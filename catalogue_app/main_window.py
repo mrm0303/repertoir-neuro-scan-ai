@@ -85,8 +85,22 @@ class CatalogueApp(AppBase):
         self.protocol("WM_DELETE_WINDOW", self._on_close)
         
     def _build_ui(self):
+        # Top Global Header Bar
+        top_header = ttk.Frame(self)
+        top_header.pack(fill="x", padx=12, pady=(6, 2))
+        
+        lbl_app = ttk.Label(top_header, text="🎬 Repertoir Neuro Scan.AI — V6.0 PRO", font=("TkDefaultFont", 11, "bold"))
+        lbl_app.pack(side="left")
+        
+        btn_guide = ttk.Button(
+            top_header, 
+            text="📖 Guide d'Utilisation / User Manual / دليل الاستخدام", 
+            command=self.open_user_guide
+        )
+        btn_guide.pack(side="right")
+
         self.nb = ttk.Notebook(self)
-        self.nb.pack(fill="both", expand=True, padx=8, pady=(8, 0))
+        self.nb.pack(fill="both", expand=True, padx=8, pady=(4, 0))
         
         # --- Main Tabs Frames ---
         self.tab_dash = ttk.Frame(self.nb)
@@ -398,6 +412,33 @@ class CatalogueApp(AppBase):
             server_manager.stop()
             if btn: btn.config(text="🌐 Lancer Accès Web & Mobile")
             messagebox.showinfo(APP_NAME, "Le serveur Web a été arrêté.")
+
+    def open_user_guide(self):
+        """Ouvre le guide d'utilisation interactif trilingue dans le navigateur web par défaut."""
+        import webbrowser
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        guide_html = os.path.join(base_dir, "manuel.html")
+        if not os.path.exists(guide_html):
+            guide_html = os.path.join(base_dir, "docs", "guide_complet.html")
+        if os.path.exists(guide_html):
+            webbrowser.open(f"file://{os.path.abspath(guide_html)}")
+        else:
+            messagebox.showinfo(APP_NAME, "Le fichier de guide n'a pas été trouvé.")
+
+    def open_markdown_guide(self):
+        """Ouvre le guide Markdown avec le lecteur par défaut du système."""
+        import subprocess
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        guide_md = os.path.join(base_dir, "GUIDE_UTILISATION_TRILINGUE.md")
+        if os.path.exists(guide_md):
+            if sys.platform == "darwin":
+                subprocess.call(["open", guide_md])
+            elif os.name == "nt":
+                os.startfile(guide_md)
+            else:
+                subprocess.call(["xdg-open", guide_md])
+        else:
+            messagebox.showinfo(APP_NAME, "Le fichier GUIDE_UTILISATION_TRILINGUE.md n'a pas été trouvé.")
 
     def _on_close(self):
         import subprocess, signal

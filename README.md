@@ -9,6 +9,20 @@ Gestionnaire professionnel hors-ligne de catalogues de disques durs, rushes cin�
 
 ---
 
+## 📖 Guide d'Utilisation Complet / User Manual / دليل الاستخدام الشامل
+
+L'application inclut un guide exhaustif pas à pas et bouton par bouton disponible en 3 langues :
+- 🇫🇷 **Français** : Explication détaillée des 12 modules, boutons, options et flux de travail (Multi-Cam, Zoom F8, DIT, Recherche IA).
+- 🇬🇧 **English** : Comprehensive step-by-step, button-by-button manual for editors, DITs, and sound recordists.
+- 🇸🇦 **العربية** : دليل احترافي كامل خطوة بخطوة وزر بزر باللغة العربية مع دعم كامل للاتجاه من اليمين إلى اليسار (RTL).
+
+### Comment ouvrir le guide ?
+1. **Directement depuis l'application** : Cliquez sur le bouton **`📖 Guide d'Utilisation`** présent dans l'en-tête supérieur, sur le *Tableau de bord* ou dans l'onglet *⚙️ Paramètres*.
+2. **Version web interactive** : Ouvrez simplement [`catalogue_app/manuel.html`](catalogue_app/manuel.html) dans n'importe quel navigateur (inclut un sélecteur de langue instantané et un champ de recherche en direct).
+3. **Version Markdown** : Consultez le fichier [`GUIDE_UTILISATION_TRILINGUE.md`](GUIDE_UTILISATION_TRILINGUE.md).
+
+---
+
 ## 🚀 Téléchargement des Versions Installables (Releases)
 
 Téléchargez le package prêt à l'emploi correspondant à votre système d'exploitation depuis la page des [**Releases GitHub**](https://github.com/mrm0303/repertoir-neuro-scan-ai/releases) :

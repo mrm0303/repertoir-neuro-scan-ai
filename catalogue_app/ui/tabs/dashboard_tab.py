@@ -57,6 +57,8 @@ class DashboardTab(BaseTab):
         self.btn_enrich = ttk.Button(act_frame, text="🌙 Lancer l'Auto-étiquetage IA", command=self._toggle_ai_enricher)
         self.btn_enrich.pack(side="left", padx=10)
         
+        ttk.Button(act_frame, text="📖 Guide d'Utilisation", command=self.app.open_user_guide).pack(side="left", padx=10)
+        
         # IA Analyst Frame
         ai_frame = ttk.LabelFrame(f, text=" Agent Analyste IA ", padding=10)
         ai_frame.pack(fill="x", padx=20, pady=5)

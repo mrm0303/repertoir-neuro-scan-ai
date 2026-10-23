@@ -47,9 +47,6 @@ def acquire_instance_lock():
         except Exception:
             print("Une instance de Repertoir Neuro Scan.AI (RNS.AI) est déjà en cours d'exécution.")
         sys.exit(0)
-        except Exception:
-            print("Une instance de Repertoir Neuro Scan.AI (RNS.AI) est déjà en cours d'exécution.")
-        sys.exit(0)
 
 if __name__ == "__main__":
     _lock = acquire_instance_lock()

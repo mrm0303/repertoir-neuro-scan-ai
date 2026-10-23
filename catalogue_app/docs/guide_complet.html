@@ -1,0 +1,3018 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repertoir Neuro Scan.AI (V6) — Guide d'Utilisation / User Manual / دليل الاستخدام</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0f111a;
+            --bg-card: #181b28;
+            --bg-card-hover: #1f2334;
+            --bg-code: #131520;
+            --border: #2a2e45;
+            --border-accent: #3d4468;
+            --text-primary: #f0f2f8;
+            --text-secondary: #9aa1c2;
+            --text-muted: #6b7294;
+            --accent: #6366f1;
+            --accent-hover: #4f46e5;
+            --accent-light: rgba(99, 102, 241, 0.15);
+            --success: #10b981;
+            --success-light: rgba(16, 185, 129, 0.15);
+            --warning: #f59e0b;
+            --warning-light: rgba(245, 158, 11, 0.15);
+            --danger: #ef4444;
+            --danger-light: rgba(239, 68, 68, 0.15);
+            --cyan: #06b6d4;
+            --cyan-light: rgba(6, 182, 212, 0.15);
+            --purple: #a855f7;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-ar: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+            --font-mono: 'JetBrains Mono', Consolas, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            line-height: 1.65;
+            font-size: 15px;
+            overflow-x: hidden;
+        }
+
+        body.lang-ar {
+            font-family: var(--font-ar);
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* Top Navigation Header */
+        .top-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 17, 26, 0.94);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .brand-badge {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: white;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .lang-switch-group {
+            display: flex;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 3px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+        }
+
+        .search-input-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 7px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            outline: none;
+            width: 240px;
+            transition: all 0.2s;
+        }
+
+        .search-input-box:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+        /* Layout Container */
+        .page-layout {
+            display: flex;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 24px 20px;
+            gap: 32px;
+        }
+
+        /* Sidebar Table of Contents */
+        .sidebar-toc {
+            width: 290px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 76px;
+            max-height: calc(100vh - 100px);
+            overflow-y: auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            display: none;
+        }
+
+        .sidebar-toc.active {
+            display: block;
+        }
+
+        .toc-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toc-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .toc-link {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 7px 10px;
+            border-radius: 6px;
+            font-size: 0.86rem;
+            transition: all 0.15s ease;
+        }
+
+        .toc-link:hover {
+            color: var(--text-primary);
+            background: var(--bg-card-hover);
+        }
+
+        .toc-link.active {
+            color: white;
+            background: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main-doc-content {
+            flex-grow: 1;
+            min-width: 0;
+        }
+
+        .doc-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 28px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-icon {
+            font-size: 1.8rem;
+            background: var(--accent-light);
+            padding: 8px 12px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 1.45rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            color: var(--accent);
+            margin: 24px 0 12px 0;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        p {
+            margin-bottom: 14px;
+            color: var(--text-secondary);
+        }
+
+        strong {
+            color: #fff;
+        }
+
+        /* Button & Control Cards */
+        .btn-card {
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 18px;
+            margin: 14px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            border-left: 4px solid var(--accent);
+            transition: border-color 0.2s;
+        }
+
+        body.lang-ar .btn-card {
+            border-left: 1px solid var(--border);
+            border-right: 4px solid var(--accent);
+        }
+
+        .btn-card:hover {
+            border-color: var(--accent-hover);
+        }
+
+        .btn-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-title {
+            font-weight: 700;
+            color: #fff;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-badge {
+            background: var(--accent);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+        }
+
+        .btn-badge.tag-green { background: var(--success); }
+        .btn-badge.tag-amber { background: var(--warning); color: #000; }
+        .btn-badge.tag-red { background: var(--danger); }
+        .btn-badge.tag-cyan { background: var(--cyan); color: #000; }
+
+        .btn-desc {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+        }
+
+        .btn-steps {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-top: 6px;
+            border: 1px dashed var(--border);
+        }
+
+        .btn-steps ol, .btn-steps ul {
+            padding-left: 20px;
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+        }
+
+        body.lang-ar .btn-steps ol, body.lang-ar .btn-steps ul {
+            padding-left: 0;
+            padding-right: 20px;
+        }
+
+        .btn-steps li {
+            margin-bottom: 6px;
+        }
+
+        /* Callouts / Alerts */
+        .callout {
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 18px 0;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .callout-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .callout-content {
+            font-size: 0.92rem;
+            flex-grow: 1;
+        }
+
+        .callout-info {
+            background: var(--accent-light);
+            border: 1px solid var(--accent);
+            color: #c7d2fe;
+        }
+
+        .callout-success {
+            background: var(--success-light);
+            border: 1px solid var(--success);
+            color: #a7f3d0;
+        }
+
+        .callout-warning {
+            background: var(--warning-light);
+            border: 1px solid var(--warning);
+            color: #fde68a;
+        }
+
+        .callout-danger {
+            background: var(--danger-light);
+            border: 1px solid var(--danger);
+            color: #fecaca;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            text-align: left;
+        }
+
+        body.lang-ar th, body.lang-ar td {
+            text-align: right;
+        }
+
+        th {
+            background: var(--bg-body);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) td {
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        /* Keyboard shortcuts */
+        kbd {
+            background: #232738;
+            border: 1px solid #3d4468;
+            border-radius: 4px;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.4);
+            color: #f0f2f8;
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            padding: 2px 6px;
+            white-space: nowrap;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            background: var(--bg-code);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.88em;
+            color: #c084fc;
+        }
+
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 900px) {
+            .page-layout {
+                flex-direction: column;
+            }
+            .sidebar-toc {
+                width: 100%;
+                position: static;
+                max-height: none;
+            }
+            .search-input-box {
+                width: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Sticky Header -->
+    <header class="top-navbar">
+        <a href="#" class="brand-logo">
+            <span>🎬 Repertoir Neuro Scan.AI</span>
+            <span class="brand-badge">V6.0 PRO</span>
+        </a>
+
+        <div class="nav-controls">
+            <input type="text" id="docSearchInput" class="search-input-box" placeholder="Rechercher / Search / بحث..." onkeyup="filterGuide()">
+            
+            <div class="lang-switch-group">
+                <button id="btn-fr" class="lang-btn active" onclick="switchLanguage('fr')">🇫🇷 Français</button>
+                <button id="btn-en" class="lang-btn" onclick="switchLanguage('en')">🇬🇧 English</button>
+                <button id="btn-ar" class="lang-btn" onclick="switchLanguage('ar')">🇸🇦 العربية</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-layout">
+
+
+    <nav class="sidebar-toc active" id="toc-fr">
+        <div class="toc-title">Sommaire du Manuel</div>
+        <ul class="toc-list">
+            <li><a href="#fr-intro" class="toc-link">1. Démarrage & Installation</a></li>
+            <li><a href="#fr-dashboard" class="toc-link">2. Tableau de Bord</a></li>
+            <li><a href="#fr-scanner" class="toc-link">3. Disques Locaux & Scanner</a></li>
+            <li><a href="#fr-servers" class="toc-link">4. Serveurs Distants & NAS</a></li>
+            <li><a href="#fr-dit" class="toc-link">5. Transfert DIT Sécurisé</a></li>
+            <li><a href="#fr-search" class="toc-link">6. Recherche & Panier Monteur</a></li>
+            <li><a href="#fr-chat" class="toc-link">7. Assistant IA & SQL</a></li>
+            <li><a href="#fr-renamer" class="toc-link">8. Renommage de Rushes</a></li>
+            <li><a href="#fr-sync" class="toc-link">9. Sync Multi-Cam & Zoom F8</a></li>
+            <li><a href="#fr-tags" class="toc-link">10. Étiquettes & Vision IA</a></li>
+            <li><a href="#fr-duplicates" class="toc-link">11. Nettoyeur de Doublons</a></li>
+            <li><a href="#fr-projects" class="toc-link">12. Gestionnaire de Projets</a></li>
+            <li><a href="#fr-settings" class="toc-link">13. Paramètres & Maintenance</a></li>
+            <li><a href="#fr-web" class="toc-link">14. Accès Web & Mobile</a></li>
+            <li><a href="#fr-faq" class="toc-link">15. Dépannage & FAQ</a></li>
+        </ul>
+    </nav>
+    
+
+    <nav class="sidebar-toc" id="toc-en">
+        <div class="toc-title">User Manual Index</div>
+        <ul class="toc-list">
+            <li><a href="#en-intro" class="toc-link">1. Quick Start & Setup</a></li>
+            <li><a href="#en-dashboard" class="toc-link">2. Master Dashboard</a></li>
+            <li><a href="#en-scanner" class="toc-link">3. Local Disks & Scanner</a></li>
+            <li><a href="#en-servers" class="toc-link">4. Remote Servers & NAS</a></li>
+            <li><a href="#en-dit" class="toc-link">5. DIT Secure Offload</a></li>
+            <li><a href="#en-search" class="toc-link">6. Search & Editor Basket</a></li>
+            <li><a href="#en-chat" class="toc-link">7. AI Assistant & SQL</a></li>
+            <li><a href="#en-renamer" class="toc-link">8. Batch Rushes Renamer</a></li>
+            <li><a href="#en-sync" class="toc-link">9. Multi-Cam & Zoom F8 Sync</a></li>
+            <li><a href="#en-tags" class="toc-link">10. Tags & AI Vision</a></li>
+            <li><a href="#en-duplicates" class="toc-link">11. Duplicate Cleaner</a></li>
+            <li><a href="#en-projects" class="toc-link">12. Project Relinker</a></li>
+            <li><a href="#en-settings" class="toc-link">13. Settings & Maintenance</a></li>
+            <li><a href="#en-web" class="toc-link">14. Web & Mobile Access</a></li>
+            <li><a href="#en-faq" class="toc-link">15. Troubleshooting & FAQ</a></li>
+        </ul>
+    </nav>
+    
+
+    <nav class="sidebar-toc" id="toc-ar">
+        <div class="toc-title">فهرس الدليل الشامل</div>
+        <ul class="toc-list">
+            <li><a href="#ar-intro" class="toc-link">1. البدء السريع والتثبيت</a></li>
+            <li><a href="#ar-dashboard" class="toc-link">2. لوحة التحكم والإحصائيات</a></li>
+            <li><a href="#ar-scanner" class="toc-link">3. فحص الأقراص المحلية</a></li>
+            <li><a href="#ar-servers" class="toc-link">4. الخوادم البعيدة وNAS</a></li>
+            <li><a href="#ar-dit" class="toc-link">5. تفريغ الذاكرة DIT الآمن</a></li>
+            <li><a href="#ar-search" class="toc-link">6. البحث وسلة المونتاج</a></li>
+            <li><a href="#ar-chat" class="toc-link">7. المساعد الذكي وSQL</a></li>
+            <li><a href="#ar-renamer" class="toc-link">8. إعادة تسمية المشاهد</a></li>
+            <li><a href="#ar-sync" class="toc-link">9. مزامنة الكاميرات وصوت Zoom F8</a></li>
+            <li><a href="#ar-tags" class="toc-link">10. الوسوم والذكاء البصري</a></li>
+            <li><a href="#ar-duplicates" class="toc-link">11. كاشف وحاذف الملفات المكررة</a></li>
+            <li><a href="#ar-projects" class="toc-link">12. إدارة المشاريع وربط الميديا</a></li>
+            <li><a href="#ar-settings" class="toc-link">13. الإعدادات والتحديث الذاتي</a></li>
+            <li><a href="#ar-web" class="toc-link">14. الوصول عبر الويب والهاتف</a></li>
+            <li><a href="#ar-faq" class="toc-link">15. حل المشكلات والأسئلة الشائعة</a></li>
+        </ul>
+    </nav>
+    
+
+    <main class="main-doc-content lang-content active" id="content-fr">
+        
+        <!-- SECTION 1: INTRODUCTION & INSTALLATION -->
+        <section class="doc-section" id="fr-intro">
+            <div class="section-header">
+                <span class="section-icon">🚀</span>
+                <div>
+                    <h2>1. Démarrage Rapide & Installation Multiplateforme</h2>
+                    <p style="margin:0;">Installation en 1 clic pour macOS, Windows et Linux — Aucune compétence technique requise.</p>
+                </div>
+            </div>
+
+            <p><strong>Repertoir Neuro Scan.AI (V6)</strong> est une station complète de gestion d'actifs numériques (MAM), d'indexation ultra-rapide, de synchronisation multi-caméra professionnelle et d'analyse IA pour le montage audiovisuel. L'application fonctionne <strong>100% en local</strong> : vos médias et votre catalogue SQLite ne quittent jamais votre machine.</p>
+
+            <div class="callout callout-info">
+                <span class="callout-icon">💡</span>
+                <div class="callout-content">
+                    <strong>Architecture Autonome & Déconnectée :</strong> Vous pouvez utiliser Repertoir en tournage sur le terrain, en van régie ou en salle de montage sans aucune connexion Internet.
+                </div>
+            </div>
+
+            <h3>Installation pas-à-pas selon votre système :</h3>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🍎 Installation sur macOS (Apple Silicon M1/M2/M3/M4 & Intel)</span>
+                    <span class="btn-badge tag-green">Recommandé</span>
+                </div>
+                <div class="btn-desc">Double-cliquez simplement sur le fichier <code>Installer_Repertoir_Mac.command</code>.</div>
+                <div class="btn-steps">
+                    <ol>
+                        <li>Faites un clic-droit sur <code>Installer_Repertoir_Mac.command</code> puis choisissez <strong>Ouvrir</strong> (pour valider la sécurité macOS Gatekeeper).</li>
+                        <li>L'installateur configure automatiquement l'environnement Python virtuel isolé, installe les dépendances nécessaires et détecte Homebrew/FFmpeg.</li>
+                        <li>Une icône d'application prête à l'emploi est générée. Pour démarrer, double-cliquez sur <code>Lancer_App.command</code>.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🪟 Installation sur Windows (Windows 10 / 11)</span>
+                    <span class="btn-badge tag-cyan">Batch Autonome</span>
+                </div>
+                <div class="btn-desc">Double-cliquez sur le fichier <code>Installer_Repertoir_Windows.bat</code>.</div>
+                <div class="btn-steps">
+                    <ol>
+                        <li>Si SmartScreen affiche un avertissement, cliquez sur <em>Informations complémentaires</em> puis <em>Exécuter quand même</em>.</li>
+                        <li>Le script prépare l'environnement virtuel Windows <code>.venv</code> sans polluer votre système.</li>
+                        <li>Pour lancer l'application à tout moment, double-cliquez sur <code>Lancer_App_Windows.bat</code>.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🐧 Installation sur Linux (Ubuntu, Debian, Fedora, Arch)</span>
+                    <span class="btn-badge">Shell Script</span>
+                </div>
+                <div class="btn-desc">Ouvrez un terminal dans le dossier et exécutez <code>bash Installer_Repertoir_Linux.sh</code>.</div>
+                <div class="btn-steps">
+                    <ol>
+                        <li>Le script vérifie la présence de Python 3 et des bibliothèques <code>python3-tk</code>.</li>
+                        <li>Démarrez ensuite avec <code>./Lancer_App_Linux.sh</code>.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: TABLEAU DE BORD -->
+        <section class="doc-section" id="fr-dashboard">
+            <div class="section-header">
+                <span class="section-icon">📊</span>
+                <div>
+                    <h2>2. Tableau de Bord (Dashboard)</h2>
+                    <p style="margin:0;">Vue d'ensemble en temps réel de votre parc de disques, statistiques et agent analyste.</p>
+                </div>
+            </div>
+
+            <h3>Éléments Visuels & Métriques</h3>
+            <p>Le bandeau supérieur affiche la synthèse instantanée de votre bibliothèque : le <strong>nombre de disques catalogués</strong>, le <strong>nombre total de fichiers</strong> et le <strong>volume global occupé (Go / To)</strong>.</p>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🗺️ Carte Visuelle Interactive (Treemap / Sunburst / Arbre)</span>
+                    <span class="btn-badge tag-cyan">Visualiseur</span>
+                </div>
+                <div class="btn-desc">Permet d'explorer visuellement le poids de vos répertoires et fichiers sur chaque disque.</div>
+                <div class="btn-steps">
+                    <ul>
+                        <li><strong>Menu déroulant de volume :</strong> Sélectionnez un disque spécifique ou visualisez l'ensemble du stockage.</li>
+                        <li><strong>Navigation par clic :</strong> Cliquez sur un rectangle pour zoomer dans un sous-dossier. Cliquez sur le bandeau supérieur pour remonter d'un niveau.</li>
+                        <li><strong>Changement de style :</strong> Vous pouvez basculer entre <em>Treemap</em> (rectangles proportionnels), <em>Sunburst</em> (cercles concentriques) et <em>Arbre</em> dans l'onglet Paramètres.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">📈 Graphiques Analytiques (Matplotlib)</span>
+                    <span class="btn-badge">Statistiques</span>
+                </div>
+                <div class="btn-desc">Situés sur le volet droit :</div>
+                <div class="btn-steps">
+                    <ul>
+                        <li><strong>Évolution temporelle :</strong> Histogramme du volume de données produites par année de tournage/création.</li>
+                        <li><strong>Mots-clés IA Fréquents :</strong> Classement horizontal des étiquettes et descripteurs sémantiques les plus présents dans vos rushes.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Boutons d'Actions Rapides</h3>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔍 Bouton « Lancer un Scan »</span>
+                    <span class="btn-badge tag-green">Raccourci</span>
+                </div>
+                <div class="btn-desc">Bascule instantanément vers l'onglet <strong>Stockage > Disques Locaux</strong> pour analyser un nouveau support.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">👯 Bouton « Chercher des Doublons »</span>
+                    <span class="btn-badge tag-amber">Nettoyage</span>
+                </div>
+                <div class="btn-desc">Ouvre directement l'onglet <strong>Doublons</strong> pour détecter les fichiers ou dossiers redondants et récupérer de l'espace disque.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">📅 Bouton « Calendrier de Tournage »</span>
+                    <span class="btn-badge">Chronologie</span>
+                </div>
+                <div class="btn-desc">Ouvre une fenêtre modale affichant la chronologie interactive des dates de tournage, réparties par caméra, projet et volume.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🌙 Bouton « Lancer l'Auto-étiquetage IA »</span>
+                    <span class="btn-badge tag-purple">IA Fond de tâche</span>
+                </div>
+                <div class="btn-desc">Démarre le démon d'enrichissement sémantique en arrière-plan. Il parcourt silencieusement vos vidéos pour générer des tags automatiques sans ralentir votre machine. Cliquez à nouveau pour le suspendre.</div>
+            </div>
+
+            <h3>🤖 Agent Analyste IA</h3>
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">Bouton « Générer un Insight »</span>
+                    <span class="btn-badge tag-cyan">Intelligence Artificielle</span>
+                </div>
+                <div class="btn-desc">Interroge l'agent analyste local qui étudie la structure de vos disques, détecte les anomalies (disques presque pleins, formats obsolètes, projets non archivés) et rédige un diagnostic professionnel.</div>
+                <div class="btn-steps">
+                    <ul>
+                        <li>Si l'agent détecte des points d'optimisation, il vous propose automatiquement le bouton <strong>« Exporter le Rapport d'Audit Complet »</strong> au format Markdown (.md).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: SCANNER DISQUES LOCAUX -->
+        <section class="doc-section" id="fr-scanner">
+            <div class="section-header">
+                <span class="section-icon">💽</span>
+                <div>
+                    <h2>3. Stockage > Disques Locaux & Scanner</h2>
+                    <p style="margin:0;">Indexation ultra-rapide de disques durs, SSD, cartes mémoires et clés USB.</p>
+                </div>
+            </div>
+
+            <h3>Tableau des Volumes</h3>
+            <p>La liste centrale répertorie tous vos disques enregistrés avec leur nom, statut de connexion (● branché en vert / ○ absent en gris), numéro de série, point de montage physique, nombre de fichiers et espace occupé.</p>
+
+            <h3>Barre d'Actions & Boutons</h3>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔄 Bouton « Détecter les disques branchés »</span>
+                    <span class="btn-badge tag-green">Détection Matérielle</span>
+                </div>
+                <div class="btn-desc">Scanne le bus matériel de votre ordinateur (ports Thunderbolt, USB-C, PCIe, SATA) et rafraîchit immédiatement le statut en direct de chaque disque.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">▶️ Bouton « Analyser » (Scan)</span>
+                    <span class="btn-badge tag-green">Indexation</span>
+                </div>
+                <div class="btn-desc">Lance l'analyse en profondeur du disque sélectionné selon les options configurées ci-dessous. Le scan s'exécute en arrière-plan avec affichage de la vitesse (fichiers/sec) et du temps restant estimé.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🗑️ Bouton « Supprimer du catalogue »</span>
+                    <span class="btn-badge tag-red">Gestion</span>
+                </div>
+                <div class="btn-desc">Retire le volume et l'ensemble de ses enregistrements de la base de données. <em>Attention : vos fichiers physiques sur le disque ne sont jamais modifiés ni effacés.</em></div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🏷️ Bouton « Note / Emplacement »</span>
+                    <span class="btn-badge">Archivage Physique</span>
+                </div>
+                <div class="btn-desc">Permet d'ajouter une étiquette physique à un disque hors ligne (ex: « Étagère A3, Boîte Tournage Maroc »). Très pratique pour retrouver immédiatement un disque physique débranché lors d'une recherche !</div>
+            </div>
+
+            <h3>Options d'Analyse (Cases à Cocher)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:25%;">Option</th>
+                        <th style="width:20%;">Comportement par défaut</th>
+                        <th>Rôle et utilité pour le monteur / DIT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>☑️ Hachage rapide (XXHash64)</strong></td>
+                        <td>Activé</td>
+                        <td>Calcule une empreinte numérique ultra-rapide (4+ Go/s) pour identifier les doublons stricts sans ralentir le scan.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>☑️ Métadonnées EXIF / ffprobe</strong></td>
+                        <td>Activé</td>
+                        <td>Extrait la résolution exacte (4K, UHD, 1080p), le codec (ProRes, BRAW, H.265), la cadence (fps), le modèle de caméra et le timecode.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>☑️ Pré-analyse</strong></td>
+                        <td>Activé</td>
+                        <td>Compte rapidement le nombre total de dossiers et fichiers avant le traitement pour fournir une jauge de progression fiable.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>☑️ Scan incrémentiel</strong></td>
+                        <td>Activé</td>
+                        <td>Ne réanalyse que les fichiers ajoutés, modifiés ou supprimés depuis le dernier passage. Réduit le temps de scan de 95% !</td>
+                    </tr>
+                    <tr>
+                        <td><strong>☑️ Masquer fichiers système</strong></td>
+                        <td>Activé</td>
+                        <td>Ignore automatiquement les fichiers parasites comme <code>.DS_Store</code>, <code>Thumbs.db</code>, <code>._*</code> ou la corbeille.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>☑️ Vignettes vidéo</strong></td>
+                        <td>Activé</td>
+                        <td>Génère des planches de contact visuelles pour prévisualiser les vidéos directement au survol de la souris.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 4: SERVEURS DISTANTS & NAS -->
+        <section class="doc-section" id="fr-servers">
+            <div class="section-header">
+                <span class="section-icon">🌐</span>
+                <div>
+                    <h2>4. Stockage > Serveurs Distants & NAS</h2>
+                    <p style="margin:0;">Connexion aux baies de stockage réseau (QNAP, Synology, TrueNAS, SMB, NFS).</p>
+                </div>
+            </div>
+
+            <p>Cet onglet permet de cataloguer et synchroniser vos serveurs de stockage centralisés sans avoir à déplacer vos postes de montage.</p>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">➕ Bouton « Ajouter un serveur »</span>
+                    <span class="btn-badge tag-green">Configuration</span>
+                </div>
+                <div class="btn-desc">Ouvre un formulaire pour renseigner l'adresse IP / nom d'hôte du NAS, le protocole (SMB/NFS/API QNAP), les identifiants et le dossier de montage.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">📡 Bouton « Scanner ce disque distant »</span>
+                    <span class="btn-badge tag-cyan">Réseau</span>
+                </div>
+                <div class="btn-desc">Indexe l'intégralité du partage réseau en optimisant les flux pour ne pas saturer la bande passante du studio.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">☁️ Bouton « Backup Sécurisé du Catalogue vers ce NAS »</span>
+                    <span class="btn-badge tag-purple">Sauvegarde Redondante</span>
+                </div>
+                <div class="btn-desc">Crée un instantané compressé de votre base de données SQLite <code>catalogue.db</code> et l'envoie automatiquement sur le répertoire de backup du NAS.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: TRANSFERT DIT -->
+        <section class="doc-section" id="fr-dit">
+            <div class="section-header">
+                <span class="section-icon">📥</span>
+                <div>
+                    <h2>5. Stockage > Transfert DIT Sécurisé (Offload)</h2>
+                    <p style="margin:0;">Déchargement conforme aux standards cinéma avec vérification d'intégrité bit-à-bit et manifestes MHL.</p>
+                </div>
+            </div>
+
+            <p>Conçu spécifiquement pour les assistants caméra et DIT sur le plateau, ce module garantit qu'aucune carte mémoire n'est effacée sans certitude mathématique que chaque octet a été copié fidèlement.</p>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎴 Zone Source (Glisser-Déposer ou Parcourir)</span>
+                    <span class="btn-badge">Source</span>
+                </div>
+                <div class="btn-desc">Glissez directement votre carte CFexpress, SD, RED Mini-Mag ou SSD de tournage dans la zone prévue.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎯 Zone Destination & Générateur d'Arborescence</span>
+                    <span class="btn-badge">Structure Projet</span>
+                </div>
+                <div class="btn-desc">Sélectionnez le disque de destination. Repertoir peut générer automatiquement l'arborescence standardisée :<br>
+                <code>[Nom_Projet] / [Date_AAAA_MM_JJ] / [Camera_A] / RUSHES</code>.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔐 Sélecteur d'Algorithme de Checksum</span>
+                    <span class="btn-badge tag-amber">Vérification</span>
+                </div>
+                <div class="btn-desc">
+                    <ul>
+                        <li><strong>XXHash64 :</strong> Le plus rapide (dépasse 4 Go/s sur SSD NVMe). Idéal pour les tournages lourds en 8K RAW.</li>
+                        <li><strong>MD5 :</strong> Le standard broadcast historique, compatible avec tous les logiciels de vérification tiers.</li>
+                        <li><strong>SHA1 / SHA256 :</strong> Sécurité cryptographique maximale pour les archives patrimoniales.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🚀 Bouton « Démarrer le Transfert Sécurisé »</span>
+                    <span class="btn-badge tag-green">Lancement</span>
+                </div>
+                <div class="btn-desc">Copie les fichiers en double buffer, calcule le hash à la volée, relit la cible pour valider la concordance et génère un fichier manifeste <code>.mhl</code> conforme aux normes de l'ASC (American Society of Cinematographers).</div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: RECHERCHE -->
+        <section class="doc-section" id="fr-search">
+            <div class="section-header">
+                <span class="section-icon">🔍</span>
+                <div>
+                    <h2>6. Recherche & Panier Monteur</h2>
+                    <p style="margin:0;">Moteur de recherche instantané à filtres multicritères, recherche sémantique IA et exports NLE.</p>
+                </div>
+            </div>
+
+            <h3>Barre de Recherche & Filtres Principaux</h3>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">⌨️ Champ de saisie & Sélecteur de portée</span>
+                    <span class="btn-badge">Texte & Mots-clés</span>
+                </div>
+                <div class="btn-desc">Tapez n'importe quel terme (nom, acteur, plan, ville). Utilisez le menu déroulant pour cibler :
+                <em>Partout</em>, <em>Nom de fichier</em>, <em>Dossier</em>, <em>Caméra</em>, <em>Extension</em>, <em>Codec</em> ou <em>Métadonnées</em>.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🗂️ Badges de Catégories Rapides</span>
+                    <span class="btn-badge tag-cyan">Filtres Rapides</span>
+                </div>
+                <div class="btn-desc">Cliquez sur un badge pour isoler un type en 1 clic : <strong>[Tous]</strong>, <strong>[Vidéos]</strong>, <strong>[Audios]</strong>, <strong>[Photos]</strong>, <strong>[Projets]</strong>, <strong>[Documents]</strong>.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🧠 Bascule « Recherche Sémantique IA »</span>
+                    <span class="btn-badge tag-purple">Intelligence Artificielle</span>
+                </div>
+                <div class="btn-desc">Active la compréhension vectorielle en langage naturel. Vous pouvez chercher des concepts visuels comme : <em>« coucher de soleil sur l'océan avec drone »</em> ou <em>« gros plan comédien en colère »</em> même si ces mots ne figurent pas dans le nom de fichier !</div>
+            </div>
+
+            <h3>Filtres Techniques Avancés</h3>
+            <p>Affinez par : <strong>Résolution</strong> (4K DCI, UHD, 1080p), <strong>Cadence</strong> (24, 25, 50, 100, 120 fps pour ralentis), <strong>Plage de dates</strong> et <strong>Taille minimale</strong>.</p>
+
+            <h3>Raccourcis & Menu Contextuel (Clic-Droit sur un résultat)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:25%;">Action / Raccourci</th>
+                        <th>Description de l'action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><kbd>Espace</kbd> (Coup d'œil)</td>
+                        <td>Ouvre immédiatement la prévisualisation QuickLook sur macOS ou le visualiseur intégré sur Windows/Linux.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ouvrir dans le Finder / Explorateur</strong></td>
+                        <td>Révèle le fichier directement dans son dossier d'origine sur le disque concerné.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Copier le chemin absolu</strong></td>
+                        <td>Place le chemin complet du fichier dans votre presse-papiers pour le coller dans vos scripts ou NLE.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fiche Technique Format</strong></td>
+                        <td>Affiche la totalité des flux audio/vidéo, codecs, profils colorimétriques (Log, Rec709, HDR) et métadonnées ffprobe.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contrôle de Santé Média</strong></td>
+                        <td>Exécute un décodage de vérification pour attester qu'aucune image n'est corrompue (drop frame ou artefact).</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Panier Monteur & Exports Professionnels</h3>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🛒 Boutons « Ajouter au panier » & « Vider le panier »</span>
+                    <span class="btn-badge">Sélection</span>
+                </div>
+                <div class="btn-desc">Permet de constituer une sélection de rushes issus de disques différents pour un traitement par lot.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎞️ Bouton « Générer Proxies (ProRes / H.264) »</span>
+                    <span class="btn-badge tag-green">Transcodage</span>
+                </div>
+                <div class="btn-desc">Transcode en arrière-plan les rushes sélectionnés vers un format de montage léger (Apple ProRes Proxy ou H.264 MP4 1080p) avec préservation rigoureuse du timecode source.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎬 Bouton « Exporter Timeline XML »</span>
+                    <span class="btn-badge tag-cyan">Édition NLE</span>
+                </div>
+                <div class="btn-desc">Génère un fichier standardisé FCPXML ou Final Cut Pro 7 XML. Ouvrez-le directement dans <strong>Adobe Premiere Pro 2026</strong>, <strong>DaVinci Resolve</strong> ou <strong>Final Cut Pro</strong> pour retrouver vos plans déjà montés sur la timeline avec leurs noms de bobines et métadonnées !</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">📝 Bouton « Générer XMP Sidecars »</span>
+                    <span class="btn-badge">Métadonnées</span>
+                </div>
+                <div class="btn-desc">Écrit les tags, descriptions et étoiles de notation directement dans des fichiers sidecars <code>.xmp</code> lisibles nativement par la suite Adobe (Premiere, Bridge, After Effects).</div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: CHAT IA -->
+        <section class="doc-section" id="fr-chat">
+            <div class="section-header">
+                <span class="section-icon">💬</span>
+                <div>
+                    <h2>7. Laboratoire IA > Assistant IA & Requêteur SQL</h2>
+                    <p style="margin:0;">Dialoguez avec votre catalogue en langage naturel sans connaître le SQL.</p>
+                </div>
+            </div>
+
+            <p>L'assistant IA est connecté directement au schéma de votre base de données locale. Vous pouvez lui poser des questions complexes de production :</p>
+            <ul>
+                <li><em>« Combien d'heures de rushes ProRes avons-nous tournées en 2025 avec la Sony FX6 ? »</em></li>
+                <li><em>« Quels sont les 10 plus gros fichiers sur le disque SSD_TOUR_02 ? »</em></li>
+                <li><em>« Trouve tous les plans où apparaît un drone tournés à 50 images par seconde. »</em></li>
+            </ul>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">Envoyer & Interception SQL Sécurisée</span>
+                    <span class="btn-badge tag-green">Sécurité DB</span>
+                </div>
+                <div class="btn-desc">L'IA traduit votre demande en requête SQL optimisée. Les requêtes sont <strong>strictement en lecture seule</strong> (SELECT uniquement) garantissant qu'aucune donnée ne peut être altérée accidentellement. La réponse affiche l'explication et le tableau des résultats.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 8: RENOMMAGE -->
+        <section class="doc-section" id="fr-renamer">
+            <div class="section-header">
+                <span class="section-icon">🪄</span>
+                <div>
+                    <h2>8. Laboratoire IA > Renommage de Rushes (Batch Renamer)</h2>
+                    <p style="margin:0;">Renommage standardisé et sécurisé pour conformité post-production et broadcast.</p>
+                </div>
+            </div>
+
+            <p>Évitez les noms génériques issus des boîtiers (comme <code>C0001.MP4</code>) qui provoquent des conflits en montage.</p>
+
+            <h3>Constructeur de Modèle (Jetons Disponibles)</h3>
+            <p>Cliquez sur les jetons pour composer votre masque de renommage :</p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin: 12px 0;">
+                <code>{camera}</code> <code>{date}</code> <code>{reel}</code> <code>{scene}</code> <code>{take}</code> <code>{resolution}</code> <code>{fps}</code> <code>{counter}</code> <code>{orig_name}</code>
+            </div>
+
+            <p>Exemple de masque recommandé :<br>
+            <code>PROJ_PARIS_{date}_CAM{camera}_S{scene}_P{take}</code></p>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">👁️ Bouton « Prévisualiser (Simulation) »</span>
+                    <span class="btn-badge tag-cyan">Contrôle Visuel</span>
+                </div>
+                <div class="btn-desc">Affiche un tableau comparatif côte à côte (Nom Actuel vs Nouveau Nom) avec détection immédiate des risques de doublons ou de collisions avant toute écriture.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">✅ Bouton « Appliquer le Renommage »</span>
+                    <span class="btn-badge tag-green">Exécution</span>
+                </div>
+                <div class="btn-desc">Renomme physiquement les fichiers sur le disque et met à jour instantanément la base SQLite sans rompre les liaisons.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">↩️ Bouton « Annuler le Renommage (Undo) »</span>
+                    <span class="btn-badge tag-amber">Annulation 1-Clic</span>
+                </div>
+                <div class="btn-desc">Grâce au journal transactionnel, vous pouvez annuler immédiatement la dernière opération de renommage et restaurer les noms d'origine exacts !</div>
+            </div>
+        </section>
+
+        <!-- SECTION 9: SYNC IMAGE ET SON -->
+        <section class="doc-section" id="fr-sync">
+            <div class="section-header">
+                <span class="section-icon">🎬</span>
+                <div>
+                    <h2>9. Laboratoire IA > Sync Image & Son (Multi-Cam & Zoom F8)</h2>
+                    <p style="margin:0;">Liaison automatique de flux multi-caméras et démultiplexage des pistes audio polyphoniques.</p>
+                </div>
+            </div>
+
+            <p>Ce module résout le problème majeur des tournages à caméras multiples (Caméra A, B, C...) associées à un enregistreur son multipiste dédié (Zoom F8, Sound Devices 833/Scorpio, Tentacle Sync).</p>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎥 Sélecteur Multi-Caméras dynamique</span>
+                    <span class="btn-badge tag-cyan">Gestion des angles</span>
+                </div>
+                <div class="btn-desc">
+                    <ul>
+                        <li><strong>Caméra 1 (Angle Principal) :</strong> Sélectionnez le fichier ou dossier de la Cam A.</li>
+                        <li><strong>Bouton « [+] Ajouter une Caméra » :</strong> Ajoute dynamiquement un nouvel angle (Caméra B, C, D...). Vous pouvez synchroniser autant de caméras que vous le souhaitez !</li>
+                        <li><strong>Bouton « [-] Retirer » :</strong> Supprime l'angle de caméra superflu.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎙️ Audio Master & Prise en Charge Zoom F8 (WAV Polyphonique)</span>
+                    <span class="btn-badge tag-green">Audio Multipiste</span>
+                </div>
+                <div class="btn-desc">
+                    Sélectionnez le fichier audio maître enregistré par votre Zoom F8 ou Sound Devices.
+                    <br><br>
+                    <strong>☑️ Option « Séparer pistes multipistes (Zoom F8 polyphonique) » :</strong>
+                    Lorsque cette case est cochée, le moteur démultiplexe automatiquement chaque piste isolée :
+                    <br>• Piste A1 : Micro Perche (Boom)
+                    <br>• Piste A2 : Micro Cravate HF Comédien 1
+                    <br>• Piste A3 : Micro Cravate HF Comédien 2
+                    <br>• Piste A4 : Ambiance Stéréo
+                    <br>Chaque son est assigné à sa propre piste audio propre sans mixage destructif !
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">⚡ Algorithmes de Synchronisation</span>
+                    <span class="btn-badge tag-purple">Haute Précision</span>
+                </div>
+                <div class="btn-desc">
+                    <ul>
+                        <li><strong>Forme d'Onde Acoustique (Waveform Cross-Correlation) :</strong> Analyse l'empreinte spectrale du son témoin des caméras et l'aligne au millième de seconde près sur le son master du Zoom F8. Idéal si vous n'aviez pas de boîtiers Timecode sur le plateau.</li>
+                        <li><strong>Timecode LTC / SMPTE :</strong> Aligne instantanément les médias selon l'horloge temporelle Broadcast intégrée dans les fichiers BWF et métadonnées vidéo.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🚀 Boutons « Lancer la Synchronisation » & « 🎬 Exporter Timeline XML »</span>
+                    <span class="btn-badge tag-green">Export Direct NLE</span>
+                </div>
+                <div class="btn-desc">
+                    Calcule le décalage (offset) et génère une séquence synchronisée prête au montage pour <strong>Adobe Premiere Pro 2026</strong>, <strong>DaVinci Resolve</strong> et <strong>Final Cut Pro</strong> avec tous les angles vidéo et toutes les pistes son isolées alignées sur la timeline !
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 10: ÉTIQUETTES & TAGS -->
+        <section class="doc-section" id="fr-tags">
+            <div class="section-header">
+                <span class="section-icon">🏷️</span>
+                <div>
+                    <h2>10. Laboratoire IA > Étiquettes & Vision IA</h2>
+                    <p style="margin:0;">Taxonomie intelligente, détection de contenu visuel et nuage de descripteurs.</p>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🤖 Bouton « Extraire Étiquettes IA »</span>
+                    <span class="btn-badge tag-purple">Vision & Audio</span>
+                </div>
+                <div class="btn-desc">Applique les modèles de vision locale pour détecter les scènes, visages, paysages, luminosités (nuit, jour, coucher de soleil) et types de plans (plan large, gros plan, traveling).</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🏷️ Nuage de Tags & Gestion de Vocabulaire</span>
+                    <span class="btn-badge">Organisation</span>
+                </div>
+                <div class="btn-desc">Affiche la fréquence de chaque étiquette. Un double-clic sur une étiquette filtre instantanément tous les rushes associés dans la Recherche. Les boutons <em>Renommer</em> et <em>Supprimer</em> permettent d'harmoniser votre lexique documentaire.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 11: DOUBLONS -->
+        <section class="doc-section" id="fr-duplicates">
+            <div class="section-header">
+                <span class="section-icon">👯</span>
+                <div>
+                    <h2>11. Laboratoire IA > Détection de Doublons & Nettoyage Sécurisé</h2>
+                    <p style="margin:0;">Récupération massive d'espace disque avec protection anti-suppression accidentelle.</p>
+                </div>
+            </div>
+
+            <h3>Modes de Détection</h3>
+            <ul>
+                <li><strong>Mode Fichiers Identiques :</strong> Compare les sommes de contrôle XXHash64. Identifie les fichiers 100% identiques même s'ils ont été renommés ou déplacés.</li>
+                <li><strong>Mode Dossiers Jumeaux :</strong> Identifie les répertoires entiers clonés d'un disque à l'autre (sauvegardes redondantes de fin de tournage).</li>
+            </ul>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">⚖️ Tableau du Plan de Nettoyage</span>
+                    <span class="btn-badge">Arbitrage Visuel</span>
+                </div>
+                <div class="btn-desc">
+                    Affiche les paires de doublons avec l'espace total récupérable en Go/To.
+                    <br>• <strong>Conserver (Bouton Vert) :</strong> Marque la copie maîtresse à garder.
+                    <br>• <strong>Retirer (Bouton Rouge) :</strong> Marque la copie superflue à envoyer en corbeille.
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🤖 Bouton « Demander Conseil IA »</span>
+                    <span class="btn-badge tag-cyan">Agent Nettoyeur</span>
+                </div>
+                <div class="btn-desc">L'agent examine les dates de création, la hiérarchie des dossiers et la vitesse des disques pour vous recommander intelligemment quelle copie garder sans risque.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🗑️ Bouton « Mettre à la corbeille sécurisée »</span>
+                    <span class="btn-badge tag-amber">Sécurité Absolue</span>
+                </div>
+                <div class="btn-desc">Repertoir n'effectue <strong>jamais de suppression définitive irréversible</strong> ! Les fichiers sont déplacés vers la Corbeille officielle de votre système (Corbeille macOS, Corbeille Windows, Trash Linux), vous permettant de les restaurer à tout moment si nécessaire.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 12: PROJETS -->
+        <section class="doc-section" id="fr-projects">
+            <div class="section-header">
+                <span class="section-icon">📁</span>
+                <div>
+                    <h2>12. Laboratoire IA > Gestionnaire de Projets & Reconnexion Média</h2>
+                    <p style="margin:0;">Indexation des fichiers de montage Premiere, DaVinci, Final Cut et relocalisation des médias hors-ligne.</p>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔍 Détection des Suites de Montage</span>
+                    <span class="btn-badge">Formats Reconnus</span>
+                </div>
+                <div class="btn-desc">Détecte automatiquement vos projets : <code>.prproj</code> (Adobe Premiere), <code>.drp</code> (DaVinci Resolve), <code>.fcpbundle</code> (Final Cut Pro), <code>.aep</code> (After Effects) et <code>.logicx</code> (Logic Pro).</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔗 Bouton « Relier les médias manquants » (Relink)</span>
+                    <span class="btn-badge tag-green">Réparation Projet</span>
+                </div>
+                <div class="btn-desc">Si un projet affiche des médias hors-ligne (écran rouge « Media Offline »), Repertoir compare les noms, durées et timecodes dans son catalogue pour retrouver instantanément sur quel disque branché le rush a été déplacé !</div>
+            </div>
+        </section>
+
+        <!-- SECTION 13: PARAMÈTRES & MAINTENANCE -->
+        <section class="doc-section" id="fr-settings">
+            <div class="section-header">
+                <span class="section-icon">⚙️</span>
+                <div>
+                    <h2>13. Paramètres, IA & Mises à Jour en 1-Clic</h2>
+                    <p style="margin:0;">Personnalisation esthétique, configuration du moteur IA local et maintenance de la base.</p>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎨 Thèmes & Styles Visuels</span>
+                    <span class="btn-badge">Interface</span>
+                </div>
+                <div class="btn-desc">Choisissez votre palette visuelle préférée (Darkly, Cyborg, Flatly, Cosmo...) et le style de carte pour l'analyse de stockage (Treemap, Sunburst ou Arbre).</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🧠 Configuration du Modèle IA Local</span>
+                    <span class="btn-badge tag-purple">LLM & MCP</span>
+                </div>
+                <div class="btn-desc">Configurez l'adresse de votre serveur IA local (LM Studio : <code>http://localhost:1234/v1</code> ou Ollama : <code>http://localhost:11434/v1</code>). Choisissez parmi les modèles embarqués (Google Gemma 4, Qwen 2.5 Coder, Minitron, Nomic Embed) et renseignez vos serveurs d'outils MCP.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">⚡ Bouton « Défragmenter et Optimiser (VACUUM) »</span>
+                    <span class="btn-badge tag-cyan">Performance SQLite</span>
+                </div>
+                <div class="btn-desc">Compacte et réindexe la base de données. Recommandé après avoir scanné plusieurs millions de fichiers pour restaurer une réactivité instantanée.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">💾 Bouton « Créer une Sauvegarde Immédiate »</span>
+                    <span class="btn-badge">Sécurité Données</span>
+                </div>
+                <div class="btn-desc">Crée instantanément une archive horodatée compressée de votre base dans le sous-dossier <code>Backups/</code>.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔄 Bouton « Vérifier et Installer les Mises à Jour depuis GitHub »</span>
+                    <span class="btn-badge tag-green">Mise à jour 1-Clic</span>
+                </div>
+                <div class="btn-desc">Vérifie automatiquement les nouvelles versions sur GitHub, télécharge les correctifs et applique les améliorations <strong>sans jamais toucher à votre base de données personnelle</strong> qui reste 100% préservée et intacte.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 14: ACCÈS WEB & MOBILE -->
+        <section class="doc-section" id="fr-web">
+            <div class="section-header">
+                <span class="section-icon">🌐</span>
+                <div>
+                    <h2>14. Accès Web & Mobile (iPad, Smartphone, Réseau Local)</h2>
+                    <p style="margin:0;">Consultez et recherchez dans votre catalogue depuis n'importe quel appareil du studio.</p>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🌐 Bouton « Lancer Accès Web & Mobile »</span>
+                    <span class="btn-badge tag-green">Serveur Local Sécurisé</span>
+                </div>
+                <div class="btn-desc">Démarre un mini-serveur Web chiffré sur votre réseau local.
+                <br>• L'application vous affiche une adresse (ex: <code>http://192.168.1.45:8080</code>) et un <strong>Code PIN sécurisé</strong>.
+                <br>• Ouvrez cette adresse sur votre iPad, tablette ou smartphone connecté au même Wi-Fi pour effectuer des recherches de rushes confortablement installé dans le salon de visionnage ou au mixage !</div>
+            </div>
+        </section>
+
+        <!-- SECTION 15: FAQ & DÉPANNAGE -->
+        <section class="doc-section" id="fr-faq">
+            <div class="section-header">
+                <span class="section-icon">❓</span>
+                <div>
+                    <h2>15. Dépannage & Questions Fréquentes (FAQ)</h2>
+                    <p style="margin:0;">Réponses aux questions courantes pour une utilisation fluide au quotidien.</p>
+                </div>
+            </div>
+
+            <div class="callout callout-warning">
+                <span class="callout-icon">🔒</span>
+                <div class="callout-content">
+                    <strong>Autorisation d'Accès au Disque sur macOS (Indispensable) :</strong><br>
+                    Si Repertoir ne parvient pas à scanner certains disques externes, ouvrez <em>Réglages Système > Confidentialité et Sécurité > Accès complet au disque</em>, et cochez l'application <strong>Terminal</strong> ou <strong>Repertoir</strong>.
+                </div>
+            </div>
+
+            <div class="callout callout-info">
+                <span class="callout-icon">🎞️</span>
+                <div class="callout-content">
+                    <strong>FFmpeg et FFprobe sont-ils obligatoires ? :</strong><br>
+                    Repertoir peut scanner les noms et tailles de fichiers sans eux. Cependant, FFmpeg et FFprobe sont vivement recommandés pour l'extraction de métadonnées vidéo avancées (ProRes, cadences, résolutions, vignettes). L'installateur <code>Installer_Repertoir_Mac.command</code> tente de les installer automatiquement via Homebrew.
+                </div>
+            </div>
+
+            <div class="callout callout-success">
+                <span class="callout-icon">🤝</span>
+                <div class="callout-content">
+                    <strong>Puis-je partager mon catalogue avec un autre monteur sur PC Windows ? :</strong><br>
+                    Absolument ! Le fichier de base de données <code>catalogue.db</code> utilise le format standardisé universel SQLite. Vous pouvez le copier directement sur un disque partagé ou une clé USB, il s'ouvrira indifféremment sur macOS, Windows ou Linux.
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+
+    <main class="main-doc-content lang-content" id="content-en">
+        
+        <!-- SECTION 1: QUICK START & INSTALLATION -->
+        <section class="doc-section" id="en-intro">
+            <div class="section-header">
+                <span class="section-icon">🚀</span>
+                <div>
+                    <h2>1. Quick Start & Multiplatform Setup</h2>
+                    <p style="margin:0;">1-click setup for macOS, Windows, and Linux — Zero IT hassle.</p>
+                </div>
+            </div>
+
+            <p><strong>Repertoir Neuro Scan.AI (V6)</strong> is a high-performance Media Asset Management (MAM) station designed specifically for video editors, DITs, sound recordists, and post-production studios. It runs <strong>100% locally</strong>: your media, project files, and SQLite database never leave your machine.</p>
+
+            <div class="callout callout-info">
+                <span class="callout-icon">💡</span>
+                <div class="callout-content">
+                    <strong>Air-Gapped & Location-Ready:</strong> Operate anywhere from outdoor film sets and production trucks to soundstages without any active internet connection.
+                </div>
+            </div>
+
+            <h3>Step-by-Step Installation:</h3>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🍎 macOS Installation (Apple Silicon M1/M2/M3/M4 & Intel)</span>
+                    <span class="btn-badge tag-green">Recommended</span>
+                </div>
+                <div class="btn-desc">Simply double-click <code>Installer_Repertoir_Mac.command</code>.</div>
+                <div class="btn-steps">
+                    <ol>
+                        <li>Right-click <code>Installer_Repertoir_Mac.command</code> and select <strong>Open</strong> (to satisfy macOS Gatekeeper security).</li>
+                        <li>The installer automatically creates an isolated Python virtual environment, installs dependencies, and checks for Homebrew/FFmpeg.</li>
+                        <li>An application launcher is created. To launch at any time, double-click <code>Lancer_App.command</code>.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🪟 Windows Installation (Windows 10 / 11)</span>
+                    <span class="btn-badge tag-cyan">Batch Installer</span>
+                </div>
+                <div class="btn-desc">Double-click <code>Installer_Repertoir_Windows.bat</code>.</div>
+                <div class="btn-steps">
+                    <ol>
+                        <li>If Windows SmartScreen prompts, click <em>More info</em> then <em>Run anyway</em>.</li>
+                        <li>The script builds the local <code>.venv</code> environment without affecting your global system.</li>
+                        <li>To run the application, double-click <code>Lancer_App_Windows.bat</code>.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🐧 Linux Installation (Ubuntu, Debian, Fedora, Arch)</span>
+                    <span class="btn-badge">Shell Script</span>
+                </div>
+                <div class="btn-desc">Open a terminal in the folder and run <code>bash Installer_Repertoir_Linux.sh</code>.</div>
+                <div class="btn-steps">
+                    <ol>
+                        <li>The installer verifies Python 3 and <code>python3-tk</code> packages.</li>
+                        <li>Start the software anytime with <code>./Lancer_App_Linux.sh</code>.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: MASTER DASHBOARD -->
+        <section class="doc-section" id="en-dashboard">
+            <div class="section-header">
+                <span class="section-icon">📊</span>
+                <div>
+                    <h2>2. Master Dashboard</h2>
+                    <p style="margin:0;">Real-time metrics, interactive storage maps, and autonomous AI health analyst.</p>
+                </div>
+            </div>
+
+            <h3>Key Metrics Banner</h3>
+            <p>The top banner summarizes your indexed media vault: <strong>Cataloged Disks</strong>, <strong>Total File Count</strong>, and <strong>Total Data Volume (GB / TB)</strong>.</p>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🗺️ Interactive Visual Map (Treemap / Sunburst / Tree)</span>
+                    <span class="btn-badge tag-cyan">Visualizer</span>
+                </div>
+                <div class="btn-desc">Visually explore which folders and projects occupy the most storage space.</div>
+                <div class="btn-steps">
+                    <ul>
+                        <li><strong>Volume Dropdown:</strong> Filter by a specific drive or examine all connected storage at once.</li>
+                        <li><strong>Click Navigation:</strong> Click any colored block to zoom into a subdirectory. Click the top breadcrumb to navigate back up.</li>
+                        <li><strong>View Switching:</strong> Switch between <em>Treemap</em> (proportional rectangles), <em>Sunburst</em> (concentric radial rings), or <em>Tree</em> in the Settings tab.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">📈 Analytics Charts (Matplotlib)</span>
+                    <span class="btn-badge">Insights</span>
+                </div>
+                <div class="btn-desc">Located in the right pane:</div>
+                <div class="btn-steps">
+                    <ul>
+                        <li><strong>Yearly Data Ingest:</strong> Histogram showing data production over shooting years.</li>
+                        <li><strong>Top AI Keyword Tags:</strong> Bar chart displaying the most frequent scene labels and visual tags in your library.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Quick Action Buttons</h3>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔍 "Start a Scan" Button</span>
+                    <span class="btn-badge tag-green">Shortcut</span>
+                </div>
+                <div class="btn-desc">Jumps directly to <strong>Storage > Local Disks</strong> to index a freshly plugged drive or memory card.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">👯 "Search for Duplicates" Button</span>
+                    <span class="btn-badge tag-amber">Cleanup</span>
+                </div>
+                <div class="btn-desc">Opens the <strong>Duplicates</strong> module to reclaim valuable storage space.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">📅 "Shooting Calendar" Button</span>
+                    <span class="btn-badge">Timeline</span>
+                </div>
+                <div class="btn-desc">Opens an interactive production calendar organizing rushes chronologically by camera, scene, and shoot day.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🌙 "Start AI Auto-Tagging" Button</span>
+                    <span class="btn-badge tag-purple">Background Agent</span>
+                </div>
+                <div class="btn-desc">Toggles the background neural enrichment worker. It quietly scans videos to generate tags without impacting system speed. Click again to pause.</div>
+            </div>
+
+            <h3>🤖 AI Storage Analyst Agent</h3>
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">"Generate Insight" Button</span>
+                    <span class="btn-badge tag-cyan">Artificial Intelligence</span>
+                </div>
+                <div class="btn-desc">Prompts the local AI analyst to inspect your storage distribution, detect risks (nearing capacity, orphaned media, obsolete codecs), and present actionable recommendations.</div>
+                <div class="btn-steps">
+                    <ul>
+                        <li>When optimizations are discovered, the agent offers an <strong>"Export Complete Storage Audit Report"</strong> button (Markdown .md).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: LOCAL DISKS & SCANNER -->
+        <section class="doc-section" id="en-scanner">
+            <div class="section-header">
+                <span class="section-icon">💽</span>
+                <div>
+                    <h2>3. Storage > Local Disks & Scanner</h2>
+                    <p style="margin:0;">Blazing fast indexing of hard drives, NVMe SSDs, CFexpress, and SD cards.</p>
+                </div>
+            </div>
+
+            <h3>Volume Registry Table</h3>
+            <p>Displays all cataloged drives with name, live connection state (● online in green / ○ offline in grey), serial number, mount point, file count, and used capacity.</p>
+
+            <h3>Action Bar & Buttons</h3>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔄 "Detect Connected Disks" Button</span>
+                    <span class="btn-badge tag-green">Hardware Probe</span>
+                </div>
+                <div class="btn-desc">Scans system buses (Thunderbolt, USB-C, PCIe, SATA) and immediately updates the live status of all drives.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">▶️ "Analyze" (Scan) Button</span>
+                    <span class="btn-badge tag-green">Indexation</span>
+                </div>
+                <div class="btn-desc">Starts high-speed scanning of the selected drive according to checked options. Runs in the background with speed metrics (files/sec) and ETA.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🗑️ "Remove from Catalog" Button</span>
+                    <span class="btn-badge tag-red">Management</span>
+                </div>
+                <div class="btn-desc">Safely removes volume records from the SQLite database. <em>Note: Your actual files on disk are completely untouched.</em></div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🏷️ "Note / Shelf Location" Button</span>
+                    <span class="btn-badge">Physical Asset Tracking</span>
+                </div>
+                <div class="btn-desc">Assign physical shelf or vault location tags (e.g., "Cabinet 4, Shelf B, Box Paris Shoot"). Extremely helpful when searching for offline drives!</div>
+            </div>
+
+            <h3>Scan Options (Checkboxes)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:25%;">Checkbox Option</th>
+                        <th style="width:20%;">Default State</th>
+                        <th>Workflow Significance for Editors & DITs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>☑️ Fast Hashing (XXHash64)</strong></td>
+                        <td>Enabled</td>
+                        <td>Computes ultra-fast 64-bit checksum fingerprints (4+ GB/s) for instant duplicate detection without scan bottleneck.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>☑️ EXIF / ffprobe Metadata</strong></td>
+                        <td>Enabled</td>
+                        <td>Extracts exact resolution (4K, UHD, 1080p), codec (ProRes, BRAW, H.265), frame rates (fps), camera models, and timecode.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>☑️ Pre-analysis</strong></td>
+                        <td>Enabled</td>
+                        <td>Fast directory tree pre-pass to display an accurate, reliable progress bar and ETA.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>☑️ Incremental Scan</strong></td>
+                        <td>Enabled</td>
+                        <td>Only examines added, modified, or deleted files since the previous scan. Cuts re-scan times by up to 95%!</td>
+                    </tr>
+                    <tr>
+                        <td><strong>☑️ Skip System Files</strong></td>
+                        <td>Enabled</td>
+                        <td>Ignores hidden OS noise like <code>.DS_Store</code>, <code>Thumbs.db</code>, <code>._*</code>, or trash folders.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>☑️ Video Thumbnails</strong></td>
+                        <td>Enabled</td>
+                        <td>Builds contact sheet frames for visual hover scrub previews.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 4: REMOTE SERVERS & NAS -->
+        <section class="doc-section" id="en-servers">
+            <div class="section-header">
+                <span class="section-icon">🌐</span>
+                <div>
+                    <h2>4. Storage > Remote Servers & NAS</h2>
+                    <p style="margin:0;">Seamless network storage integration (QNAP, Synology, TrueNAS, SMB, NFS).</p>
+                </div>
+            </div>
+
+            <p>Index and monitor centralized studio storage pools over local Gigabit/10GbE networks without moving physical edit suites.</p>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">➕ "Add Server" Button</span>
+                    <span class="btn-badge tag-green">Configuration</span>
+                </div>
+                <div class="btn-desc">Specify IP address/hostname, protocol (SMB/NFS/QNAP API), credentials, and remote mount path.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">📡 "Scan this Remote Disk" Button</span>
+                    <span class="btn-badge tag-cyan">Network Ingest</span>
+                </div>
+                <div class="btn-desc">Catalogs entire network shares with optimized thread batching to prevent saturating editing network traffic.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">☁️ "Secure Catalog Backup to this NAS" Button</span>
+                    <span class="btn-badge tag-purple">Redundancy</span>
+                </div>
+                <div class="btn-desc">Creates a compressed SQLite snapshot of <code>catalogue.db</code> and archives it on your protected NAS backup volume.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: DIT OFFLOAD -->
+        <section class="doc-section" id="en-dit">
+            <div class="section-header">
+                <span class="section-icon">📥</span>
+                <div>
+                    <h2>5. Storage > DIT Secure Offload</h2>
+                    <p style="margin:0;">Cinema-grade camera card offloading with bit-by-bit verification and MHL checksum manifests.</p>
+                </div>
+            </div>
+
+            <p>Engineered for digital imaging technicians and camera assistants on set. Ensures no card is formatted until mathematically verified.</p>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎴 Source Drop Zone (Drag & Drop or Browse)</span>
+                    <span class="btn-badge">Source Card</span>
+                </div>
+                <div class="btn-desc">Drag your CFexpress, SD, RED Mini-Mag, or camera shuttle drive directly into the designated drop area.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎯 Destination & Automatic Folder Hierarchy Builder</span>
+                    <span class="btn-badge">Project Structure</span>
+                </div>
+                <div class="btn-desc">Select target raid or backup drive. Repertoir can automatically build standard production hierarchies:<br>
+                <code>[Project_Name] / [YYYY_MM_DD] / [Camera_A] / RUSHES</code>.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔐 Checksum Verification Algorithms</span>
+                    <span class="btn-badge tag-amber">Integrity Engine</span>
+                </div>
+                <div class="btn-desc">
+                    <ul>
+                        <li><strong>XXHash64:</strong> Blazing performance (4+ GB/s on NVMe). Perfect for fast 8K RAW turnarounds.</li>
+                        <li><strong>MD5:</strong> Classic broadcast standard recognized by all third-party checksum verifiers.</li>
+                        <li><strong>SHA1 / SHA256:</strong> Cryptographic assurance for museum and archival deliverables.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🚀 "Start Secure Transfer" Button</span>
+                    <span class="btn-badge tag-green">Execution</span>
+                </div>
+                <div class="btn-desc">Performs dual-buffer copy, computes on-the-fly hashes, verifies target reads, and creates an ASC-standard <code>.mhl</code> manifest file.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: SEARCH -->
+        <section class="doc-section" id="en-search">
+            <div class="section-header">
+                <span class="section-icon">🔍</span>
+                <div>
+                    <h2>6. Search & Editor Rushes Basket</h2>
+                    <p style="margin:0;">Instant multi-parameter search, AI semantic queries, proxy rendering, and NLE timeline export.</p>
+                </div>
+            </div>
+
+            <h3>Search Bar & Main Query Controls</h3>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">⌨️ Query Input & Field Scope Dropdown</span>
+                    <span class="btn-badge">Query Builder</span>
+                </div>
+                <div class="btn-desc">Type any keywords (scene, actor, shot, town). Target specific scopes using the dropdown:
+                <em>Everywhere</em>, <em>Filename</em>, <em>Folder</em>, <em>Camera</em>, <em>Extension</em>, <em>Codec</em>, or <em>Metadata</em>.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🗂️ Quick Category Badges</span>
+                    <span class="btn-badge tag-cyan">1-Click Filter</span>
+                </div>
+                <div class="btn-desc">Isolate media types instantly: <strong>[All]</strong>, <strong>[Videos]</strong>, <strong>[Audios]</strong>, <strong>[Photos]</strong>, <strong>[Projects]</strong>, <strong>[Documents]</strong>.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🧠 "AI Semantic Search" Toggle</span>
+                    <span class="btn-badge tag-purple">Natural Language</span>
+                </div>
+                <div class="btn-desc">Enables vector semantic search. You can search by visual intent: <em>"aerial drone shot of beach sunset"</em> or <em>"close-up actor shouting"</em> even if those words do not appear in file names!</div>
+            </div>
+
+            <h3>Technical Filters</h3>
+            <p>Filter by: <strong>Resolution</strong> (4K DCI, UHD, 1080p), <strong>Frame Rate</strong> (24, 25, 50, 100, 120 fps high-speed), <strong>Date Range</strong>, and <strong>Minimum Size</strong>.</p>
+
+            <h3>Right-Click Context Menu & Shortcuts</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:25%;">Action / Shortcut</th>
+                        <th>Workflow Behavior</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><kbd>Spacebar</kbd> (QuickLook)</td>
+                        <td>Triggers native QuickLook on macOS or embedded player on Windows/Linux for instant playback.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reveal in Finder / Explorer</strong></td>
+                        <td>Opens the exact source folder on the respective drive.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Copy Absolute Filepath</strong></td>
+                        <td>Copies full system filepath to clipboard for pasting into shell scripts or NLE relink windows.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Format Technical Sheet</strong></td>
+                        <td>Displays complete stream specs, audio channels, color profile (Log, Rec709, HDR), and ffprobe metadata.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Media Health Check</strong></td>
+                        <td>Executes full decode scan to guarantee zero dropped frames or bitstream corruption.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Rushes Basket & Professional Exports</h3>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🛒 "Add to Basket" & "Empty Basket" Buttons</span>
+                    <span class="btn-badge">Selection Batch</span>
+                </div>
+                <div class="btn-desc">Collect shots from multiple disparate drives into a unified editing batch.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎞️ "Generate Proxies (ProRes / H.264)" Button</span>
+                    <span class="btn-badge tag-green">Batch Transcode</span>
+                </div>
+                <div class="btn-desc">Transcodes selected media to Apple ProRes Proxy or 1080p H.264 while preserving source timecode and audio channels.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎬 "Export Timeline XML" Button</span>
+                    <span class="btn-badge tag-cyan">NLE Interoperability</span>
+                </div>
+                <div class="btn-desc">Generates industry-standard FCPXML or Premiere XML. Open directly in <strong>Adobe Premiere Pro 2026</strong>, <strong>DaVinci Resolve</strong>, or <strong>Final Cut Pro</strong> to see your sequence instantly assembled with reel names and markers!</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">📝 "Generate XMP Sidecars" Button</span>
+                    <span class="btn-badge">Metadata Sync</span>
+                </div>
+                <div class="btn-desc">Bakes AI tags, ratings, and descriptions directly into Adobe-compliant <code>.xmp</code> sidecar files.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: AI CHAT -->
+        <section class="doc-section" id="en-chat">
+            <div class="section-header">
+                <span class="section-icon">💬</span>
+                <div>
+                    <h2>7. AI Lab > AI Assistant & SQL Engine</h2>
+                    <p style="margin:0;">Query your production library conversationally without writing code.</p>
+                </div>
+            </div>
+
+            <p>The AI assistant directly interprets natural language questions into secure SQLite queries:</p>
+            <ul>
+                <li><em>"How many hours of ProRes footage did we shoot in 2025 with Sony FX6?"</em></li>
+                <li><em>"Show me the 10 largest video files on the drive SSD_PRODUCTION_02."</em></li>
+                <li><em>"Find all clips featuring a vehicle shot at 50 frames per second."</em></li>
+            </ul>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">Send & Read-Only SQL Interceptor</span>
+                    <span class="btn-badge tag-green">Data Security</span>
+                </div>
+                <div class="btn-desc">Translates your intent into an optimized SQL statement. Executed strictly in <strong>read-only mode</strong> (SELECT only), preventing any accidental data modification. Results are tabulated immediately.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 8: BATCH RENAMER -->
+        <section class="doc-section" id="en-renamer">
+            <div class="section-header">
+                <span class="section-icon">🪄</span>
+                <div>
+                    <h2>8. AI Lab > Batch Rushes Renamer</h2>
+                    <p style="margin:0;">Standardized post-production file renaming with collision avoidance.</p>
+                </div>
+            </div>
+
+            <p>Eliminate generic camera names (such as <code>C0001.MP4</code>) that cause timeline conflicts.</p>
+
+            <h3>Pattern Tokens Builder</h3>
+            <p>Click tokens to construct standard delivery filenames:</p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin: 12px 0;">
+                <code>{camera}</code> <code>{date}</code> <code>{reel}</code> <code>{scene}</code> <code>{take}</code> <code>{resolution}</code> <code>{fps}</code> <code>{counter}</code> <code>{orig_name}</code>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">👁️ "Preview (Simulation)" Button</span>
+                    <span class="btn-badge tag-cyan">Verification</span>
+                </div>
+                <div class="btn-desc">Displays a side-by-side comparison table showing current filenames versus prospective new names, warning of potential collisions.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">✅ "Apply Renaming" Button</span>
+                    <span class="btn-badge tag-green">Execute</span>
+                </div>
+                <div class="btn-desc">Physically renames files on disk and automatically updates database references without breaking links.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">↩️ "Undo Renaming" Button</span>
+                    <span class="btn-badge tag-amber">1-Click Rollback</span>
+                </div>
+                <div class="btn-desc">Instantly reverses the last renaming session back to original names using transaction logs!</div>
+            </div>
+        </section>
+
+        <!-- SECTION 9: MULTI-CAM & ZOOM F8 SYNC -->
+        <section class="doc-section" id="en-sync">
+            <div class="section-header">
+                <span class="section-icon">🎬</span>
+                <div>
+                    <h2>9. AI Lab > Multi-Cam & Zoom F8 Audio Sync</h2>
+                    <p style="margin:0;">Automatic multi-angle alignment and polyphonic multi-channel audio demuxing.</p>
+                </div>
+            </div>
+
+            <p>Solves multi-camera alignment problems (Camera A, B, C...) paired with multi-channel sound field recorders (Zoom F8, Sound Devices 833, Tentacle Sync).</p>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎥 Dynamic Multi-Camera Slots</span>
+                    <span class="btn-badge tag-cyan">Angle Manager</span>
+                </div>
+                <div class="btn-desc">
+                    <ul>
+                        <li><strong>Camera 1 (Main Angle):</strong> Select master camera footage.</li>
+                        <li><strong>"[+] Add Camera" Button:</strong> Add extra camera angles dynamically (Cam B, C, D...). Support for unlimited angles!</li>
+                        <li><strong>"[-] Remove" Button:</strong> Delete unnecessary angle slot.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎙️ Master Audio & Zoom F8 Support (Polyphonic WAV)</span>
+                    <span class="btn-badge tag-green">Multi-Track Demux</span>
+                </div>
+                <div class="btn-desc">
+                    Select master polyphonic BWF/WAV sound files recorded from your Zoom F8 or Sound Devices.
+                    <br><br>
+                    <strong>☑️ "Split multi-track channels (Zoom F8 polyphonic)" Checkbox:</strong>
+                    When selected, automatically de-interleaves discrete isolated audio channels:
+                    <br>• Track A1: Boom Microphone
+                    <br>• Track A2: Actor 1 Lavalier
+                    <br>• Track A3: Actor 2 Lavalier
+                    <br>• Track A4: Stereo Room Ambience
+                    <br>Routes every microphone to its own independent timeline track!
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">⚡ Synchronization Engines</span>
+                    <span class="btn-badge tag-purple">High Precision</span>
+                </div>
+                <div class="btn-desc">
+                    <ul>
+                        <li><strong>Audio Waveform Cross-Correlation:</strong> Aligns scratch camera sound against high-fidelity master sound with microsecond accuracy.</li>
+                        <li><strong>SMPTE / LTC Timecode:</strong> Instant lock using embedded hardware timecodes.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🚀 "Run Sync" & "🎬 Export Timeline XML" Buttons</span>
+                    <span class="btn-badge tag-green">NLE Sequence Export</span>
+                </div>
+                <div class="btn-desc">
+                    Computes frame offsets and exports ready-to-edit multi-camera sequences for <strong>Adobe Premiere Pro 2026</strong>, <strong>DaVinci Resolve</strong>, and <strong>Final Cut Pro</strong>.
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 10: TAGS & VISION -->
+        <section class="doc-section" id="en-tags">
+            <div class="section-header">
+                <span class="section-icon">🏷️</span>
+                <div>
+                    <h2>10. AI Lab > Tags & Visual Semantic Indexing</h2>
+                    <p style="margin:0;">Deep neural scene analysis, visual taxonomy, and tag clouds.</p>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🤖 "Extract AI Tags" Button</span>
+                    <span class="btn-badge tag-purple">Neural Vision</span>
+                </div>
+                <div class="btn-desc">Runs local computer vision to classify lighting conditions (golden hour, night, daylight), framing types (close-up, aerial, wide), and scene elements.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🏷️ Tag Frequency Cloud</span>
+                    <span class="btn-badge">Taxonomy</span>
+                </div>
+                <div class="btn-desc">Double-clicking any tag reveals all corresponding clips in the Search tab. Rename and Delete buttons let you harmonize terms across projects.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 11: DUPLICATES -->
+        <section class="doc-section" id="en-duplicates">
+            <div class="section-header">
+                <span class="section-icon">👯</span>
+                <div>
+                    <h2>11. AI Lab > Duplicate Cleaner & Safe Trash</h2>
+                    <p style="margin:0;">Reclaim massive storage space with zero risk of accidental data destruction.</p>
+                </div>
+            </div>
+
+            <h3>Detection Modes</h3>
+            <ul>
+                <li><strong>Identical Files Mode:</strong> Compares XXHash64 hashes regardless of filenames or locations.</li>
+                <li><strong>Twin Folders Mode:</strong> Finds entire duplicated directories across different storage volumes.</li>
+            </ul>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">⚖️ Cleanup Plan Matrix</span>
+                    <span class="btn-badge">Visual Triage</span>
+                </div>
+                <div class="btn-desc">
+                    Displays duplicate clusters with reclaimable space in GB/TB.
+                    <br>• <strong>Keep (Green Button):</strong> Retains original master.
+                    <br>• <strong>Remove (Red Button):</strong> Marks duplicate file for trash bin.
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🤖 "Ask AI Duplicate Advice" Button</span>
+                    <span class="btn-badge tag-cyan">Cleaner Agent</span>
+                </div>
+                <div class="btn-desc">The AI cleaner analyzes creation timestamps, drive speeds, and path depth to recommend safe master files.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🗑️ "Move to Safe Trash" Button</span>
+                    <span class="btn-badge tag-amber">System Trash Integration</span>
+                </div>
+                <div class="btn-desc">Repertoir <strong>never performs permanent destructive file deletion</strong>! Files are placed into your operating system's native trash bin (macOS Trash, Windows Recycle Bin, Linux Trash) where they can be restored at any time.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 12: PROJECTS -->
+        <section class="doc-section" id="en-projects">
+            <div class="section-header">
+                <span class="section-icon">📁</span>
+                <div>
+                    <h2>12. AI Lab > Project Manager & Media Relinker</h2>
+                    <p style="margin:0;">Index NLE project timelines and restore missing offline media automatically.</p>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔍 Multi-NLE Detection</span>
+                    <span class="btn-badge">Supported Formats</span>
+                </div>
+                <div class="btn-desc">Automatically indexes: <code>.prproj</code> (Adobe Premiere), <code>.drp</code> (DaVinci Resolve), <code>.fcpbundle</code> (Final Cut Pro), <code>.aep</code> (After Effects), and <code>.logicx</code> (Logic Pro).</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔗 "Relink Missing Media" Button</span>
+                    <span class="btn-badge tag-green">Project Repair</span>
+                </div>
+                <div class="btn-desc">Resolves "Media Offline" errors by matching clips in your catalog and locating where assets have moved across drives.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 13: SETTINGS -->
+        <section class="doc-section" id="en-settings">
+            <div class="section-header">
+                <span class="section-icon">⚙️</span>
+                <div>
+                    <h2>13. Settings, AI Config & 1-Click Updates</h2>
+                    <p style="margin:0;">Theme switching, local LLM endpoints, and non-destructive GitHub updating.</p>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎨 UI Themes & Visual Styles</span>
+                    <span class="btn-badge">Themes</span>
+                </div>
+                <div class="btn-desc">Select visual themes (Darkly, Cyborg, Cosmo, Flatly...) and choose storage visualization modes (Treemap, Sunburst, or Tree).</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🧠 Local AI Model & MCP Server Endpoints</span>
+                    <span class="btn-badge tag-purple">LLM Integration</span>
+                </div>
+                <div class="btn-desc">Connect to local LM Studio (<code>http://localhost:1234/v1</code>) or Ollama (<code>http://localhost:11434/v1</code>). Configure models such as Google Gemma 4, Qwen 2.5 Coder, Minitron, or Nomic Embed.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">⚡ "Defragment & Optimize (VACUUM)" Button</span>
+                    <span class="btn-badge tag-cyan">SQLite Tuning</span>
+                </div>
+                <div class="btn-desc">Compacts database indexes to ensure sub-millisecond searches even with millions of indexed files.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔄 "Check and Install GitHub Updates" Button</span>
+                    <span class="btn-badge tag-green">1-Click Update</span>
+                </div>
+                <div class="btn-desc">Pulls software updates from GitHub while <strong>keeping your local SQLite database 100% safe and untouched</strong>.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 14: WEB ACCESS -->
+        <section class="doc-section" id="en-web">
+            <div class="section-header">
+                <span class="section-icon">🌐</span>
+                <div>
+                    <h2>14. Web & Mobile Remote Access</h2>
+                    <p style="margin:0;">Search and browse your catalog on iPad, iPhone, and Android devices across studio Wi-Fi.</p>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🌐 "Launch Web & Mobile Access" Button</span>
+                    <span class="btn-badge tag-green">Local Secure Server</span>
+                </div>
+                <div class="btn-desc">Spins up an internal web server.
+                <br>• The app displays your local URL (e.g., <code>http://192.168.1.45:8080</code>) and a <strong>Security PIN Code</strong>.
+                <br>• Connect via iPad or smartphone to query rushes comfortably from the screening sofa!</div>
+            </div>
+        </section>
+
+        <!-- SECTION 15: FAQ -->
+        <section class="doc-section" id="en-faq">
+            <div class="section-header">
+                <span class="section-icon">❓</span>
+                <div>
+                    <h2>15. Troubleshooting & Frequently Asked Questions (FAQ)</h2>
+                    <p style="margin:0;">Quick resolutions to everyday questions.</p>
+                </div>
+            </div>
+
+            <div class="callout callout-warning">
+                <span class="callout-icon">🔒</span>
+                <div class="callout-content">
+                    <strong>Full Disk Access Permission on macOS (Crucial):</strong><br>
+                    If external drives cannot be scanned, go to <em>System Settings > Privacy & Security > Full Disk Access</em> and toggle <strong>Terminal</strong> or <strong>Repertoir</strong> to ON.
+                </div>
+            </div>
+
+            <div class="callout callout-info">
+                <span class="callout-icon">🎞️</span>
+                <div class="callout-content">
+                    <strong>Are FFmpeg and FFprobe mandatory?</strong><br>
+                    Basic file cataloging works without them. However, FFmpeg and FFprobe are strongly recommended to unlock video codec extraction, timecode indexing, and thumbnail rendering.
+                </div>
+            </div>
+
+            <div class="callout callout-success">
+                <span class="callout-icon">🤝</span>
+                <div class="callout-content">
+                    <strong>Can I share my database with Windows/Linux colleagues?</strong><br>
+                    Yes! The SQLite database format <code>catalogue.db</code> is completely cross-platform. It can be copied directly to shared drives without modification.
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+
+    <main class="main-doc-content lang-content" id="content-ar">
+        
+        <!-- SECTION 1: QUICK START & INSTALLATION -->
+        <section class="doc-section" id="ar-intro">
+            <div class="section-header">
+                <span class="section-icon">🚀</span>
+                <div>
+                    <h2>1. البدء السريع والتثبيت على كافة الأنظمة</h2>
+                    <p style="margin:0;">تثبيت بنقرة واحدة لأنظمة ماك، ويندوز ولينكس — دون أي تعقيدات تقنية للمحترفين.</p>
+                </div>
+            </div>
+
+            <p><strong>برنامج ريبيرتوار (Repertoir Neuro Scan.AI - V6)</strong> هو محطة متكاملة لإدارة الأصول الرقمية (MAM)، الفهرسة فائقة السرعة، مزامنة الكاميرات المتعددة الاحترافية، والتحليل الذكي لمراحل ما بعد الإنتاج والمونتاج. يعمل البرنامج <strong>محلياً بالكامل (100% Offline)</strong> على جهازك دون إرسال أي وسائط أو بيانات خارج حاسوبك.</p>
+
+            <div class="callout callout-info">
+                <span class="callout-icon">💡</span>
+                <div class="callout-content">
+                    <strong>جاهز لمواقع التصوير المعزولة:</strong> يمكنك تشغيل البرنامج في مواقع التصوير الصحراوية، سيارات البث الخارجي أو غرف المونتاج دون الحاجة لأي اتصال بالإنترنت.
+                </div>
+            </div>
+
+            <h3>خطوات التثبيت خطوة بخطوة حسب نظام التشغيل:</h3>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🍎 التثبيت على أجهزة ماك (macOS معالجات Apple Silicon M1/M2/M3/M4 وإنتل)</span>
+                    <span class="btn-badge tag-green">موصى به</span>
+                </div>
+                <div class="btn-desc">انقر نقراً مزدوجاً على الملف <code>Installer_Repertoir_Mac.command</code>.</div>
+                <div class="btn-steps">
+                    <ol>
+                        <li>انقر بزر الفأرة الأيمن على ملف التثبيت واختر <strong>Open (فتح)</strong> لتجاوز حماية Gatekeeper في نظام ماك.</li>
+                        <li>يقوم برنامج التثبيت تلقائياً بإنشاء بيئة بايثون معزولة، وتثبيت الحزم المطلوبة وتجهيز محركات FFmpeg.</li>
+                        <li>لبدء تشغيل التطبيق في أي وقت، انقر نقراً مزدوجاً على <code>Lancer_App.command</code>.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🪟 التثبيت على نظام ويندوز (Windows 10 / 11)</span>
+                    <span class="btn-badge tag-cyan">تثبيت تلقائي</span>
+                </div>
+                <div class="btn-desc">انقر نقراً مزدوجاً على الملف <code>Installer_Repertoir_Windows.bat</code>.</div>
+                <div class="btn-steps">
+                    <ol>
+                        <li>إذا ظهرت نافذة حماية Windows SmartScreen، انقر على <em>More info (مزيد من المعلومات)</em> ثم <em>Run anyway (تشغيل على أية حال)</em>.</li>
+                        <li>يتم إعداد البيئة الافتراضية <code>.venv</code> الخاصة بويندوز دون تغيير إعدادات حاسوبك العامة.</li>
+                        <li>لتشغيل البرنامج لاحقاً، انقر على <code>Lancer_App_Windows.bat</code>.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🐧 التثبيت على نظام لينكس (Ubuntu, Debian, Fedora, Arch)</span>
+                    <span class="btn-badge">ملف شل</span>
+                </div>
+                <div class="btn-desc">افتح الطرفية (Terminal) في المجلد واكتب: <code>bash Installer_Repertoir_Linux.sh</code>.</div>
+                <div class="btn-steps">
+                    <ol>
+                        <li>يتأكد السكربت من توفر بايثون 3 وحزم <code>python3-tk</code>.</li>
+                        <li>لتشغيل البرنامج، استخدم <code>./Lancer_App_Linux.sh</code>.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: MASTER DASHBOARD -->
+        <section class="doc-section" id="ar-dashboard">
+            <div class="section-header">
+                <span class="section-icon">📊</span>
+                <div>
+                    <h2>2. لوحة التحكم الشاملة (Dashboard)</h2>
+                    <p style="margin:0;">مؤشرات آنية، خريطة تخزين مرئية تفاعلية ومحلل ذكاء اصطناعي لسلامة الأصول.</p>
+                </div>
+            </div>
+
+            <h3>شريط المؤشرات الرئيسية</h3>
+            <p>يستعرض الشريط العلوي إحصائيات مكتبتك في الوقت الفعلي: <strong>عدد الأقراص المفهرسة</strong>، <strong>إجمالي عدد الملفات</strong> و<strong>الحجم الكلي المشغول (جيجابايت / تيرابايت)</strong>.</p>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🗺️ الخريطة المرئية التفاعلية (Treemap / Sunburst / Tree)</span>
+                    <span class="btn-badge tag-cyan">مستكشف التخزين</span>
+                </div>
+                <div class="btn-desc">استكشاف المجلدات والمشاريع الأكثر استهلاكاً للمساحة بصرياً.</div>
+                <div class="btn-steps">
+                    <ul>
+                        <li><strong>قائمة اختيار القرص:</strong> تصفح قرصاً محدداً أو استعراض كامل مساحة التخزين المجمعة.</li>
+                        <li><strong>التنقل بالنقر:</strong> انقر على أي مستطيل ملون للتعمق داخل المجلد الفرعي. انقر على المسار العلوي للرجوع للخلف.</li>
+                        <li><strong>تغيير نمط العرض:</strong> يمكنك الاختيار بين <em>خريطة المستطيلات المتناسبة (Treemap)</em>، <em>الأقراص الدائرية (Sunburst)</em> أو <em>الشجرة</em> من نافذة الإعدادات.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">📈 المخططات البيانية والتحليلية</span>
+                    <span class="btn-badge">رسوم إحصائية</span>
+                </div>
+                <div class="btn-desc">في اللوحة الجانبية اليمنى:</div>
+                <div class="btn-steps">
+                    <ul>
+                        <li><strong>تطور البيانات عبر السنوات:</strong> رسم بياني يوضح حجم إنتاج المواد المصورة موزعة حسب سنة التصوير.</li>
+                        <li><strong>أكثر الوسوم والكلمات الدلالية تكراراً:</strong> مخطط بياني يبرز أكثر المشاهد والمواضيع توثيقاً بالذكاء الاصطناعي.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>أزرار الإجراءات السريعة</h3>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔍 زر «بدء فحص قرص (Lancer un Scan)»</span>
+                    <span class="btn-badge tag-green">اختصار مباشر</span>
+                </div>
+                <div class="btn-desc">ينقلك مباشرة إلى شاشة فحص الأقراص المحلية لفهرسة قرص أو بطاقة ذاكرة جديدة.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">👯 زر «كشف الملفات المكررة (Chercher des Doublons)»</span>
+                    <span class="btn-badge tag-amber">تنظيف المساحة</span>
+                </div>
+                <div class="btn-desc">يفتح وحدة الكشف عن التكرارات لاستعادة المساحة التخزينية المهدورة.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">📅 زر «جدول التصوير الزمني (Calendrier de Tournage)»</span>
+                    <span class="btn-badge">التسلسل الزمني</span>
+                </div>
+                <div class="btn-desc">يعرض تقويماً تفاعلياً يرتب المشاهد زمنياً حسب أيام التصوير، الكاميرات والمشاريع.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🌙 زر «تشغيل التصنيف التلقائي الذكي (Lancer l'Auto-étiquetage IA)»</span>
+                    <span class="btn-badge tag-purple">معالجة خلفية</span>
+                </div>
+                <div class="btn-desc">يشغل محرك الفهرسة الذاتية في الخلفية لتحليل الفيديوهات وتوليد الكلمات المفتاحية دون التأثير على سرعة المونتاج. انقر مجدداً للإيقاف المؤقت.</div>
+            </div>
+
+            <h3>🤖 وكيل التحليل الذكي (AI Analyst Agent)</h3>
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">زر «توليد رؤية تحليلية (Générer un Insight)»</span>
+                    <span class="btn-badge tag-cyan">ذكاء اصطناعي</span>
+                </div>
+                <div class="btn-desc">يطلب من الوكيل الذكي المحلي فحص توزيع الملفات، واكتشاف الأقراص الموشكة على الامتلاء، والوسائط المعزولة، ثم تقديم توصيات احترافية.</div>
+                <div class="btn-steps">
+                    <ul>
+                        <li>إذا اكتشف الوكيل نقاط تحسين، يقترح عليك زراً لتصدير <strong>تقرير تدقيق تخزين شامل</strong> بصيغة Markdown (.md).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: SCANNER LOCAL DISKS -->
+        <section class="doc-section" id="ar-scanner">
+            <div class="section-header">
+                <span class="section-icon">💽</span>
+                <div>
+                    <h2>3. التخزين > فحص الأقراص المحلية</h2>
+                    <p style="margin:0;">فهرسة فائقة السرعة للأقراص الصلبة، وحدات NVMe SSD وبطاقات CFexpress وSD.</p>
+                </div>
+            </div>
+
+            <h3>جدول سجل الأقراص</h3>
+            <p>يستعرض الأقراص المسجلة مع أسمائها، حالة الاتصال الحالية (● متصل باللون الأخضر / ○ غير متصل بالرمادي)، الرقم التسلسلي، نقطة التوصيل، عدد الملفات، والمساحة المستغلة.</p>
+
+            <h3>شريط العمليات والأزرار</h3>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔄 زر «اكتشاف الأقراص المتصلة (Détecter les disques branchés)»</span>
+                    <span class="btn-badge tag-green">فحص عتادي</span>
+                </div>
+                <div class="btn-desc">يفحص منافذ Thunderbolt وUSB-C وSATA لتحديث حالة اتصال الأقراص في اللحظة ذاتها.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">▶️ زر «بدء الفهرسة (Analyser)»</span>
+                    <span class="btn-badge tag-green">مسح شامل</span>
+                </div>
+                <div class="btn-desc">يبدأ فهرسة القرص المحدد بسرعة هائلة في الخلفية مع عرض معدل الإنجاز (ملف/ثانية) والوقت المتبقي المقدر.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🗑️ زر «حذف من الفهرس (Supprimer du catalogue)»</span>
+                    <span class="btn-badge tag-red">إدارة الفهرس</span>
+                </div>
+                <div class="btn-desc">يحذف بيانات القرص من قاعدة بيانات البرنامج. <em>تنبيه: ملفاتك المادية على القرص تظل آمنة تماماً ولا يتم مسها أبداً.</em></div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🏷️ زر «ملاحظة / موقع الحفظ الفعلي (Note / Emplacement)»</span>
+                    <span class="btn-badge">أرشفة الأرفف والخزائن</span>
+                </div>
+                <div class="btn-desc">تسجيل المكان الفعلي للقرص عندما يكون مفصولاً (مثال: «الخزانة 3، الرف B، صندوق تصوير مسلسل دراما»). يتيح لك العثور على القرص الفعلي فوراً بمجرد البحث عن أي مشهد فيه!</div>
+            </div>
+
+            <h3>خيارات الفحص (خانات الاختيار)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:25%;">الخيار</th>
+                        <th style="width:20%;">الحالة الافتراضية</th>
+                        <th>الأهمية التقنية للمونتير وفني الـ DIT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>☑️ البصمة السريعة (XXHash64)</strong></td>
+                        <td>مفعل</td>
+                        <td>توليد بصمة تشفيرية سريعة جداً (تتجاوز 4 جيجابايت/ثانية) لكشف التطابق والمكررات دون إبطاء الفحص.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>☑️ بيانات EXIF و ffprobe</strong></td>
+                        <td>مفعل</td>
+                        <td>استخراج الدقة الكاملة (4K, ProRes, BRAW)، الترميز، معدل الإطارات (fps)، نوع الكاميرا والتايم كود.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>☑️ التحليل الأولي المسبق</strong></td>
+                        <td>مفعل</td>
+                        <td>حساب سريع لعدد المجلدات والملفات لعرض مؤشر تقدم زمني حقيقي ودقيق.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>☑️ الفحص التراكمي الذكي</strong></td>
+                        <td>مفعل</td>
+                        <td>فحص الملفات الجديدة أو المعدلة أو المحذوفة فقط منذ آخر فحص. يقلل زمن إعادة الفحص بنسبة 95%!</td>
+                    </tr>
+                    <tr>
+                        <td><strong>☑️ تجاهل ملفات النظام</strong></td>
+                        <td>مفعل</td>
+                        <td>استبعاد الملفات غير المرغوبة تلقائياً مثل <code>.DS_Store</code> و <code>Thumbs.db</code> وسلة المهملات.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>☑️ الصور المصغرة للفيديو</strong></td>
+                        <td>مفعل</td>
+                        <td>إنشاء أشرطة لقطات للمعاينة البصرية السريعة بمجرد تمرير الفأرة فوق الفيديو.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SECTION 4: REMOTE SERVERS & NAS -->
+        <section class="doc-section" id="ar-servers">
+            <div class="section-header">
+                <span class="section-icon">🌐</span>
+                <div>
+                    <h2>4. التخزين > الخوادم البعيدة ووحدات التخزين الشبكي NAS</h2>
+                    <p style="margin:0;">ربط وفهرسة خوادم QNAP وSynology وTrueNAS عبر بروتوكولات SMB وNFS.</p>
+                </div>
+            </div>
+
+            <p>يتيح هذا القسم ربط وفهرسة خوادم الاستوديو المشتركة عبر الشبكة المحلية ومراقبة محتواها دون الحاجة لتحريك محطات العمل.</p>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">➕ زر «إضافة خادم (Ajouter un serveur)»</span>
+                    <span class="btn-badge tag-green">إعداد الاتصال</span>
+                </div>
+                <div class="btn-desc">نافذة إدخال عنوان IP الخاص بالخادم، واسم المستخدم، وكلمة المرور ومسار المجلد المشترك.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">📡 زر «فحص هذا القرص البعيد (Scanner ce disque distant)»</span>
+                    <span class="btn-badge tag-cyan">فحص شبكي</span>
+                </div>
+                <div class="btn-desc">فهرسة محتويات السيرفر مع تنظيم تدفق البيانات لتجنب إشغال شبكة المونتاج أثناء العمل.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">☁️ زر «نسخ احتياطي لقاعدة البيانات إلى السيرفر (Backup Sécurisé)»</span>
+                    <span class="btn-badge tag-purple">حماية ومزامنة</span>
+                </div>
+                <div class="btn-desc">إنشاء لقطة مضغوطة من قاعدة بيانات <code>catalogue.db</code> وحفظها تلقائياً في مجلد النسخ الاحتياطي على خادم NAS لضمان عدم ضياع الأرشيف أبداً.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: DIT OFFLOAD -->
+        <section class="doc-section" id="ar-dit">
+            <div class="section-header">
+                <span class="section-icon">📥</span>
+                <div>
+                    <h2>5. التخزين > تفريغ الذاكرة DIT الآمن (Offload)</h2>
+                    <p style="margin:0;">تفريغ بطاقات الذاكرة وفق المعايير السينمائية مع التحقق بايت-بايت وملفات MHL المعتمدة.</p>
+                </div>
+            </div>
+
+            <p>مصمم خصيصاً لمساعدي الكاميرا وفنيي الصورة الرقمية (DIT) في موقع التصوير لضمان عدم مسح أي بطاقة تصوير قبل التأكد الرياضي القاطع من مطابقة النسخ بنسبة 100%.</p>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎴 منطقة سحب وإفلات بطاقة الذاكرة (Source)</span>
+                    <span class="btn-badge">المصدر</span>
+                </div>
+                <div class="btn-desc">اسحب وأفلت بطاقة CFexpress أو SD أو RED Mini-Mag مباشرة في هذه المنطقة.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎯 قرص الوجهة ومنشئ شجرة المجلدات القياسية</span>
+                    <span class="btn-badge">هيكلية المشروع</span>
+                </div>
+                <div class="btn-desc">اختر قرص النسخ المستهدف. يقوم البرنامج تلقائياً بإنشاء التدرج الشجري السينمائي الموحد:<br>
+                <code>[اسم_المشروع] / [تاريخ_التصوير] / [كاميرا_A] / RUSHES</code>.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔐 اختيار خوارزمية البصمة والتحقق (Checksum)</span>
+                    <span class="btn-badge tag-amber">محرك التحقق</span>
+                </div>
+                <div class="btn-desc">
+                    <ul>
+                        <li><strong>XXHash64:</strong> أسرع خوارزمية في العالم (تتجاوز 4 جيجابايت/ثانية على أقراص NVMe). مثالية لتفريغ ملفات 8K RAW الضخمة بسرعة.</li>
+                        <li><strong>MD5:</strong> المعيار التقليدي للبث التلفزيوني ومطابق لبرامج الفحص الخارجية مثل Silverstack وShotPut Pro.</li>
+                        <li><strong>SHA1 / SHA256:</strong> حماية تشفيرية فائقة للأفلام الوثائقية والأرشيف الوطني.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🚀 زر «بدء النقل الآمن (Démarrer le Transfert Sécurisé)»</span>
+                    <span class="btn-badge tag-green">تنفيذ آمن</span>
+                </div>
+                <div class="btn-desc">يقوم بنسخ البيانات عبر مخازن مزدوجة، وحساب البصمة أثناء النسخ، وإعادة قراءة الملفات من الوجهة لمطابقتها بايت-بايت، وتوليد ملف بيان رسمي <code>.mhl</code> معتمد من جمعية المصورين السينمائيين الأمريكية (ASC).</div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: SEARCH -->
+        <section class="doc-section" id="ar-search">
+            <div class="section-header">
+                <span class="section-icon">🔍</span>
+                <div>
+                    <h2>6. محرك البحث الشامل وسلة المونتاج (Rushes Basket)</h2>
+                    <p style="margin:0;">بحث لحظي متعدد المعايير، بحث دلالي بالذكاء الاصطناعي وتصدير مباشر لبرامج المونتاج.</p>
+                </div>
+            </div>
+
+            <h3>شريط البحث وأدوات التصفية الرئيسية</h3>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">⌨️ حقل البحث وقائمة نطاق البحث</span>
+                    <span class="btn-badge">بحث مرن</span>
+                </div>
+                <div class="btn-desc">اكتب أي كلمة (اسم ممثل، مشهد، مدينة، رقم لقطة). حدد النطاق من القائمة:
+                <em>الكل (Partout)</em>، <em>اسم الملف</em>، <em>المجلد</em>، <em>نوع الكاميرا</em>، <em>الامتداد</em>، <em>الترميز (Codec)</em> أو <em>البيانات الوصفية</em>.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🗂️ أزرار التصنيفات السريعة</span>
+                    <span class="btn-badge tag-cyan">تصفية سريعة</span>
+                </div>
+                <div class="btn-desc">تصفية نوعية بنقرة واحدة: <strong>[الكل]</strong>، <strong>[فيديو]</strong>، <strong>[صوت]</strong>، <strong>[صور]</strong>، <strong>[مشاريع مونتاج]</strong>، <strong>[مستندات]</strong>.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🧠 مفتاح «البحث الدلالي بالذكاء الاصطناعي (Recherche Sémantique)»</span>
+                    <span class="btn-badge tag-purple">لغة طبيعية</span>
+                </div>
+                <div class="btn-desc">تفعيل الفهم البصري للمحتوى باللغة الطبيعية. يمكنك البحث عن أوصاف مثل: <em>«غروب الشمس فوق البحر تصوير طائرة درون»</em> أو <em>«لقطة مقربة لممثل غاضب»</em> حتى لو لم تكن هذه الكلمات مكتوبة في اسم الملف!</div>
+            </div>
+
+            <h3>فلاتر المواصفات التقنية</h3>
+            <p>تصفية النتائج بدقة حسب: <strong>الدقة</strong> (4K DCI, UHD, 1080p)، <strong>معدل الإطارات</strong> (24, 25, 50, 100, 120 إطار لتصوير الحركة البطيئة Slo-Mo)، <strong>النطاق الزمني</strong> و<strong>الحجم الأدنى للملف</strong>.</p>
+
+            <h3>قائمة الزر الأيمن واختصارات لوحة المفاتيح</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:25%;">الإجراء / الاختصار</th>
+                        <th>الوظيفة وسير العمل</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><kbd>المسافة (Spacebar)</kbd></td>
+                        <td>معاينة فورية للفيديو عبر QuickLook على ماك أو المشغل المدمج على ويندوز ولينكس.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>فتح في المجلد (Finder / Explorer)</strong></td>
+                        <td>فتح مكان تواجد الملف الأصلي مباشرة على القرص الفعلي المعني.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>نسخ المسار الكامل (Copier le chemin)</strong></td>
+                        <td>نسخ مسار الملف بالكامل إلى الحافظة لاستخدامه في برامج المونتاج أو أوامر النظام.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>البطاقة التقنية للملف (Fiche Technique)</strong></td>
+                        <td>استعراض مواصفات الصوت والصورة الكاملة، القنوات الصوتية، وملف الألوان (Log, Rec709, HDR).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>فحص سلامة الميديا (Santé Média)</strong></td>
+                        <td>فحص الملف والتأكد من خلوه تماماً من أي عطب أو لقطات ساقطة (Dropped Frames).</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>سلة المونتاج وعمليات التصدير الاحترافية</h3>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🛒 أزرار «إضافة للسلة» و «إفراغ السلة»</span>
+                    <span class="btn-badge">تجميع المشاهد</span>
+                </div>
+                <div class="btn-desc">تجميع لقطات مختارة من أقراص مختلفة في سلة واحدة لتنفيذ عمليات مجمعة عليها.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎞️ زر «توليد ملفات البروكسي (Générer Proxies)»</span>
+                    <span class="btn-badge tag-green">تحويل سريع</span>
+                </div>
+                <div class="btn-desc">تحويل المشاهد المختارة في الخلفية إلى صيغ مونتاج خفيفة وسلسة (Apple ProRes Proxy أو H.264 MP4 بدقة 1080p) مع الحفاظ التام على التايم كود والقنوات الصوتية.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎬 زر «تصدير تايم لاين XML (Exporter Timeline XML)»</span>
+                    <span class="btn-badge tag-cyan">تكامل المونتاج NLE</span>
+                </div>
+                <div class="btn-desc">توليد ملف FCPXML أو Final Cut 7 XML معياري. افتحه مباشرة في <strong>أدوبي بريمير برو 2026 (Premiere Pro)</strong>، <strong>دافينشي ريزولف (DaVinci Resolve)</strong> أو <strong>فاينل كت برو (Final Cut Pro)</strong> لتجد مشاهدك مصفوفة على التايم لاين مع أسمائها وبياناتها دون الحاجة لإعادة سحبها يدوياً!</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">📝 زر «توليد ملفات البيانات المرافقة (Générer XMP Sidecars)»</span>
+                    <span class="btn-badge">بيانات وصفية</span>
+                </div>
+                <div class="btn-desc">حفظ الوسوم، التقييم بالنجوم والأوصاف الذكية مباشرة في ملفات <code>.xmp</code> متوافقة تماماً مع حزمة برامج أدوبي (Premiere, Bridge, After Effects).</div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: AI CHAT -->
+        <section class="doc-section" id="ar-chat">
+            <div class="section-header">
+                <span class="section-icon">💬</span>
+                <div>
+                    <h2>7. مختبر الذكاء الاصطناعي > المساعد الذكي واستعلامات SQL</h2>
+                    <p style="margin:0;">تحدث مع مكتبتك الفلمية باللغة الطبيعية دون الحاجة لمعرفة لغات البرمجة.</p>
+                </div>
+            </div>
+
+            <p>يتصل المساعد الذكي مباشرة ببياناتك المحلية، ويمكنك سؤاله أسئلة إنتاجية معقدة مثل:</p>
+            <ul>
+                <li><em>«كم ساعة من لقطات ProRes قمنا بتصويرها في عام 2025 بكاميرا Sony FX6؟»</em></li>
+                <li><em>«أظهر لي أضخم 10 ملفات حجماً على القرص SSD_TOUR_02.»</em></li>
+                <li><em>«اعثر على كل المشاهد التي تظهر فيها سيارة والمصورة بسرعة 50 إطاراً في الثانية.»</em></li>
+            </ul>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">زر الإرسال وحاجز أمان SQL (Read-Only)</span>
+                    <span class="btn-badge tag-green">أمان مطلق</span>
+                </div>
+                <div class="btn-desc">يترجم المساعد طلبك إلى استعلام SQL منظم ينفذ <strong>في وضع القراءة فقط (SELECT)</strong> لضمان استحالة تعديل أو حذف أي ملف بالخطأ. تظهر الإجابة مباشرة مصحوبة بجدول النتائج.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 8: BATCH RENAMER -->
+        <section class="doc-section" id="ar-renamer">
+            <div class="section-header">
+                <span class="section-icon">🪄</span>
+                <div>
+                    <h2>8. مختبر الذكاء الاصطناعي > إعادة تسمية المشاهد (Batch Renamer)</h2>
+                    <p style="margin:0;">إعادة تسمية جماعية منظمة وفق معايير البث والقنوات التلفزيونية.</p>
+                </div>
+            </div>
+
+            <p>تخلص من الأسماء التلقائية العشوائية للكاميرات (مثل <code>C0001.MP4</code>) التي تسبب مشاكل وتضارباً أثناء المونتاج.</p>
+
+            <h3>بناء قالب التسمية (العناصر المتاحة)</h3>
+            <p>انقر على العناصر لتركيب صيغة التسمية المطلوبة:</p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin: 12px 0;">
+                <code>{camera}</code> <code>{date}</code> <code>{reel}</code> <code>{scene}</code> <code>{take}</code> <code>{resolution}</code> <code>{fps}</code> <code>{counter}</code> <code>{orig_name}</code>
+            </div>
+
+            <p>صيغة موصى بها لمشاريع الأفلام والمسلسلات:<br>
+            <code>PROJ_FILM_{date}_CAM{camera}_S{scene}_T{take}</code></p>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">👁️ زر «معاينة المحاكاة (Prévisualiser)»</span>
+                    <span class="btn-badge tag-cyan">تحقق بصري مسبق</span>
+                </div>
+                <div class="btn-desc">يعرض جدولاً مقارناً جنباً إلى جنب (الاسم الأصلي مقابل الاسم الجديد المقترح) مع تنبيه فوري في حال وجود أي تشابه أو تكرار محتمل قبل التطبيق الفعلي.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">✅ زر «تطبيق إعادة التسمية (Appliquer le Renommage)»</span>
+                    <span class="btn-badge tag-green">تنفيذ</span>
+                </div>
+                <div class="btn-desc">إعادة تسمية الملفات المادية على القرص وتحديث سجلات قاعدة بيانات SQLite فوراً دون كسر أي مسارات أو روابط.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">↩️ زر «تراجع عن التسمية بنقرة واحدة (Undo)»</span>
+                    <span class="btn-badge tag-amber">إلغاء آمن</span>
+                </div>
+                <div class="btn-desc">بفضل سجل المعاملات الآمن، يمكنك التراجع فوراً واستعادة الأسماء الأصلية للملفات بضغطة زر واحدة!</div>
+            </div>
+        </section>
+
+        <!-- SECTION 9: MULTI-CAM & ZOOM F8 SYNC -->
+        <section class="doc-section" id="ar-sync">
+            <div class="section-header">
+                <span class="section-icon">🎬</span>
+                <div>
+                    <h2>9. مختبر الذكاء الاصطناعي > مزامنة الكاميرات المتعددة وصوت Zoom F8</h2>
+                    <p style="margin:0;">ربط آلي لزوايا التصوير المتعددة مع فصل مسارات الصوت متعدد القنوات (Polyphonic WAV).</p>
+                </div>
+            </div>
+
+            <p>يحل هذا القسم إحدى أكبر معضلات المونتاج عند تصوير المشاهد بكاميرات متعددة (كاميرا A، كاميرا B، كاميرا C...) مع تسجيل صوت احترافي مستقل عبر أجهزة مسجلات الصوت الميدانية (مثل Zoom F8 و Sound Devices 833 و Tentacle Sync).</p>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎥 إدارة زوايا الكاميرات المتعددة (Multi-Cam)</span>
+                    <span class="btn-badge tag-cyan">زوايا الكاميرا</span>
+                </div>
+                <div class="btn-desc">
+                    <ul>
+                        <li><strong>كاميرا 1 (الزاوية الرئيسية A):</strong> اختر ملف أو مجلد الكاميرا الأولى.</li>
+                        <li><strong>زر «[+] إضافة كاميرا» :</strong> إضافة زاوية كاميرا جديدة ديناميكياً (كاميرا B، كاميرا C، كاميرا D...). يمكنك إضافة عدد لا نهائي من زوايا الكاميرات!</li>
+                        <li><strong>زر «[-] حذف زاوية» :</strong> إزالة زاوية كاميرا غير مرغوبة.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎙️ ملف الصوت الرئيسي ودعم مسجلات Zoom F8 (WAV متعدد القنوات)</span>
+                    <span class="btn-badge tag-green">صوت متعدد المسارات</span>
+                </div>
+                <div class="btn-desc">
+                    اختر ملف الصوت الرئيسي المسجل من جهاز Zoom F8 أو Sound Devices بصيغة Broadcast Wave (BWF / Polyphonic WAV).
+                    <br><br>
+                    <strong>☑️ خيار «فصل المسارات المستقلة تلقائياً (Séparer pistes multipistes)» :</strong>
+                    عند تفعيل هذا الخيار، يقوم المحرك تلقائياً بفصل كل ميكروفون في مسار صوتي منفصل:
+                    <br>• المسار A1 : ميكروفون البوم الرئيسي (Boom)
+                    <br>• المسار A2 : ميكروفون لافالير الممثل الأول (Lavalier 1)
+                    <br>• المسار A3 : ميكروفون لافالير الممثل الثاني (Lavalier 2)
+                    <br>• المسار A4 : ميكروفون محيطي للغرفة (Ambience)
+                    <br>يتم توزيع كل صوت على تراك خاص به على التايم لاين لسهولة المكس والمونتاج دون دمج مشوه!
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">⚡ خوارزميات المزامنة فائقة الدقة</span>
+                    <span class="btn-badge tag-purple">مطابقة صوتية</span>
+                </div>
+                <div class="btn-desc">
+                    <ul>
+                        <li><strong>المطابقة البصرية للموجات الصوتية (Waveform Cross-Correlation):</strong> تحليل البصمة الترددية لصوت الكاميرا ومطابقتها مع صوت مسجل Zoom F8 بدقة أجزاء من الألف من الثانية، وهي مثالية عند عدم استخدام أجهزة تايم كود في موقع التصوير.</li>
+                        <li><strong>التايم كود المدمج (Timecode LTC / SMPTE):</strong> قفل ومزامنة فورية بالاعتماد على ساعة التايم كود المشتركة المدمجة في الميديا.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🚀 زري «بدء المزامنة» و «🎬 تصدير تايم لاين XML»</span>
+                    <span class="btn-badge tag-green">تصدير مباشر للمونتاج</span>
+                </div>
+                <div class="btn-desc">
+                    يقوم بحساب الفارق الزمني وتصدير تسلسل متعدد الكاميرات جاهز فوراً للعمل في <strong>Adobe Premiere Pro 2026</strong> و<strong>DaVinci Resolve</strong> و<strong>Final Cut Pro</strong>، مع ظهور كافة زوايا الفيديو ومسارات الصوت المستقلة مرتبة ومزامنة تماماً على الخط الزمني!
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 10: TAGS & VISION -->
+        <section class="doc-section" id="ar-tags">
+            <div class="section-header">
+                <span class="section-icon">🏷️</span>
+                <div>
+                    <h2>10. مختبر الذكاء الاصطناعي > الوسوم والتحليل البصري الذكي</h2>
+                    <p style="margin:0;">تصنيف المشاهد، التعرف على الإضاءة واللقطات وتوليد سحابة الكلمات المفتاحية.</p>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🤖 زر «استخراج وسوم الذكاء الاصطناعي (Extraire Étiquettes IA)»</span>
+                    <span class="btn-badge tag-purple">رؤية حاسوبية</span>
+                </div>
+                <div class="btn-desc">تشغيل نماذج الرؤية الحاسوبية لاكتشاف وتصنيف طبيعة اللقطات (لقطة عامة، مقربة، درون)، وظروف الإضاءة (ليل، نهار، ساعة ذهبية)، والأشخاص والأماكن.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🏷️ سحابة الوسوم والتحكم في المصطلحات</span>
+                    <span class="btn-badge">تنظيم الأرشيف</span>
+                </div>
+                <div class="btn-desc">انقر نقراً مزدوجاً على أي وسم للانتقال مباشرة إلى كافة المشاهد المرتبطة به في شاشة البحث. تتيح لك أزرار <em>تعديل الاسم</em> و<em>حذف الوسم</em> تنظيم المعجم الوثائقي للمؤسسة.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 11: DUPLICATES -->
+        <section class="doc-section" id="ar-duplicates">
+            <div class="section-header">
+                <span class="section-icon">👯</span>
+                <div>
+                    <h2>11. مختبر الذكاء الاصطناعي > كاشف الملفات المكررة والحذف الآمن</h2>
+                    <p style="margin:0;">استرجاع مساحات تخزين ضخمة مع أمان تام من الحذف الخاطئ.</p>
+                </div>
+            </div>
+
+            <h3>أنماط كشف التكرار</h3>
+            <ul>
+                <li><strong>نمط الملفات المتطابقة:</strong> مطابقة تامة عبر البصمة الرقمية XXHash64 حتى لو تغيرت أسماء الملفات أو اختلفت مساراتها.</li>
+                <li><strong>نمط المجلدات المتطابقة:</strong> كشف المجلدات الكاملة المستنسخة بين الأقراص المختلفة (مثل نسخ الحماية المكررة بعد انتهاء التصوير).</li>
+            </ul>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">⚖️ جدول خطة التنظيف</span>
+                    <span class="btn-badge">مقارنة واضحة</span>
+                </div>
+                <div class="btn-desc">
+                    عرض مجموعات الملفات المكررة مع حساب إجمالي المساحة القابلة للاسترجاع (بالجيجابايت أو التيرابايت).
+                    <br>• <strong>إبقاء النسخة الأصلية (الزر الأخضر) :</strong> تثبيت النسخة الأساسية وحمايتها.
+                    <br>• <strong>إرسال للسلة (الزر الأحمر) :</strong> تحديد النسخة الفائضة لنقلها إلى سلة المهملات.
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🤖 زر «طلب مشورة الذكاء الاصطناعي (Demander Conseil IA)»</span>
+                    <span class="btn-badge tag-cyan">وكيل التنظيف الذكي</span>
+                </div>
+                <div class="btn-desc">يقوم الوكيل بفحص تواريخ التصوير الأصلية وسرعة الأقراص ليرشح لك بذكاء النسخة التي يُفضل الاحتفاظ بها بكل أمان.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🗑️ زر «النقل إلى سلة المهملات الآمنة (Mettre à la corbeille)»</span>
+                    <span class="btn-badge tag-amber">حماية من الضياع</span>
+                </div>
+                <div class="btn-desc">برنامج ريبيرتوار <strong>لا يقوم أبداً بحذف الملفات نهائياً بشكل غير قابل للاسترجاع</strong>! يتم نقل الملفات المحددة إلى سلة مهملات نظام التشغيل الرسمية (Trash في ماك، Recycle Bin في ويندوز)، مما يتيح لك استعادتها بضغطة زر إن غيرت رأيك لاحقاً.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 12: PROJECTS -->
+        <section class="doc-section" id="ar-projects">
+            <div class="section-header">
+                <span class="section-icon">📁</span>
+                <div>
+                    <h2>12. مختبر الذكاء الاصطناعي > إدارة المشاريع وربط الميديا المفقودة</h2>
+                    <p style="margin:0;">فهرسة مشاريع Premiere وDaVinci وFinal Cut وإصلاح مشكلة الميديا المفصولة (Media Offline).</p>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔍 دعم شامل لملفات برامج المونتاج</span>
+                    <span class="btn-badge">صيغ المشاريع</span>
+                </div>
+                <div class="btn-desc">فهرسة تلقائية لملفات مشاريع: <code>.prproj</code> (أدوبي بريمير)، <code>.drp</code> (دافينشي ريزولف)، <code>.fcpbundle</code> (فاينل كت)، <code>.aep</code> (أفتر إفكتس) و <code>.logicx</code> (لوجيك برو).</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔗 زر «إعادة ربط الميديا المفقودة (Relink)»</span>
+                    <span class="btn-badge tag-green">إصلاح المشاريع</span>
+                </div>
+                <div class="btn-desc">عند ظهور الشاشة الحمراء الشهيرة (Media Offline) داخل برنامج المونتاج، يقوم ريبيرتوار بمطابقة المشاهد في قاعدة بياناته الشاملة وتحديد القرص والمجلد الذي انتقل إليه المشهد لربطه فوراً!</div>
+            </div>
+        </section>
+
+        <!-- SECTION 13: SETTINGS -->
+        <section class="doc-section" id="ar-settings">
+            <div class="section-header">
+                <span class="section-icon">⚙️</span>
+                <div>
+                    <h2>13. الإعدادات، الذكاء الاصطناعي والتحديث الذاتي بنقرة واحدة</h2>
+                    <p style="margin:0;">تخصيص المظهر، ربط محركات الذكاء الاصطناعي وتحديث البرنامج دون المساس ببياناتك.</p>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🎨 مظهر التطبيق وأنماط العرض</span>
+                    <span class="btn-badge">تخصيص الواجهة</span>
+                </div>
+                <div class="btn-desc">اختر السمة اللونية المفضلة (Darkly, Cyborg, Cosmo, Flatly...) ونمط خريطة التخزين المرئية (Treemap, Sunburst أو الشجرة).</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🧠 ضبط محرك الذكاء الاصطناعي المحلي (LLM & MCP)</span>
+                    <span class="btn-badge tag-purple">ربط النماذج</span>
+                </div>
+                <div class="btn-desc">ربط البرنامج بخادم الذكاء الاصطناعي المحلي مثل LM Studio (<code>http://localhost:1234/v1</code>) أو Ollama (<code>http://localhost:11434/v1</code>)، واختيار النماذج المفضلة مثل Google Gemma 4 و Qwen 2.5 و Minitron.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">⚡ زر «ضغط وتحسين قاعدة البيانات (VACUUM)»</span>
+                    <span class="btn-badge tag-cyan">صيانة SQLite</span>
+                </div>
+                <div class="btn-desc">إعادة فهرسة وترتيب قاعدة البيانات لضمان بقاء سرعة البحث لحظية وفائقة حتى بعد فهرسة ملايين الملفات.</div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🔄 زر «فحص وتثبيت التحديثات من GitHub»</span>
+                    <span class="btn-badge tag-green">تحديث بنقرة واحدة</span>
+                </div>
+                <div class="btn-desc">يقوم بجلب أحدث الإصلاحات والميزات تلقائياً من GitHub مع <strong>حماية مطلقة لقاعدة بياناتك المحلية حيث تظل سليمة ومحفوظة تماماً</strong>.</div>
+            </div>
+        </section>
+
+        <!-- SECTION 14: WEB ACCESS -->
+        <section class="doc-section" id="ar-web">
+            <div class="section-header">
+                <span class="section-icon">🌐</span>
+                <div>
+                    <h2>14. الوصول عبر الويب والأجهزة المحمولة (iPad، الهواتف الذكية)</h2>
+                    <p style="margin:0;">تصفح وبحث في أرشيفك من أي هاتف أو جهاز لوحي متصل بشبكة الواي فاي في الاستوديو.</p>
+                </div>
+            </div>
+
+            <div class="btn-card">
+                <div class="btn-header">
+                    <span class="btn-title">🌐 زر «تشغيل الوصول عبر الويب والموبايل»</span>
+                    <span class="btn-badge tag-green">سيرفر محلي آمن</span>
+                </div>
+                <div class="btn-desc">تشغيل خادم ويب داخلي مشفر على شبكتك المحلية.
+                <br>• يعرض لك التطبيق رابطاً محلياً (مثل: <code>http://192.168.1.45:8080</code>) مصحوباً بـ <strong>رمز أمان سري (PIN Code)</strong>.
+                <br>• افتح الرابط على جهاز iPad أو هاتفك الذكي للبحث عن المشاهد واستعراض مواصفاتها وأنت مسترخٍ في غرفة المونتاج أو استوديو الصوت!</div>
+            </div>
+        </section>
+
+        <!-- SECTION 15: FAQ -->
+        <section class="doc-section" id="ar-faq">
+            <div class="section-header">
+                <span class="section-icon">❓</span>
+                <div>
+                    <h2>15. حل المشكلات والأسئلة الشائعة (FAQ)</h2>
+                    <p style="margin:0;">إرشادات وتوجيهات لأفضل تجربة استخدام يومية.</p>
+                </div>
+            </div>
+
+            <div class="callout callout-warning">
+                <span class="callout-icon">🔒</span>
+                <div class="callout-content">
+                    <strong>إذن الوصول الكامل للأقراص في نظام ماك (Full Disk Access):</strong><br>
+                    إذا تعذر على البرنامج فحص بعض الأقراص الخارجية، توجه إلى <em>إعدادات النظام > الخصوصية والأمن > الوصول الكامل للقرص (Full Disk Access)</em>، وقم بتفعيل تطبيق <strong>Terminal</strong> أو <strong>Repertoir</strong>.
+                </div>
+            </div>
+
+            <div class="callout callout-info">
+                <span class="callout-icon">🎞️</span>
+                <div class="callout-content">
+                    <strong>هل برامج FFmpeg و FFprobe إلزامية لتشغيل البرنامج؟</strong><br>
+                    يمكن للتطبيق فهرسة أسماء الملفات وأحجامها بدونها. ولكن ينصح بها بشدة لاستخراج بيانات الفيديو المتقدمة (ProRes، التايم كود، الدقة والصور المصغرة). ملف التثبيت <code>Installer_Repertoir_Mac.command</code> يثبتها تلقائياً.
+                </div>
+            </div>
+
+            <div class="callout callout-success">
+                <span class="callout-icon">🤝</span>
+                <div class="callout-content">
+                    <strong>هل يمكنني نقل قاعدة بياناتي ومشاركتها مع زميل يستخدم ويندوز أو لينكس؟</strong><br>
+                    نعم بكل تأكيد! ملف الفهرس <code>catalogue.db</code> مبني بمعيار SQLite العالمي المتوافق بين كافة الأنظمة، ويمكنك نقله عبر قرص صلب أو فلاشة USB ليعمل فوراً دون أي تعديل.
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+
+    </div> <!-- .page-layout -->
+
+    <footer>
+        <p><strong>Repertoir Neuro Scan.AI (V6)</strong> — Système Professionnel d'Indexation, de Synchronisation Multi-Caméra & d'Archivage Audiovisuel.</p>
+        <p style="margin-top:6px; font-size:0.8rem; color:var(--text-muted);">Conçu pour les Monteurs, Réalisateurs, Opérateurs DIT et Archivistes. Base SQLite locale & IA embarquée respectant 100% la confidentialité.</p>
+    </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            document.querySelectorAll('.lang-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.sidebar-toc').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+
+            const contentEl = document.getElementById('content-' + lang);
+            const tocEl = document.getElementById('toc-' + lang);
+            const btnEl = document.getElementById('btn-' + lang);
+
+            if (contentEl) contentEl.classList.add('active');
+            if (tocEl) tocEl.classList.add('active');
+            if (btnEl) btnEl.classList.add('active');
+
+            if (lang === 'ar') {
+                document.body.classList.add('lang-ar');
+                document.documentElement.lang = 'ar';
+                document.documentElement.dir = 'rtl';
+                document.getElementById('docSearchInput').placeholder = 'بحث في دليل الاستخدام...';
+            } else if (lang === 'en') {
+                document.body.classList.remove('lang-ar');
+                document.documentElement.lang = 'en';
+                document.documentElement.dir = 'ltr';
+                document.getElementById('docSearchInput').placeholder = 'Search user guide...';
+            } else {
+                document.body.classList.remove('lang-ar');
+                document.documentElement.lang = 'fr';
+                document.documentElement.dir = 'ltr';
+                document.getElementById('docSearchInput').placeholder = 'Rechercher dans le guide...';
+            }
+
+            try { localStorage.setItem('rns_guide_lang', lang); } catch (e) {}
+        }
+
+        function filterGuide() {
+            const query = document.getElementById('docSearchInput').value.toLowerCase().trim();
+            const activeContent = document.querySelector('.lang-content.active');
+            if (!activeContent) return;
+
+            const cards = activeContent.querySelectorAll('.btn-card, .doc-section');
+            if (query === '') {
+                cards.forEach(card => card.style.display = '');
+                return;
+            }
+
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Auto restore language from localStorage
+        (function() {
+            try {
+                const saved = localStorage.getItem('rns_guide_lang');
+                if (saved && ['fr', 'en', 'ar'].includes(saved)) {
+                    switchLanguage(saved);
+                }
+            } catch (e) {}
+        })();
+    </script>
+</body>
+</html>

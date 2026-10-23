@@ -245,6 +245,31 @@ class SettingsTab(BaseTab):
             command=lambda: self.app.check_and_prompt_update(interactive=True)
         ).pack(side="left", padx=(0, 10))
 
+        # Cadre Documentation & Manuel d'Utilisation (Trilingue FR / EN / AR)
+        doc_frame = ttk.LabelFrame(f, text=" 📖 Documentation & Manuel d'Utilisation (Trilingue FR / EN / AR) ", padding=20)
+        doc_frame.pack(fill="x", padx=20, pady=10)
+
+        ttk.Label(
+            doc_frame,
+            text="Guide complet étape par étape et bouton par bouton disponible en 3 langues (Français, English, العربية).",
+            wraplength=600
+        ).pack(anchor="w", pady=(0, 10))
+
+        btn_doc_row = ttk.Frame(doc_frame)
+        btn_doc_row.pack(fill="x")
+
+        ttk.Button(
+            btn_doc_row,
+            text="🌐 Ouvrir le Guide Interactif (Navigateur Web)",
+            command=self.app.open_user_guide
+        ).pack(side="left", padx=(0, 12))
+
+        ttk.Button(
+            btn_doc_row,
+            text="📄 Ouvrir le Guide Markdown (.md)",
+            command=self.app.open_markdown_guide
+        ).pack(side="left")
+
     def on_theme_change(self, event=None):
         theme = self.var_theme.get()
         if hasattr(self.app, "style"):
