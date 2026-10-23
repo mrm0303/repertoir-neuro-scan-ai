@@ -22,6 +22,7 @@ mkdir -p "$STAGE_DIR"
 
 # Copier uniquement le code propre et l'installateur (sans base de données personnelle ni venv)
 rsync -a \
+    --exclude '.git' \
     --exclude '.venv' \
     --exclude '__pycache__' \
     --exclude '*.pyc' \

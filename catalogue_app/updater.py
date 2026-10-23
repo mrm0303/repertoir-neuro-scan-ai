@@ -89,6 +89,30 @@ def get_current_version_info():
     }
 
 
+def _has_head(root):
+    """Vrai si le dossier possède déjà un commit Git local (HEAD valide)."""
+    try:
+        res = subprocess.run(
+            ["git", "-C", root, "rev-parse", "--verify", "-q", "HEAD"],
+            capture_output=True, text=True, timeout=5
+        )
+        return res.returncode == 0
+    except Exception:
+        return False
+
+
+def git_available():
+    """Vérifie que Git est utilisable (sur Mac : Outils de ligne de commande Apple)."""
+    import shutil
+    if not shutil.which("git"):
+        return False
+    try:
+        res = subprocess.run(["git", "--version"], capture_output=True, text=True, timeout=10)
+        return res.returncode == 0
+    except Exception:
+        return False
+
+
 def _detect_remote_branch(root, preferred_branch="main"):
     """Détecte la branche distante disponible sur origin (main ou master)."""
     for b in (preferred_branch, "main", "master"):
@@ -124,6 +148,22 @@ def check_for_updates():
             "branch": "main",
         }
 
+    if not git_available():
+        if sys.platform == "darwin":
+            try:
+                subprocess.Popen(["xcode-select", "--install"])
+            except Exception:
+                pass
+        return {
+            "status": "error",
+            "behind_count": 0,
+            "changelog": "",
+            "message": ("Les mises à jour nécessitent les « Outils de ligne de commande » d'Apple.\n\n"
+                        "Une fenêtre macOS propose de les installer : cliquez sur « Installer », "
+                        "puis relancez la vérification des mises à jour."),
+            "branch": "main",
+        }
+
     # S'assurer que le remote origin est configuré
     set_configured_repo_url(repo_url)
 
@@ -144,6 +184,21 @@ def check_for_updates():
 
         info = get_current_version_info()
         branch = _detect_remote_branch(root, info.get("branch", "main"))
+
+        # Installation depuis un ZIP (pas encore d'historique Git local) :
+        # on propose d'aligner l'installation sur la dernière version GitHub.
+        if not _has_head(root):
+            log_res = subprocess.run(
+                ["git", "-C", root, "log", f"origin/{branch}", "--oneline", "-n", "8"],
+                capture_output=True, text=True, timeout=5
+            )
+            return {
+                "status": "update_available",
+                "behind_count": 1,
+                "changelog": (log_res.stdout or "").strip(),
+                "message": "🎉 Première connexion à GitHub : la dernière version peut être installée.",
+                "branch": branch,
+            }
 
         cnt_res = subprocess.run(
             ["git", "-C", root, "rev-list", f"HEAD..origin/{branch}", "--count"],
@@ -213,19 +268,38 @@ def apply_update(progress_cb=None):
         branch = _detect_remote_branch(root, info.get("branch", "main"))
 
         _notify("Téléchargement et application des nouveaux fichiers...")
-        pull_res = subprocess.run(
-            ["git", "-C", root, "pull", "--rebase", "--autostash", "origin", branch],
-            capture_output=True, text=True, timeout=60
-        )
-        if pull_res.returncode != 0:
-            # En cas de conflit sur un fichier local chez un testeur, forcer l'alignement propre sur origin/branch
-            subprocess.run(["git", "-C", root, "rebase", "--abort"], capture_output=True, timeout=10)
-            reset_res = subprocess.run(
-                ["git", "-C", root, "reset", "--hard", f"origin/{branch}"],
-                capture_output=True, text=True, timeout=30
+        if not _has_head(root):
+            # Installation issue d'un ZIP : aucun travail local à préserver,
+            # on aligne les fichiers du programme sur GitHub (la base de données
+            # vit dans ~/CatalogueDisques et n'est pas concernée).
+            res = subprocess.run(
+                ["git", "-C", root, "checkout", "-f", "-B", branch, f"origin/{branch}"],
+                capture_output=True, text=True, timeout=60
             )
-            if reset_res.returncode != 0:
-                return False, f"Erreur lors de la mise à jour Git :\n{(pull_res.stderr or pull_res.stdout).strip()}"
+            if res.returncode != 0:
+                return False, f"Erreur lors de la mise à jour Git :\n{(res.stderr or res.stdout).strip()}"
+        else:
+            # Protection : ne jamais écraser du code modifié localement (machine de développement).
+            dirty = subprocess.run(
+                ["git", "-C", root, "status", "--porcelain", "--untracked-files=no"],
+                capture_output=True, text=True, timeout=10
+            ).stdout.strip()
+            ahead = subprocess.run(
+                ["git", "-C", root, "rev-list", f"origin/{branch}..HEAD", "--count"],
+                capture_output=True, text=True, timeout=5
+            ).stdout.strip()
+            if dirty or (ahead.isdigit() and int(ahead) > 0):
+                return False, (
+                    "Des modifications locales du programme ont été détectées sur ce Mac.\n\n"
+                    "Par sécurité, la mise à jour automatique ne les écrase pas.\n"
+                    "(Sur le Mac de développement, utilisez « Publier_Mise_A_Jour_GitHub.command ».)"
+                )
+            res = subprocess.run(
+                ["git", "-C", root, "merge", "--ff-only", f"origin/{branch}"],
+                capture_output=True, text=True, timeout=60
+            )
+            if res.returncode != 0:
+                return False, f"Erreur lors de la mise à jour Git :\n{(res.stderr or res.stdout).strip()}"
 
         # Mise à jour des dépendances Python si requirements.txt est présent
         req_file = os.path.join(root, "requirements.txt")

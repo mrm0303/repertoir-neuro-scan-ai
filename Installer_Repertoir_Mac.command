@@ -21,6 +21,16 @@ APP_BUNDLE_NAME="Repertoir Neuro Scan.AI.app"
 # Ajouter Homebrew au PATH (Mac Apple Silicon M1/M2/M3/M4 et Mac Intel)
 export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 
+# 0. Outils de ligne de commande Apple (fournissent Git + Python 3, nécessaires aux mises à jour)
+if ! xcode-select -p >/dev/null 2>&1; then
+    echo "🍎 Les « Outils de ligne de commande » d'Apple sont nécessaires."
+    echo "   Une fenêtre macOS va s'ouvrir : cliquez sur « Installer » et attendez la fin,"
+    echo "   puis double-cliquez à nouveau sur Installer_Repertoir_Mac.command."
+    xcode-select --install >/dev/null 2>&1 || true
+    read -p "Appuyez sur Entrée pour fermer..."
+    exit 0
+fi
+
 # 1. Copier ou mettre à jour les fichiers dans ~/Applications/Repertoir_Neuro_Scan_AI
 mkdir -p "$HOME/Applications"
 if [ "$SRC_DIR" != "$INSTALL_DIR" ]; then

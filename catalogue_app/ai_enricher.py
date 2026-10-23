@@ -191,7 +191,7 @@ class AIEnricher:
         cfg = cfg.copy()
         cfg["model"] = "local-model"
 
-        url = cfg.get("url", "http://192.168.11.193:1234/api/v1/chat/completions")
+        url = cfg.get("url", "http://localhost:1234/v1/chat/completions")
         # Ensure standard openai endpoint if they passed the custom one for text
         if url.endswith("/api/v1/chat"):
             url = url.replace("/api/v1/chat", "/v1/chat/completions")
