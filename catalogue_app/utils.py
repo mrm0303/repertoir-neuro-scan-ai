@@ -195,29 +195,66 @@ def fmt_fps(fps) -> str:
 
 
 def move_to_trash(path: str) -> tuple[bool, str]:
-    """Déplace un fichier vers la Corbeille (macOS Finder native) au lieu d'une suppression irréversible."""
+    """Déplace un fichier vers la Corbeille de manière native et sécurisée (macOS, Windows, Linux)."""
     if not os.path.exists(path):
         return False, "Fichier introuvable sur le disque."
     try:
         if sys.platform == "darwin":
-            # Native macOS Trash via AppleScript
+            # Corbeille native macOS via AppleScript Finder
             escaped_path = path.replace('\\', '\\\\').replace('"', '\\"')
             cmd = ["osascript", "-e", f'tell application "Finder" to delete POSIX file "{escaped_path}"']
             res = subprocess.run(cmd, capture_output=True, text=True, timeout=10)
             if res.returncode == 0:
                 return True, "Fichier déplacé dans la Corbeille macOS avec succès."
-            # Fallback if Finder script fails (e.g. permission or special path)
-        user_trash = os.path.expanduser("~/.Trash")
-        if os.path.isdir(user_trash):
-            dest = os.path.join(user_trash, os.path.basename(path))
-            # Avoid collision
-            if os.path.exists(dest):
-                base, ext = os.path.splitext(dest)
-                dest = f"{base}_{int(time.time())}{ext}"
-            shutil.move(path, dest)
-            return True, "Fichier déplacé dans ~/.Trash avec succès."
+            user_trash = os.path.expanduser("~/.Trash")
+            if os.path.isdir(user_trash):
+                dest = os.path.join(user_trash, os.path.basename(path))
+                if os.path.exists(dest):
+                    base, ext = os.path.splitext(dest)
+                    dest = f"{base}_{int(time.time())}{ext}"
+                shutil.move(path, dest)
+                return True, "Fichier déplacé dans ~/.Trash avec succès."
+        elif os.name == "nt":
+            # Corbeille native Windows via PowerShell
+            clean_win = path.replace("'", "''")
+            ps_cmd = f"Add-Type -AssemblyName Microsoft.VisualBasic; [Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile('{clean_win}', 'OnlyErrorDialogs', 'SendToRecycleBin')"
+            res = subprocess.run(["powershell", "-NoProfile", "-Command", ps_cmd], capture_output=True, text=True, timeout=10)
+            if res.returncode == 0:
+                return True, "Fichier déplacé dans la Corbeille Windows avec succès."
+        elif sys.platform.startswith("linux"):
+            # Corbeille Linux standard (GIO / trash-cli)
+            try:
+                res = subprocess.run(["gio", "trash", path], capture_output=True, text=True, timeout=10)
+                if res.returncode == 0:
+                    return True, "Fichier déplacé dans la Corbeille Linux avec succès."
+            except Exception:
+                pass
+
+        # Fallback suppression directe si la corbeille système est inaccessible
         os.remove(path)
         return True, "Fichier supprimé (Corbeille indisponible)."
     except Exception as e:
         return False, f"Erreur lors du déplacement vers la corbeille : {e}"
+
+
+def quick_preview(paths):
+    """Aperçu rapide multiplateforme : QuickLook sur macOS, visionneuse système sur Windows & Linux."""
+    if not paths:
+        return
+    if isinstance(paths, str):
+        paths = [paths]
+    clean_paths = [p for p in paths if os.path.exists(p)]
+    if not clean_paths:
+        return
+    try:
+        if sys.platform == "darwin":
+            subprocess.Popen(["qlmanage", "-p"] + clean_paths)
+        elif os.name == "nt":
+            for p in clean_paths[:4]:
+                os.startfile(os.path.normpath(p))
+        else:
+            for p in clean_paths[:4]:
+                subprocess.Popen(["xdg-open", p])
+    except Exception:
+        pass
 

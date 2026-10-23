@@ -239,7 +239,7 @@ class RenameTab(BaseTab):
             if 0 <= idx < len(self.rename_preview_data):
                 p = self.rename_preview_data[idx]["full_old_path"]
                 if os.path.exists(p):
-                    subprocess.Popen(["qlmanage", "-p", p])
+                    quick_preview(p)
 
         self.tv_rename.bind("<space>", _ql_batch_rename)
 

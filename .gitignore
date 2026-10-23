@@ -23,15 +23,18 @@ migrate_working_dir/
 # is commented out by default.
 #.vscode/
 
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
+# Legacy Flutter / Dart / Kilo (non utilisés dans la version Python pure)
+lib/
+macos/
+pubspec.*
+analysis_options.yaml
+.metadata
+test/
+.kilo/
 .dart_tool/
 .flutter-plugins-dependencies
-.pub-cache/
-.pub/
-/build/
-/coverage/
+build/
+Rapport_Livraison_Catalogue.pdf
 
 # Symbolication related
 app.*.symbols

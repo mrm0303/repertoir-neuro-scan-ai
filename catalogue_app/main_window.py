@@ -425,7 +425,8 @@ class CatalogueApp(AppBase):
         except Exception:
             pass
         try:
-            subprocess.run(["pkill", "-f", "qlmanage"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            if sys.platform == "darwin":
+                subprocess.run(["pkill", "-f", "qlmanage"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         except Exception:
             pass
         try:

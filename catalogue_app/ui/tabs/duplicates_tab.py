@@ -519,8 +519,7 @@ class DuplicatesTab(BaseTab):
         r = self.current_dup_items[int(sel[0])]
         full = full_path_of(self.app.con, r, getattr(self.app, 'online', getattr(self, 'online', False)))
         if full and os.path.exists(full):
-            import subprocess
-            subprocess.Popen(["qlmanage", "-p", full])
+            quick_preview(full)
         else:
             item_name = r.get("name") or r.get("folder") or "élément"
             messagebox.showinfo(APP_NAME, f"Le disque « {r['volume_name']} » n\'est pas branché actuellement.\n\nÉlément hors ligne : {item_name}")

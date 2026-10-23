@@ -846,7 +846,7 @@ class SearchTab(BaseTab):
                     else:
                         offline_name = r["volume_name"]
         if paths:
-            subprocess.Popen(["qlmanage", "-p"] + paths)
+            quick_preview(paths)
         elif offline_name:
             messagebox.showinfo(
                 APP_NAME,
