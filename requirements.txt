@@ -1,0 +1,22 @@
+# Moteur Web & API Mobile
+fastapi>=0.115.0
+uvicorn>=0.30.0
+
+# Interface Graphique Moderne
+ttkbootstrap>=2.2.0
+tkinterdnd2>=0.4.0
+sv-ttk>=2.6.0
+Pillow>=10.0.0
+matplotlib>=3.8.0
+fpdf2>=2.8.0
+
+# Traitement Audio, Vidéo & Synchronisation
+numpy>=1.26.0
+scipy>=1.13.0
+
+# Réseau, NAS & Requêtes HTTP
+requests>=2.31.0
+urllib3>=2.2.0
+
+# Empreintes & Checksums rapides (optionnel)
+xxhash>=3.4.0

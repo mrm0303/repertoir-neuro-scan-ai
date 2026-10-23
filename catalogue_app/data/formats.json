@@ -1,0 +1,2476 @@
+{
+  "format_catalog": {
+    "braw": {
+      "name": "Blackmagic RAW",
+      "category": "Vidéo RAW",
+      "software": "Blackmagic Design (DaVinci Resolve, URSA, BMPCC)",
+      "description": "Format RAW moderne combinant le dématriçage partiel accéléré par GPU avec la flexibilité d'ajustement ISO, colorimétrie et balance des blancs.",
+      "ffi_url": "https://www.fileformat.info/format/braw/index.htm"
+    },
+    "r3d": {
+      "name": "REDCODE RAW Video",
+      "category": "Vidéo RAW",
+      "software": "RED Digital Cinema (Monstro, V-Raptor, Komodo)",
+      "description": "Format RAW vidéo propriétaire basé sur la compression ondelette (wavelet), référence historique du cinéma numérique 4K/6K/8K.",
+      "ffi_url": "https://www.fileformat.info/format/r3d/index.htm"
+    },
+    "ari": {
+      "name": "ARRIRAW",
+      "category": "Vidéo RAW",
+      "software": "ARRI (Alexa Mini, LF, Alexa 35)",
+      "description": "Données brutes non compressées issues directement du capteur ARRI ALEV, offrant la plus grande dynamique d'image du cinéma broadcast.",
+      "ffi_url": "https://www.fileformat.info/format/ari/index.htm"
+    },
+    "crm": {
+      "name": "Canon Cinema RAW Light",
+      "category": "Vidéo RAW",
+      "software": "Canon Cinema EOS (C200, C300 Mark III, C500 Mark II, R5 C)",
+      "description": "RAW vidéo compressé conservant les données de dynamique Canon Log avec des débits de données réduits.",
+      "ffi_url": "https://www.fileformat.info/format/crm/index.htm"
+    },
+    "mxf": {
+      "name": "Material Exchange Format",
+      "category": "Vidéo Broadcast",
+      "software": "SMPTE Standard (Sony XDCAM, Panasonic P2, Avid, DaVinci)",
+      "description": "Conteneur professionnel standard pour l'audiovisuel et la télévision, intégrant métadonnées timecode, audio multipiste et essence vidéo.",
+      "ffi_url": "https://www.fileformat.info/format/mxf/index.htm"
+    },
+    "mov": {
+      "name": "QuickTime Movie",
+      "category": "Vidéo",
+      "software": "Apple Inc. (Final Cut Pro, DaVinci, Premiere Pro)",
+      "description": "Conteneur multimédia phare d'Apple supportant ProRes 422/4444, H.264, animations et pistes multicanales.",
+      "ffi_url": "https://www.fileformat.info/format/mov/index.htm"
+    },
+    "mp4": {
+      "name": "MPEG-4 Part 14",
+      "category": "Vidéo",
+      "software": "ISO/IEC Standard (Universel)",
+      "description": "Format conteneur standard de diffusion web et mobile le plus utilisé au monde (H.264 / AVC et H.265 / HEVC).",
+      "ffi_url": "https://www.fileformat.info/format/mpeg4/index.htm"
+    },
+    "mkv": {
+      "name": "Matroska Video",
+      "category": "Vidéo",
+      "software": "Matroska Open Source Project",
+      "description": "Conteneur ouvert réputé pour sa flexibilité, pouvant encapsuler un nombre illimité de pistes vidéo, audio et sous-titres avec chapitrage.",
+      "ffi_url": "https://www.fileformat.info/format/mkv/index.htm"
+    },
+    "dpx": {
+      "name": "Digital Picture Exchange",
+      "category": "Vidéo / Image de Post-prod",
+      "software": "SMPTE Standard (Étalonnage et effets visuels VFX)",
+      "description": "Séquence d'images non compressées à très grande profondeur de couleur (10-bit / 16-bit log), standard historique des scans de pellicule 35mm.",
+      "ffi_url": "https://www.fileformat.info/format/dpx/index.htm"
+    },
+    "cine": {
+      "name": "Phantom Cine Video",
+      "category": "Vidéo Ultra Haute Vitesse",
+      "software": "Vision Research (Caméras Phantom)",
+      "description": "Format brut spécialisé dans l'enregistrement ultra-ralenti à plusieurs milliers d'images par seconde.",
+      "ffi_url": "https://www.fileformat.info/format/cine/index.htm"
+    },
+    "arw": {
+      "name": "Sony Alpha Raw Image",
+      "category": "Photo RAW",
+      "software": "Sony (Appareils photo Alpha A7, A1, FX3)",
+      "description": "Données brutes de capteur Sony non compressées ou compressées sans perte, basées sur la structure TIFF.",
+      "ffi_url": "https://www.fileformat.info/format/arw/index.htm"
+    },
+    "cr3": {
+      "name": "Canon Raw Version 3",
+      "category": "Photo RAW",
+      "software": "Canon (EOS R5, R6, R3, 1D X Mark III)",
+      "description": "Format RAW nouvelle génération de Canon basé sur le conteneur ISO base media file (MP4).",
+      "ffi_url": "https://www.fileformat.info/format/cr3/index.htm"
+    },
+    "cr2": {
+      "name": "Canon Raw Image Version 2",
+      "category": "Photo RAW",
+      "software": "Canon (Boîtiers reflex EOS 5D, 6D, 7D)",
+      "description": "Format RAW emblématique de Canon utilisant la structure TIFF avec métadonnées propriétaires.",
+      "ffi_url": "https://www.fileformat.info/format/cr2/index.htm"
+    },
+    "nef": {
+      "name": "Nikon Electronic Format",
+      "category": "Photo RAW",
+      "software": "Nikon (Z9, Z8, D850, D750)",
+      "description": "Fichier RAW photographique de Nikon préservant l'ensemble des données captées sans perte de dynamique.",
+      "ffi_url": "https://www.fileformat.info/format/nef/index.htm"
+    },
+    "dng": {
+      "name": "Digital Negative",
+      "category": "Photo / Vidéo RAW",
+      "software": "Adobe Systems / Standard Ouvert",
+      "description": "Format RAW d'archivage universel créé par Adobe pour standardiser les formats propriétaires des constructeurs.",
+      "ffi_url": "https://www.fileformat.info/format/dng/index.htm"
+    },
+    "exr": {
+      "name": "OpenEXR Image",
+      "category": "Image VFX & Rendu 3D",
+      "software": "Industrial Light & Magic (ILM)",
+      "description": "Format d'image à virgule flottante (16-bit half / 32-bit float) avec haute plage dynamique (HDR) et multi-couches (cryptomatte, passes de rendu).",
+      "ffi_url": "https://www.fileformat.info/format/exr/index.htm"
+    },
+    "psd": {
+      "name": "Adobe Photoshop Document",
+      "category": "Graphisme & Retouche",
+      "software": "Adobe Systems (Photoshop)",
+      "description": "Format de retouche professionnel supportant calques, masques, objets dynamiques, modes de fusion et métadonnées.",
+      "ffi_url": "https://www.fileformat.info/format/psd/index.htm"
+    },
+    "tiff": {
+      "name": "Tagged Image File Format",
+      "category": "Image Haute Qualité",
+      "software": "Aldus / Adobe (Archivage et Impression)",
+      "description": "Format raster universel sans perte très répandu pour l'impression fine-art et l'archivage photographique pérenne.",
+      "ffi_url": "https://www.fileformat.info/format/tiff/index.htm"
+    },
+    "tif": {
+      "name": "Tagged Image File Format",
+      "category": "Image Haute Qualité",
+      "software": "Aldus / Adobe",
+      "description": "Abréviation de TIFF, format d'image sans compression ou compression LZW sans perte.",
+      "ffi_url": "https://www.fileformat.info/format/tiff/index.htm"
+    },
+    "wav": {
+      "name": "Waveform Audio File Format",
+      "category": "Audio",
+      "software": "Microsoft & IBM (Standard Studio)",
+      "description": "Format audio non compressé basé sur RIFF/PCM, référence absolue de l'enregistrement sonore en studio et sur tournage.",
+      "ffi_url": "https://www.fileformat.info/format/wav/index.htm"
+    },
+    "bwf": {
+      "name": "Broadcast Wave Format",
+      "category": "Audio Broadcast",
+      "software": "EBU (Union Européenne de Radio-Télévision)",
+      "description": "Extension professionnelle du WAV intégrant le Timecode, le nom de scène, de prise et de piste dans le bloc BEXT.",
+      "ffi_url": "https://www.fileformat.info/format/bwf/index.htm"
+    },
+    "aif": {
+      "name": "Audio Interchange File Format",
+      "category": "Audio",
+      "software": "Apple Computer",
+      "description": "Format audio PCM sans perte historique des plateformes Mac et studios audio.",
+      "ffi_url": "https://www.fileformat.info/format/aiff/index.htm"
+    },
+    "aiff": {
+      "name": "Audio Interchange File Format",
+      "category": "Audio",
+      "software": "Apple Computer",
+      "description": "Format audio sans perte basé sur IFF, couramment utilisé dans Logic Pro et Pro Tools.",
+      "ffi_url": "https://www.fileformat.info/format/aiff/index.htm"
+    },
+    "flac": {
+      "name": "Free Lossless Audio Codec",
+      "category": "Audio Sans Perte",
+      "software": "Xiph.Org Foundation",
+      "description": "Codec audio compressé sans perte, réduisant la taille du fichier d'environ 50% tout en conservant 100% de la qualité originale.",
+      "ffi_url": "https://www.fileformat.info/format/flac/index.htm"
+    },
+    "prproj": {
+      "name": "Adobe Premiere Pro Project",
+      "category": "Projet de Montage NLE",
+      "software": "Adobe Premiere Pro",
+      "description": "Fichier XML compressé en gzip décrivant les séquences, timelines, effets, et liens vers les médias de montage.",
+      "ffi_url": "https://www.fileformat.info/format/prproj/index.htm"
+    },
+    "drp": {
+      "name": "DaVinci Resolve Project",
+      "category": "Projet de Montage & Étalonnage",
+      "software": "Blackmagic Design DaVinci Resolve",
+      "description": "Archive exportée contenant l'ensemble de la base de données du projet (timeline, nœuds d'étalonnage, Fairlight audio).",
+      "ffi_url": "https://www.fileformat.info/format/drp/index.htm"
+    },
+    "fcpxml": {
+      "name": "Final Cut Pro XML",
+      "category": "Échange de Montage NLE",
+      "software": "Apple Final Cut Pro",
+      "description": "Format d'échange XML pour transférer des projets, métadonnées et séquences entre logiciels de montage.",
+      "ffi_url": "https://www.fileformat.info/format/fcpxml/index.htm"
+    },
+    "aep": {
+      "name": "After Effects Project",
+      "category": "Motion Design & Effets Visuels",
+      "software": "Adobe After Effects",
+      "description": "Fichier de composition contenant les calques, animations, masques et effets visuels VFX.",
+      "ffi_url": "https://www.fileformat.info/format/aep/index.htm"
+    },
+    "aaf": {
+      "name": "Advanced Authoring Format",
+      "category": "Échange Professionnel",
+      "software": "AMWA Standard (Avid Media Composer, Pro Tools)",
+      "description": "Standard d'échange professionnel pour le passage de timeline d'image vers le mixage son (Pro Tools) ou l'étalonnage.",
+      "ffi_url": "https://www.fileformat.info/format/aaf/index.htm"
+    },
+    "blend": {
+      "name": "Blender 3D Scene",
+      "category": "Création 3D & Animation",
+      "software": "Blender Foundation",
+      "description": "Fichier binaire complet contenant modèles 3D, textures, squelettes de rigging, matériaux et animations.",
+      "ffi_url": "https://www.fileformat.info/format/blend/index.htm"
+    },
+    "c4d": {
+      "name": "Cinema 4D Project",
+      "category": "Création 3D & Motion Graphics",
+      "software": "Maxon Cinema 4D",
+      "description": "Scène 3D utilisée dans l'industrie publicitaire et le motion design pour les rendus photoréalistes.",
+      "ffi_url": "https://www.fileformat.info/format/c4d/index.htm"
+    },
+    "usdz": {
+      "name": "Universal Scene Description Zip",
+      "category": "3D & Réalité Augmentée",
+      "software": "Pixar / Apple Inc.",
+      "description": "Format de scène 3D optimisé pour l'écosystème Apple (iOS, macOS, Vision Pro) et le travail collaboratif de studio.",
+      "ffi_url": "https://www.fileformat.info/format/usdz/index.htm"
+    }
+  },
+  "gist_formats": {
+    "txt": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "Plain text file 📄",
+      "use_case": "Notes, logs, configs 🗒️",
+      "tools": "Notepad++ 📝, VS Code 💻, Nano 📟"
+    },
+    "md": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "Markdown file ✍️",
+      "use_case": "Documentation, READMEs 📖",
+      "tools": "GitHub 🐙, Obsidian 🏗️, Jekyll 🌐"
+    },
+    "docx": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "Microsoft Word file 🏛️",
+      "use_case": "Reports, essays, documents 📄",
+      "tools": "Microsoft Word 🖊️, Google Docs 🌍"
+    },
+    "doc": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "Older Word document 🏛️",
+      "use_case": "Legacy MS Word documents 📜",
+      "tools": "Microsoft Word 🖊️, LibreOffice 🏢"
+    },
+    "odt": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "OpenDocument Text 📜",
+      "use_case": "Open-source Word files 🏗️",
+      "tools": "LibreOffice Writer 🖊️, OpenOffice 📖"
+    },
+    "pdf": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "Portable Document Format 📜",
+      "use_case": "Official documents, e-books 📚",
+      "tools": "Adobe Acrobat 🔍, Foxit Reader 📖"
+    },
+    "rtf": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "Rich Text Format 📝",
+      "use_case": "Formatted text documents ✍️",
+      "tools": "Microsoft Word 🖊️, WordPad 📜"
+    },
+    "tex": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "LaTeX file 📑",
+      "use_case": "Academic papers, math docs 📖",
+      "tools": "TeX Live 📚, Overleaf ✏️, MiKTeX 🏗️"
+    },
+    "wpd": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "WordPerfect Document 🏛️",
+      "use_case": "Older word processing docs 📄",
+      "tools": "WordPerfect 🖊️, LibreOffice 🏢"
+    },
+    "xlsx": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "Excel Spreadsheet 📊",
+      "use_case": "Data analysis, finance 💰",
+      "tools": "Excel 📈, Google Sheets 📊, LibreOffice Calc 🏢"
+    },
+    "xls": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "Legacy Excel file 📊",
+      "use_case": "Older Excel spreadsheets 🗃️",
+      "tools": "Excel 📈, LibreOffice Calc 🏢"
+    },
+    "csv": {
+      "section": "📊 Data & Machine Learning",
+      "description": "Comma-Separated Values 📄",
+      "use_case": "Tabular data storage",
+      "tools": "Excel, Pandas, Google Sheets"
+    },
+    "tsv": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "Tab-Separated Values 📄",
+      "use_case": "Tabular data storage 🗃️",
+      "tools": "Pandas 🐼, Excel 📈, Notepad++ 📝"
+    },
+    "pptx": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "PowerPoint Presentation 🎤",
+      "use_case": "Slideshows, presentations 📽️",
+      "tools": "PowerPoint 📊, Google Slides 🌍"
+    },
+    "ppt": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "Older PowerPoint file 🎞️",
+      "use_case": "Legacy slideshows 📽️",
+      "tools": "PowerPoint 📊, LibreOffice Impress 🏢"
+    },
+    "odp": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "OpenDocument Presentation 🎥",
+      "use_case": "Open-source slideshows 📽️",
+      "tools": "LibreOffice Impress 🏢, OpenOffice 📖"
+    },
+    "pages": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "Apple Pages Document 🍏",
+      "use_case": "Apple document processing 📝",
+      "tools": "Apple Pages 📖"
+    },
+    "key": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "Apple Keynote Presentation 🍏",
+      "use_case": "Apple slideshows 🎤",
+      "tools": "Apple Keynote 📊"
+    },
+    "numbers": {
+      "section": "📄 Documents & Spreadsheets",
+      "description": "Apple Numbers Spreadsheet 🍏",
+      "use_case": "Apple spreadsheet files 📈",
+      "tools": "Apple Numbers 📊"
+    },
+    "log": {
+      "section": "📊 Data & Machine Learning",
+      "description": "Log file 📖",
+      "use_case": "System & app logs",
+      "tools": "ELK Stack, Splunk"
+    },
+    "ipynb": {
+      "section": "📚 Jupyter Notebooks",
+      "description": "Jupyter Notebook 📓",
+      "use_case": "Data science, ML research 🤖",
+      "tools": "Jupyter Notebook, Google Colab"
+    },
+    "ipynb_checkpoints": {
+      "section": "📚 Jupyter Notebooks",
+      "description": "Notebook checkpoint 🔄",
+      "use_case": "Auto-saved versions 📝",
+      "tools": "Jupyter Notebook"
+    },
+    "nbconvert": {
+      "section": "📚 Jupyter Notebooks",
+      "description": "Notebook conversion 🔁",
+      "use_case": "Exporting to HTML, PDF 📄",
+      "tools": "Jupyter nbconvert"
+    },
+    "nblink": {
+      "section": "📚 Jupyter Notebooks",
+      "description": "Jupyter Notebook link 🔗",
+      "use_case": "Linking external notebooks 🌍",
+      "tools": "Jupyter Notebook, JupyterLab"
+    },
+    "json": {
+      "section": "💾 Database Files",
+      "description": "NoSQL Data Storage 🌐",
+      "use_case": "Document-based databases",
+      "tools": "MongoDB, Firebase"
+    },
+    "py": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Python Server Script 🐍",
+      "use_case": "Web frameworks",
+      "tools": "Django, Flask, FastAPI"
+    },
+    "java": {
+      "section": "💻 Programming & Code Files",
+      "description": "Java source file ☕",
+      "use_case": "Enterprise apps, Android dev",
+      "tools": "IntelliJ, Eclipse, NetBeans"
+    },
+    "c": {
+      "section": "💻 Programming & Code Files",
+      "description": "C source file 🔵",
+      "use_case": "Low-level programming, OS dev",
+      "tools": "GCC, Clang, CodeBlocks"
+    },
+    "cpp": {
+      "section": "💻 Programming & Code Files",
+      "description": "C++ source file 🚀",
+      "use_case": "High-performance apps, gaming",
+      "tools": "Visual Studio, CMake"
+    },
+    "html": {
+      "section": "💻 Programming & Code Files",
+      "description": "HTML file 🌍",
+      "use_case": "Structuring web pages",
+      "tools": "VS Code, Chrome DevTools"
+    },
+    "css": {
+      "section": "💻 Programming & Code Files",
+      "description": "CSS file 🎨",
+      "use_case": "Styling web pages",
+      "tools": "Tailwind, Bootstrap, Sass"
+    },
+    "js": {
+      "section": "💻 Programming & Code Files",
+      "description": "JavaScript file ⚡",
+      "use_case": "Frontend & backend scripting",
+      "tools": "Node.js, React, Angular"
+    },
+    "ts": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "TypeScript Script 🚀",
+      "use_case": "Scalable frontend & backend",
+      "tools": "Angular, Deno, NestJS"
+    },
+    "r": {
+      "section": "💻 Programming & Code Files",
+      "description": "R script 📊",
+      "use_case": "Data science, statistics",
+      "tools": "RStudio, Jupyter Notebook"
+    },
+    "scala": {
+      "section": "💻 Programming & Code Files",
+      "description": "Scala source file 🔴",
+      "use_case": "Scalable applications",
+      "tools": "IntelliJ, Scala IDE"
+    },
+    "dart": {
+      "section": "💻 Programming & Code Files",
+      "description": "Dart source file 🎯",
+      "use_case": "Flutter mobile apps",
+      "tools": "Dart SDK, Flutter"
+    },
+    "rb": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Ruby Script 💎",
+      "use_case": "Web applications",
+      "tools": "Sinatra, Ruby on Rails"
+    },
+    "swift": {
+      "section": "💻 Programming & Code Files",
+      "description": "Swift source file 🍏",
+      "use_case": "iOS/macOS development",
+      "tools": "Xcode, Swift Playgrounds"
+    },
+    "go": {
+      "section": "💻 Programming & Code Files",
+      "description": "Go source file 🏎️",
+      "use_case": "Cloud computing, networking",
+      "tools": "GoLand, VS Code, Go Compiler"
+    },
+    "rs": {
+      "section": "💻 Programming & Code Files",
+      "description": "Rust source file 🦀",
+      "use_case": "Systems programming, safety",
+      "tools": "Rust Compiler, Cargo, Clippy"
+    },
+    "lua": {
+      "section": "💻 Programming & Code Files",
+      "description": "Lua script 🕹️",
+      "use_case": "Game development, scripting",
+      "tools": "Lua, Love2D, Corona SDK"
+    },
+    "pl": {
+      "section": "💻 Programming & Code Files",
+      "description": "Perl script 🐪",
+      "use_case": "Text processing, sys admin",
+      "tools": "Perl, Strawberry Perl, Padre"
+    },
+    "sh": {
+      "section": "⚙️ Configuration & System Files",
+      "description": "Shell script 🖥️",
+      "use_case": "Linux/macOS automation",
+      "tools": "Bash, Zsh, Terminal"
+    },
+    "bat": {
+      "section": "⚙️ Configuration & System Files",
+      "description": "Batch script 📝",
+      "use_case": "Windows automation",
+      "tools": "CMD, PowerShell"
+    },
+    "png": {
+      "section": "🌐 Web & Graphics",
+      "description": "High-quality images 🌆",
+      "use_case": "Transparency, UI elements",
+      "tools": "Photoshop, GIMP, Figma"
+    },
+    "jpg": {
+      "section": "🌐 Web & Graphics",
+      "description": "Compressed images 📷",
+      "use_case": "Photographs, web graphics",
+      "tools": "Photoshop, Lightroom"
+    },
+    "webp": {
+      "section": "🌐 Web & Graphics",
+      "description": "Web-optimized images 🌎",
+      "use_case": "Fast-loading web graphics",
+      "tools": "Squoosh, WebP Converter"
+    },
+    "svg": {
+      "section": "🌐 Fonts & Typography",
+      "description": "SVG Font 🖌️",
+      "use_case": "Scalable vector-based fonts",
+      "tools": "Web design, CSS"
+    },
+    "gif": {
+      "section": "🌐 Web & Graphics",
+      "description": "Animated images 🎞️",
+      "use_case": "Simple animations, memes",
+      "tools": "Photoshop, GIMP, Ezgif"
+    },
+    "ico": {
+      "section": "🌐 Web & Graphics",
+      "description": "Icon file 🏠",
+      "use_case": "Website favicons, app icons",
+      "tools": "IcoFX, Photoshop, GIMP"
+    },
+    "tiff": {
+      "section": "🌐 Web & Graphics",
+      "description": "Lossless raster images 🖼️",
+      "use_case": "High-quality prints",
+      "tools": "Photoshop, Lightroom"
+    },
+    "bmp": {
+      "section": "🌐 Web & Graphics",
+      "description": "Bitmap image 📏",
+      "use_case": "Uncompressed image storage",
+      "tools": "MS Paint, Photoshop"
+    },
+    "psd": {
+      "section": "🌐 Web & Graphics",
+      "description": "Photoshop document 🎭",
+      "use_case": "Layered image editing",
+      "tools": "Adobe Photoshop"
+    },
+    "ai": {
+      "section": "🌐 Web & Graphics",
+      "description": "Adobe Illustrator file 🖋️",
+      "use_case": "Vector graphics, logos",
+      "tools": "Adobe Illustrator"
+    },
+    "ini": {
+      "section": "⚙️ Configuration & System Files",
+      "description": "Initialization file 🛠️",
+      "use_case": "App settings, preferences",
+      "tools": "Notepad++, VS Code"
+    },
+    "cfg": {
+      "section": "⚙️ Configuration & System Files",
+      "description": "Configuration file ⚙️",
+      "use_case": "Software & system configs",
+      "tools": "Any text editor"
+    },
+    "toml": {
+      "section": "⚙️ Configuration & System Files",
+      "description": "TOML config file 📜",
+      "use_case": "Readable configuration",
+      "tools": "VS Code, Sublime Text"
+    },
+    "yaml": {
+      "section": "⚙️ Configuration & System Files",
+      "description": "YAML config file 📄",
+      "use_case": "Human-readable settings",
+      "tools": "PyYAML, Kubernetes, Ansible"
+    },
+    "xml": {
+      "section": "📊 Data & Machine Learning",
+      "description": "Extensible Markup Language 📑",
+      "use_case": "Configs, data exchange",
+      "tools": "XPath, XSLT, XMLParser"
+    },
+    "conf": {
+      "section": "⚙️ Configuration & System Files",
+      "description": "System config file ⚙️",
+      "use_case": "Linux system settings",
+      "tools": "Vim, Nano, VS Code"
+    },
+    "editorconfig": {
+      "section": "⚙️ Configuration & System Files",
+      "description": "Code style settings 🖋️",
+      "use_case": "Formatting rules",
+      "tools": "EditorConfig Plugin"
+    },
+    "onnx": {
+      "section": "📊 Data & Machine Learning",
+      "description": "Open Neural Network Exchange",
+      "use_case": "Modèle d'IA interopérable",
+      "tools": "PyTorch, ONNX Runtime, TensorFlow"
+    },
+    "safetensors": {
+      "section": "📊 Data & Machine Learning",
+      "description": "Format de poids de modèles IA sécurisé",
+      "use_case": "Checkpoints LLM / Stable Diffusion",
+      "tools": "Hugging Face, PyTorch"
+    },
+    "gguf": {
+      "section": "📊 Data & Machine Learning",
+      "description": "Format de modèle quantifié pour LLM local",
+      "use_case": "Exécution locale LM Studio, llama.cpp",
+      "tools": "LM Studio, Ollama, llama.cpp"
+    },
+    "parquet": {
+      "section": "📊 Data & Machine Learning",
+      "description": "Columnar data format 📈",
+      "use_case": "Big data processing",
+      "tools": "Apache Spark, Pandas"
+    },
+    "orc": {
+      "section": "📊 Data & Machine Learning",
+      "description": "Optimized Row Column format 🏗️",
+      "use_case": "High-performance data",
+      "tools": "Apache Hive, Spark"
+    },
+    "avro": {
+      "section": "📊 Data & Machine Learning",
+      "description": "Apache Avro format 🔄",
+      "use_case": "Data serialization",
+      "tools": "Hadoop, Apache Kafka"
+    },
+    "feather": {
+      "section": "📊 Data & Machine Learning",
+      "description": "Fast binary format ⚡",
+      "use_case": "High-speed data loading",
+      "tools": "Pandas, Apache Arrow"
+    },
+    "pkl": {
+      "section": "📊 Data & Machine Learning",
+      "description": "Python pickle 🥒",
+      "use_case": "Storing ML models",
+      "tools": "Scikit-learn, Pandas"
+    },
+    "joblib": {
+      "section": "📊 Data & Machine Learning",
+      "description": "Joblib serialization 📦",
+      "use_case": "Large ML models",
+      "tools": "Joblib, Scikit-learn"
+    },
+    "h5": {
+      "section": "📊 Data & Machine Learning",
+      "description": "HDF5 format 📊",
+      "use_case": "Deep learning datasets",
+      "tools": "TensorFlow, H5py"
+    },
+    "npy": {
+      "section": "📊 Data & Machine Learning",
+      "description": "NumPy binary format 🔢",
+      "use_case": "Numerical data storage",
+      "tools": "NumPy, TensorFlow"
+    },
+    "data": {
+      "section": "📊 Data & Machine Learning",
+      "description": "General data format 📂",
+      "use_case": "Custom data storage",
+      "tools": "Various ML libraries"
+    },
+    "mp4": {
+      "section": "🎧🎥 Media Files",
+      "description": "MP4 Video File 📽️",
+      "use_case": "Streaming, online videos",
+      "tools": "VLC, FFmpeg, Adobe Premiere Pro"
+    },
+    "mp3": {
+      "section": "🎧🎥 Media Files",
+      "description": "MP3 Audio File 🎵",
+      "use_case": "Music, podcasts",
+      "tools": "VLC, Audacity, iTunes"
+    },
+    "wav": {
+      "section": "🎧🎥 Media Files",
+      "description": "WAV Audio File 🎼",
+      "use_case": "High-quality sound",
+      "tools": "Audacity, FL Studio, Logic Pro"
+    },
+    "flac": {
+      "section": "🎧🎥 Media Files",
+      "description": "FLAC Audio File 🎶",
+      "use_case": "Lossless music storage",
+      "tools": "VLC, Foobar2000, Audacity"
+    },
+    "aac": {
+      "section": "🎧🎥 Media Files",
+      "description": "AAC Audio File 🎙️",
+      "use_case": "Apple music format",
+      "tools": "iTunes, QuickTime, Audacity"
+    },
+    "ogg": {
+      "section": "🎧🎥 Media Files",
+      "description": "Ogg Vorbis Audio 🎧",
+      "use_case": "Open-source alternative",
+      "tools": "VLC, Audacity"
+    },
+    "wma": {
+      "section": "🎧🎥 Media Files",
+      "description": "Windows Media Audio 🔊",
+      "use_case": "Windows music playback",
+      "tools": "Windows Media Player, VLC"
+    },
+    "m4a": {
+      "section": "🎧🎥 Media Files",
+      "description": "M4A Audio File 🎵",
+      "use_case": "iTunes music format",
+      "tools": "Apple Music, QuickTime"
+    },
+    "opus": {
+      "section": "🎧🎥 Media Files",
+      "description": "Opus Audio Format 🎤",
+      "use_case": "Voice recording, streaming",
+      "tools": "Discord, WhatsApp, FFmpeg"
+    },
+    "mov": {
+      "section": "🎧🎥 Media Files",
+      "description": "QuickTime Movie 🎬",
+      "use_case": "Apple video format",
+      "tools": "QuickTime, Final Cut Pro"
+    },
+    "avi": {
+      "section": "🎧🎥 Media Files",
+      "description": "AVI Video File 📹",
+      "use_case": "Windows video format",
+      "tools": "VLC, Windows Media Player"
+    },
+    "mkv": {
+      "section": "🎧🎥 Media Files",
+      "description": "Matroska Video File 🎞️",
+      "use_case": "High-quality HD videos",
+      "tools": "VLC, MKVToolNix"
+    },
+    "webm": {
+      "section": "🎧🎥 Media Files",
+      "description": "WebM Video File 🌍",
+      "use_case": "Web streaming format",
+      "tools": "YouTube, FFmpeg, Chrome"
+    },
+    "flv": {
+      "section": "🎧🎥 Media Files",
+      "description": "Flash Video File 📺",
+      "use_case": "Older web videos",
+      "tools": "Adobe Flash Player (deprecated)"
+    },
+    "3gp": {
+      "section": "🎧🎥 Media Files",
+      "description": "3GPP Video File 📱",
+      "use_case": "Mobile videos",
+      "tools": "VLC, QuickTime"
+    },
+    "rm": {
+      "section": "🎧🎥 Media Files",
+      "description": "RealMedia File 🎥",
+      "use_case": "Older streaming format",
+      "tools": "RealPlayer"
+    },
+    "m4v": {
+      "section": "🎧🎥 Media Files",
+      "description": "Apple Video Format 🍏",
+      "use_case": "iTunes video files",
+      "tools": "QuickTime, iTunes"
+    },
+    "gitignore": {
+      "section": "🗂️ Version Control & Git",
+      "description": "Git Ignore File 🚫",
+      "use_case": "Excluding files from Git tracking",
+      "tools": "Git, GitHub, GitLab"
+    },
+    "gitattributes": {
+      "section": "🗂️ Version Control & Git",
+      "description": "Git Attributes 📜",
+      "use_case": "Defining Git behaviors for files",
+      "tools": "Git, GitHub, Bitbucket"
+    },
+    "mailmap": {
+      "section": "🗂️ Version Control & Git",
+      "description": "Mailmap File 📧",
+      "use_case": "Standardizing author names in Git logs",
+      "tools": "Git"
+    },
+    "gitmodules": {
+      "section": "🗂️ Version Control & Git",
+      "description": "Git Submodules 🔗",
+      "use_case": "Managing sub-repositories within a repo",
+      "tools": "Git CLI"
+    },
+    "gitkeep": {
+      "section": "🗂️ Version Control & Git",
+      "description": "Placeholder File 📁",
+      "use_case": "Keeping empty folders in Git",
+      "tools": "Git"
+    },
+    "gitconfig": {
+      "section": "🗂️ Version Control & Git",
+      "description": "Git Configuration ⚙️",
+      "use_case": "User settings for Git",
+      "tools": "Git CLI, GitHub Desktop"
+    },
+    "pack": {
+      "section": "🗂️ Version Control & Git",
+      "description": "Packed Git Objects 📦",
+      "use_case": "Optimized storage for Git data",
+      "tools": "Git Internals"
+    },
+    "idx": {
+      "section": "🗂️ Version Control & Git",
+      "description": "Git Index File 🏗️",
+      "use_case": "Indexing Git objects for performance",
+      "tools": "Git Internals"
+    },
+    "commit_msg": {
+      "section": "🗂️ Version Control & Git",
+      "description": "Commit Message Template ✍️",
+      "use_case": "Standardizing commit messages",
+      "tools": "Git Hooks"
+    },
+    "pre-commit": {
+      "section": "🗂️ Version Control & Git",
+      "description": "Pre-commit Hook 🔄",
+      "use_case": "Running checks before committing",
+      "tools": "Pre-commit, Git Hooks"
+    },
+    "rebase-merge": {
+      "section": "🗂️ Version Control & Git",
+      "description": "Git Rebase State 📌",
+      "use_case": "Tracking rebase process",
+      "tools": "Git Rebase"
+    },
+    "merge_msg": {
+      "section": "🗂️ Version Control & Git",
+      "description": "Merge Commit Message ✏️",
+      "use_case": "Auto-generated message for merges",
+      "tools": "Git CLI"
+    },
+    "php": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "PHP script 🐘",
+      "use_case": "Server-side scripting",
+      "tools": "PHP, Laravel, WordPress"
+    },
+    "asp": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Active Server Pages 📄",
+      "use_case": "Microsoft web applications",
+      "tools": "ASP.NET, IIS"
+    },
+    "jsp": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Java Server Pages ☕",
+      "use_case": "Java-based web apps",
+      "tools": "Tomcat, Spring Boot"
+    },
+    "ejs": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Embedded JavaScript 📝",
+      "use_case": "Templating for Node.js",
+      "tools": "Express.js, Next.js"
+    },
+    "erb": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Embedded Ruby 🖍️",
+      "use_case": "Ruby on Rails templating",
+      "tools": "Ruby on Rails"
+    },
+    "cgi": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Common Gateway Interface 📡",
+      "use_case": "Legacy server-side scripting",
+      "tools": "Apache CGI, Perl"
+    },
+    "cshtml": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Razor View Engine 🏗️",
+      "use_case": "ASP.NET MVC templates",
+      "tools": "ASP.NET Core"
+    },
+    "aspx": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "ASP.NET Web Page 🏛️",
+      "use_case": "Web applications",
+      "tools": "ASP.NET, IIS"
+    },
+    "vue": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Vue.js Component 🎨",
+      "use_case": "Frontend UI components",
+      "tools": "Vue.js, Nuxt.js"
+    },
+    "svelte": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Svelte Component 🚀",
+      "use_case": "Lightweight UI components",
+      "tools": "Svelte"
+    },
+    "twig": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Twig Templating Engine 🍃",
+      "use_case": "PHP templates",
+      "tools": "Symfony, Drupal"
+    },
+    "liquid": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Liquid Templating 🌊",
+      "use_case": "Shopify, Jekyll templates",
+      "tools": "Shopify, Jekyll"
+    },
+    "hbs": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Handlebars Templating 🔥",
+      "use_case": "Dynamic HTML generation",
+      "tools": "Handlebars.js"
+    },
+    "pug": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Pug Templating ✏️",
+      "use_case": "HTML preprocessor",
+      "tools": "Pug.js"
+    },
+    "njk": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Nunjucks Templating 📜",
+      "use_case": "Static site generation",
+      "tools": "Nunjucks"
+    },
+    "gohtml": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Go Templating 🏗️",
+      "use_case": "Go web applications",
+      "tools": "Golang, Hugo"
+    },
+    "scss": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Sass Stylesheet 🎨",
+      "use_case": "Advanced CSS preprocessor",
+      "tools": "Sass, Bootstrap"
+    },
+    "less": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "LESS Stylesheet 💄",
+      "use_case": "CSS preprocessor",
+      "tools": "LESS"
+    },
+    "styl": {
+      "section": "🌐 Web Development & Server-side Scripts",
+      "description": "Stylus Stylesheet ✏️",
+      "use_case": "CSS preprocessor",
+      "tools": "Stylus"
+    },
+    "db": {
+      "section": "💾 Database Files",
+      "description": "Generic database file 📂",
+      "use_case": "Storing structured data",
+      "tools": "SQLite, DB Browser"
+    },
+    "sqlite": {
+      "section": "💾 Database Files",
+      "description": "SQLite database 📀",
+      "use_case": "Lightweight database",
+      "tools": "SQLite CLI, DB Browser"
+    },
+    "sql": {
+      "section": "💾 Database Files",
+      "description": "SQL script file 📝",
+      "use_case": "Database queries, schema",
+      "tools": "MySQL, PostgreSQL, Oracle"
+    },
+    "mdb": {
+      "section": "💾 Database Files",
+      "description": "Microsoft Access DB 📊",
+      "use_case": "Windows-based database",
+      "tools": "MS Access, MDB Viewer"
+    },
+    "accdb": {
+      "section": "💾 Database Files",
+      "description": "Access Database (New) 📑",
+      "use_case": "MS Access newer format",
+      "tools": "MS Access"
+    },
+    "frm": {
+      "section": "💾 Database Files",
+      "description": "MySQL Table Format 📜",
+      "use_case": "MySQL table definitions",
+      "tools": "MySQL, MariaDB"
+    },
+    "ibd": {
+      "section": "💾 Database Files",
+      "description": "InnoDB Storage File 🏗️",
+      "use_case": "MySQL InnoDB tables",
+      "tools": "MySQL, InnoDB"
+    },
+    "myd": {
+      "section": "💾 Database Files",
+      "description": "MyISAM Data File 📊",
+      "use_case": "MySQL table storage",
+      "tools": "MySQL, MariaDB"
+    },
+    "myi": {
+      "section": "💾 Database Files",
+      "description": "MyISAM Index File 🔎",
+      "use_case": "MySQL table indexes",
+      "tools": "MySQL, MariaDB"
+    },
+    "ndf": {
+      "section": "💾 Database Files",
+      "description": "SQL Server Data File 🏢",
+      "use_case": "Secondary DB storage",
+      "tools": "Microsoft SQL Server"
+    },
+    "mdf": {
+      "section": "💾 Database Files",
+      "description": "SQL Server Master DB 📂",
+      "use_case": "Primary database file",
+      "tools": "Microsoft SQL Server"
+    },
+    "ldf": {
+      "section": "💾 Database Files",
+      "description": "SQL Server Log File 📝",
+      "use_case": "Transaction logging",
+      "tools": "Microsoft SQL Server"
+    },
+    "dmp": {
+      "section": "💾 Database Files",
+      "description": "Database Dump 📦",
+      "use_case": "Database backups",
+      "tools": "Oracle, MySQL, PostgreSQL"
+    },
+    "bak": {
+      "section": "💾 Database Files",
+      "description": "Backup File 🔄",
+      "use_case": "Database restoration",
+      "tools": "Microsoft SQL Server, MySQL"
+    },
+    "bson": {
+      "section": "💾 Database Files",
+      "description": "Binary JSON Format 📦",
+      "use_case": "MongoDB storage format",
+      "tools": "MongoDB"
+    },
+    "cql": {
+      "section": "💾 Database Files",
+      "description": "Cassandra Query File 📜",
+      "use_case": "NoSQL distributed DB",
+      "tools": "Apache Cassandra"
+    },
+    "rdb": {
+      "section": "💾 Database Files",
+      "description": "Redis Database Dump 🔥",
+      "use_case": "In-memory key-value store",
+      "tools": "Redis"
+    },
+    "rocksdb": {
+      "section": "💾 Database Files",
+      "description": "RocksDB Storage 📊",
+      "use_case": "High-performance storage engine",
+      "tools": "RocksDB"
+    },
+    "dbf": {
+      "section": "💾 Database Files",
+      "description": "dBase Database 📋",
+      "use_case": "Legacy database files",
+      "tools": "FoxPro, dBase"
+    },
+    "kdbx": {
+      "section": "💾 Database Files",
+      "description": "KeePass Database 🔐",
+      "use_case": "Encrypted password storage",
+      "tools": "KeePass, KeePassXC"
+    },
+    "makefile": {
+      "section": "⚙️ Build & Makefiles",
+      "description": "Make build script ⚙️",
+      "use_case": "Automating project builds",
+      "tools": "GNU Make, BSD Make"
+    },
+    "cmake": {
+      "section": "⚙️ Build & Makefiles",
+      "description": "CMake script 🏗️",
+      "use_case": "Cross-platform build automation",
+      "tools": "CMake, Ninja"
+    },
+    "kconfig": {
+      "section": "⚙️ Build & Makefiles",
+      "description": "Kernel Config 📑",
+      "use_case": "Linux kernel configuration",
+      "tools": "Linux Kernel, `menuconfig`"
+    },
+    "kbuild": {
+      "section": "⚙️ Build & Makefiles",
+      "description": "Kernel Build Rules 🔧",
+      "use_case": "Linux kernel build system",
+      "tools": "GNU Make, Linux Kernel"
+    },
+    "ninja": {
+      "section": "⚙️ Build & Makefiles",
+      "description": "Ninja Build Script ⚡",
+      "use_case": "High-performance build automation",
+      "tools": "Ninja"
+    },
+    "gradle": {
+      "section": "⚙️ Build & Makefiles",
+      "description": "Gradle Build Script 📜",
+      "use_case": "Java, Android builds",
+      "tools": "Gradle, Android Studio"
+    },
+    "maven": {
+      "section": "⚙️ Build & Makefiles",
+      "description": "Apache Maven Build 🏗️",
+      "use_case": "Java project builds",
+      "tools": "Apache Maven"
+    },
+    "bazel": {
+      "section": "⚙️ Build & Makefiles",
+      "description": "Bazel Build Script 🏗️",
+      "use_case": "Scalable software builds",
+      "tools": "Bazel"
+    },
+    "scons": {
+      "section": "⚙️ Build & Makefiles",
+      "description": "SCons Build Script 🏗️",
+      "use_case": "Software construction tool",
+      "tools": "SCons"
+    },
+    "meson": {
+      "section": "⚙️ Build & Makefiles",
+      "description": "Meson Build Script 🚀",
+      "use_case": "Fast, maintainable builds",
+      "tools": "Meson"
+    },
+    "waf": {
+      "section": "⚙️ Build & Makefiles",
+      "description": "Waf Build System 🔧",
+      "use_case": "Python-based build system",
+      "tools": "Waf"
+    },
+    "xcodeproj": {
+      "section": "⚙️ Build & Makefiles",
+      "description": "Xcode Project File 🍏",
+      "use_case": "macOS/iOS development",
+      "tools": "Xcode"
+    },
+    "xcworkspace": {
+      "section": "⚙️ Build & Makefiles",
+      "description": "Xcode Workspace 📦",
+      "use_case": "Multi-project Xcode setups",
+      "tools": "Xcode"
+    },
+    "vsproj": {
+      "section": "⚙️ Build & Makefiles",
+      "description": "Visual Studio Project 🎯",
+      "use_case": "Windows application development",
+      "tools": "Visual Studio"
+    },
+    "sln": {
+      "section": "⚙️ Build & Makefiles",
+      "description": "Visual Studio Solution 📦",
+      "use_case": "Multi-project VS setups",
+      "tools": "Visual Studio"
+    },
+    "mk": {
+      "section": "⚙️ Build & Makefiles",
+      "description": "Makefile Extension 🏗️",
+      "use_case": "Project-specific build rules",
+      "tools": "GNU Make"
+    },
+    "o": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Object file 📦",
+      "use_case": "Intermediate compilation output",
+      "tools": "GCC, Clang, MSVC"
+    },
+    "so": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Shared object file 🔄",
+      "use_case": "Linux dynamic libraries",
+      "tools": "GCC, Clang, ELF binaries"
+    },
+    "dll": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Dynamic Link Library 🖥️",
+      "use_case": "Windows system libraries",
+      "tools": "Windows API, MSVC, MinGW"
+    },
+    "exe": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Executable file 🚀",
+      "use_case": "Windows applications",
+      "tools": "Visual Studio, MinGW, Wine"
+    },
+    "bin": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Binary file 💾",
+      "use_case": "Raw machine code or firmware",
+      "tools": "objcopy, binwalk"
+    },
+    "hex": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Intel HEX file 📟",
+      "use_case": "Embedded systems, firmware",
+      "tools": "Keil, AVRDUDE, Hex Editor"
+    },
+    "elf": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Executable & Linkable Format 📜",
+      "use_case": "Linux binary executables",
+      "tools": "GCC, GDB, objdump"
+    },
+    "app": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "macOS Application 🍏",
+      "use_case": "macOS software packages",
+      "tools": "Xcode, macOS Finder"
+    },
+    "dylib": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Dynamic Library 📚",
+      "use_case": "macOS shared libraries",
+      "tools": "Xcode, macOS Terminal"
+    },
+    "out": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Linux Executable 🏗️",
+      "use_case": "Default compiled executable",
+      "tools": "GCC, Clang"
+    },
+    "a": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Static Library 🏛️",
+      "use_case": "Precompiled code libraries",
+      "tools": "ar, ranlib, GCC"
+    },
+    "class": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Java Compiled Bytecode ☕",
+      "use_case": "JVM execution",
+      "tools": "javac, JVM"
+    },
+    "jar": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Java Archive 🎭",
+      "use_case": "Packaged Java applications",
+      "tools": "JDK, Maven, Gradle"
+    },
+    "war": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Web Archive 🌍",
+      "use_case": "Java web applications",
+      "tools": "Tomcat, WildFly"
+    },
+    "ear": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Enterprise Archive 🏢",
+      "use_case": "Java EE applications",
+      "tools": "JBoss, WebSphere"
+    },
+    "msi": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Windows Installer 📦",
+      "use_case": "Windows software installation",
+      "tools": "Windows Installer"
+    },
+    "apk": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Android Package 📱",
+      "use_case": "Android apps",
+      "tools": "Android Studio, APKTool"
+    },
+    "dex": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Dalvik Executable 🏗️",
+      "use_case": "Android runtime",
+      "tools": "dx, Android SDK"
+    },
+    "ipa": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "iOS App Package 📱",
+      "use_case": "iOS applications",
+      "tools": "Xcode, iTunes"
+    },
+    "wasm": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "WebAssembly File 🌐",
+      "use_case": "Running code in browsers",
+      "tools": "Emscripten, WebAssembly Runtime"
+    },
+    "bc": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "LLVM Bitcode ⚙️",
+      "use_case": "Intermediate LLVM format",
+      "tools": "Clang, LLVM"
+    },
+    "mod": {
+      "section": "🏢 Compilation & Binaries",
+      "description": "Fortran Module 📐",
+      "use_case": "Compiled Fortran code",
+      "tools": "GNU Fortran, Intel Fortran"
+    },
+    "img": {
+      "section": "💽 Disk Images",
+      "description": "Raw disk image 🏷️",
+      "use_case": "Raspberry Pi, Bootable USBs",
+      "tools": "Win32DiskImager, dd (Linux)"
+    },
+    "zip": {
+      "section": "📀 Archives & Compression",
+      "description": "ZIP compressed file 📦",
+      "use_case": "Storing multiple files",
+      "tools": "WinRAR, 7-Zip, macOS Archive Utility"
+    },
+    "tar": {
+      "section": "📀 Archives & Compression",
+      "description": "TAR archive 🎞️",
+      "use_case": "Linux backups",
+      "tools": "tar, gzip"
+    },
+    "gz": {
+      "section": "📀 Archives & Compression",
+      "description": "Gzip compression 🗜️",
+      "use_case": "Web assets, logs",
+      "tools": "gzip, gunzip"
+    },
+    "7z": {
+      "section": "📀 Archives & Compression",
+      "description": "7-Zip compression 📂",
+      "use_case": "High-ratio compression",
+      "tools": "7-Zip, WinRAR"
+    },
+    "rar": {
+      "section": "📀 Archives & Compression",
+      "description": "RAR archive 📚",
+      "use_case": "File compression & storage",
+      "tools": "WinRAR, PeaZip"
+    },
+    "bz2": {
+      "section": "📀 Archives & Compression",
+      "description": "Bzip2 compression 📉",
+      "use_case": "Higher compression efficiency",
+      "tools": "bzip2, WinRAR"
+    },
+    "xz": {
+      "section": "📀 Archives & Compression",
+      "description": "XZ compression 🚀",
+      "use_case": "Efficient Linux compression",
+      "tools": "xz, tar.xz"
+    },
+    "lzma": {
+      "section": "📀 Archives & Compression",
+      "description": "LZMA compression 🔄",
+      "use_case": "High-ratio compression",
+      "tools": "7-Zip, LZMA Utils"
+    },
+    "zst": {
+      "section": "📀 Archives & Compression",
+      "description": "Zstandard compression ⚡",
+      "use_case": "Fast compression with small size",
+      "tools": "zstd, tar.zst"
+    },
+    "cab": {
+      "section": "📀 Archives & Compression",
+      "description": "Cabinet archive 📂",
+      "use_case": "Windows installation files",
+      "tools": "Windows Installer, cabextract"
+    },
+    "iso": {
+      "section": "💽 Disk Images",
+      "description": "ISO disk image 💿",
+      "use_case": "Bootable OS images",
+      "tools": "Rufus, VirtualBox, Balena Etcher"
+    },
+    "vhd": {
+      "section": "💽 Disk Images",
+      "description": "Virtual Hard Disk 📀",
+      "use_case": "Microsoft Virtual PC, Hyper-V",
+      "tools": "Hyper-V, VirtualBox"
+    },
+    "dmg": {
+      "section": "💽 Disk Images",
+      "description": "macOS disk image 🍏",
+      "use_case": "macOS application installations",
+      "tools": "Disk Utility (macOS), TransMac"
+    },
+    "pkg": {
+      "section": "📀 Archives & Compression",
+      "description": "macOS Installer Package 📦",
+      "use_case": "macOS software installation",
+      "tools": "Installer.app"
+    },
+    "xpi": {
+      "section": "📀 Archives & Compression",
+      "description": "Mozilla Extension Archive 🦊",
+      "use_case": "Firefox & Thunderbird add-ons",
+      "tools": "Mozilla Firefox"
+    },
+    "appimage": {
+      "section": "📀 Archives & Compression",
+      "description": "Linux AppImage 🔗",
+      "use_case": "Portable Linux applications",
+      "tools": "AppImageLauncher"
+    },
+    "ttf": {
+      "section": "🌐 Fonts & Typography",
+      "description": "TrueType Font 🅰️",
+      "use_case": "Scalable system & web fonts",
+      "tools": "Windows, macOS, Linux, Adobe Fonts"
+    },
+    "otf": {
+      "section": "🌐 Fonts & Typography",
+      "description": "OpenType Font 🔡",
+      "use_case": "Advanced typography, ligatures",
+      "tools": "Adobe Fonts, Microsoft Fonts"
+    },
+    "woff": {
+      "section": "🌐 Fonts & Typography",
+      "description": "Web Open Font Format 🌍",
+      "use_case": "Web-optimized fonts",
+      "tools": "CSS `@font-face`, Google Fonts"
+    },
+    "woff2": {
+      "section": "🌐 Fonts & Typography",
+      "description": "Web Open Font Format 2 🚀",
+      "use_case": "Faster, compressed web fonts",
+      "tools": "Google Fonts, CSS `@font-face`"
+    },
+    "eot": {
+      "section": "🌐 Fonts & Typography",
+      "description": "Embedded OpenType 📜",
+      "use_case": "Legacy web fonts (IE)",
+      "tools": "Microsoft Edge, Internet Explorer"
+    },
+    "pfb": {
+      "section": "🌐 Fonts & Typography",
+      "description": "PostScript Font Binary 📄",
+      "use_case": "Professional publishing",
+      "tools": "Adobe Type Manager, LaTeX"
+    },
+    "pfm": {
+      "section": "🌐 Fonts & Typography",
+      "description": "Printer Font Metrics 📏",
+      "use_case": "Paired with `.pfb` fonts",
+      "tools": "Adobe Type Manager"
+    },
+    "bdf": {
+      "section": "🌐 Fonts & Typography",
+      "description": "Bitmap Distribution Format 📟",
+      "use_case": "Low-resolution screen fonts",
+      "tools": "X Window System, GNU Unifont"
+    },
+    "fnt": {
+      "section": "🌐 Fonts & Typography",
+      "description": "Windows Font File 🖥️",
+      "use_case": "Older Windows fonts",
+      "tools": "Windows Font Viewer"
+    },
+    "psf": {
+      "section": "🌐 Fonts & Typography",
+      "description": "PC Screen Font 🖥️",
+      "use_case": "Console fonts for Linux",
+      "tools": "Linux Kernel, GRUB"
+    },
+    "sfd": {
+      "section": "🌐 Fonts & Typography",
+      "description": "Spline Font Database ✍️",
+      "use_case": "Font editing & creation",
+      "tools": "FontForge"
+    },
+    "dwg": {
+      "section": "🛠️ 3D Models & CAD",
+      "description": "AutoCAD Drawing 📐",
+      "use_case": "2D & 3D engineering designs",
+      "tools": "AutoCAD, DraftSight"
+    },
+    "dxf": {
+      "section": "🛠️ 3D Models & CAD",
+      "description": "Drawing Exchange Format 📏",
+      "use_case": "CAD data exchange",
+      "tools": "AutoCAD, LibreCAD, Fusion 360"
+    },
+    "stl": {
+      "section": "🛠️ 3D Models & CAD",
+      "description": "Stereolithography 🌐",
+      "use_case": "3D printing, rapid prototyping",
+      "tools": "Cura, PrusaSlicer, Blender"
+    },
+    "obj": {
+      "section": "🛠️ 3D Models & CAD",
+      "description": "3D Object File 🎭",
+      "use_case": "3D modeling & game assets",
+      "tools": "Blender, Maya, 3ds Max"
+    },
+    "step": {
+      "section": "🛠️ 3D Models & CAD",
+      "description": "STEP Model File 🏗️",
+      "use_case": "CAD model exchange",
+      "tools": "SolidWorks, CATIA, FreeCAD"
+    },
+    "iges": {
+      "section": "🛠️ 3D Models & CAD",
+      "description": "IGES Model File 📏",
+      "use_case": "CAD data interoperability",
+      "tools": "SolidWorks, AutoCAD, Rhino"
+    },
+    "3mf": {
+      "section": "🛠️ 3D Models & CAD",
+      "description": "3D Manufacturing Format 🖨️",
+      "use_case": "Modern 3D printing",
+      "tools": "Ultimaker Cura, Microsoft 3D Builder"
+    },
+    "skp": {
+      "section": "🛠️ 3D Models & CAD",
+      "description": "SketchUp Model 🏠",
+      "use_case": "Architectural & interior design",
+      "tools": "SketchUp"
+    },
+    "fbx": {
+      "section": "🛠️ 3D Models & CAD",
+      "description": "Filmbox 3D Model 🎬",
+      "use_case": "Game engines & animations",
+      "tools": "Autodesk FBX, Unity, Unreal Engine"
+    },
+    "glb": {
+      "section": "🛠️ 3D Models & CAD",
+      "description": "GL Transmission Format 🌍",
+      "use_case": "Web & AR/VR 3D models",
+      "tools": "Babylon.js, Three.js"
+    },
+    "gltf": {
+      "section": "🛠️ 3D Models & CAD",
+      "description": "GL Transmission Format Text 🌍",
+      "use_case": "Web 3D model storage",
+      "tools": "Blender, Sketchfab"
+    },
+    "blend": {
+      "section": "🛠️ 3D Models & CAD",
+      "description": "Blender File 🎨",
+      "use_case": "3D modeling & animation",
+      "tools": "Blender"
+    },
+    "x3d": {
+      "section": "🛠️ 3D Models & CAD",
+      "description": "Extensible 3D Graphics 📊",
+      "use_case": "3D web graphics",
+      "tools": "X3DOM, FreeWRL"
+    },
+    "u3d": {
+      "section": "🛠️ 3D Models & CAD",
+      "description": "Universal 3D File 🔄",
+      "use_case": "Interactive 3D PDFs",
+      "tools": "Adobe Acrobat 3D"
+    },
+    "c4d": {
+      "section": "🛠️ 3D Models & CAD",
+      "description": "Cinema 4D Model 🎬",
+      "use_case": "High-end 3D motion graphics",
+      "tools": "Cinema 4D"
+    },
+    "max": {
+      "section": "🛠️ 3D Models & CAD",
+      "description": "3ds Max Scene 📽️",
+      "use_case": "Game development & VFX",
+      "tools": "Autodesk 3ds Max"
+    },
+    "vmdk": {
+      "section": "💽 Disk Images",
+      "description": "VMware disk image 💾",
+      "use_case": "Virtual machines",
+      "tools": "VMware Workstation, ESXi"
+    },
+    "qcow2": {
+      "section": "💽 Disk Images",
+      "description": "QEMU disk image 🔄",
+      "use_case": "Cloud & VM storage",
+      "tools": "QEMU, OpenStack"
+    },
+    "vhdx": {
+      "section": "💽 Disk Images",
+      "description": "Virtual Hard Disk (Newer) 📀",
+      "use_case": "Windows virtual machines",
+      "tools": "Hyper-V"
+    },
+    "xva": {
+      "section": "💽 Disk Images",
+      "description": "XenServer image 🔧",
+      "use_case": "XenServer VMs",
+      "tools": "Xen Orchestra, Citrix XenServer"
+    },
+    "vdi": {
+      "section": "💽 Disk Images",
+      "description": "VirtualBox Disk Image 🖥️",
+      "use_case": "VirtualBox virtual machines",
+      "tools": "VirtualBox"
+    },
+    "efi": {
+      "section": "💽 Disk Images",
+      "description": "EFI Boot image ⚙️",
+      "use_case": "Boot firmware images",
+      "tools": "UEFI firmware updates"
+    },
+    "wim": {
+      "section": "💽 Disk Images",
+      "description": "Windows Imaging Format 🖥️",
+      "use_case": "Windows deployment & recovery",
+      "tools": "DISM, Windows ADK"
+    },
+    "esd": {
+      "section": "💽 Disk Images",
+      "description": "Windows Electronic Software Download 📦",
+      "use_case": "Windows updates & installations",
+      "tools": "DISM, Windows Media Creation Tool"
+    },
+    "sparseimage": {
+      "section": "💽 Disk Images",
+      "description": "macOS Sparse Disk Image 📂",
+      "use_case": "Dynamically growing disk images",
+      "tools": "Disk Utility (macOS)"
+    },
+    "toast": {
+      "section": "💽 Disk Images",
+      "description": "Roxio Toast Disk Image 🔥",
+      "use_case": "macOS CD/DVD disk images",
+      "tools": "Roxio Toast"
+    },
+    "nrg": {
+      "section": "💽 Disk Images",
+      "description": "Nero Disk Image 📀",
+      "use_case": "Optical disc backup",
+      "tools": "Nero Burning ROM"
+    }
+  },
+  "box_representations": {
+    "3ds": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "3D Graphics",
+      "name": "Autodesk 3D Studio"
+    },
+    "3g2": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vidéo Mobile",
+      "name": "3GPP2 Multimedia"
+    },
+    "3gp": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vidéo Mobile",
+      "name": "3GPP Multimedia"
+    },
+    "aac": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "Audio",
+      "name": "Advanced Audio Coding"
+    },
+    "ai": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vectoriel PAO",
+      "name": "Adobe Illustrator Artwork"
+    },
+    "aif": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "Audio",
+      "name": "Audio Interchange File Format"
+    },
+    "aifc": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "Audio",
+      "name": "Compressed Audio Interchange File"
+    },
+    "aiff": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "Audio",
+      "name": "Audio Interchange File Format"
+    },
+    "amr": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "Audio",
+      "name": "Adaptive Multi-Rate Audio"
+    },
+    "au": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "Audio",
+      "name": "Sun/NeXT Audio"
+    },
+    "avi": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vidéo",
+      "name": "Audio Video Interleave"
+    },
+    "bat": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Script",
+      "name": "DOS/Windows Batch File"
+    },
+    "bmp": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Image",
+      "name": "Bitmap Image"
+    },
+    "box3d": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "3D Graphics",
+      "name": "Box 3D Model"
+    },
+    "boxcanvas": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": true,
+      "category": "Dessin",
+      "name": "Box Canvas"
+    },
+    "boxnote": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": true,
+      "category": "Document",
+      "name": "Box Note"
+    },
+    "c": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Code Source",
+      "name": "C Source Code"
+    },
+    "cpp": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Code Source",
+      "name": "C++ Source Code"
+    },
+    "cr2": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Photo RAW",
+      "name": "Canon Raw Version 2"
+    },
+    "crw": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Photo RAW",
+      "name": "Canon Raw CIFF"
+    },
+    "cs": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Code Source",
+      "name": "C# Source Code"
+    },
+    "css": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Feuille de style",
+      "name": "Cascading Style Sheets"
+    },
+    "csv": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Tableur / Données",
+      "name": "Comma-Separated Values"
+    },
+    "dae": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "3D Graphics",
+      "name": "Collada Digital Asset Exchange"
+    },
+    "dcm": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Imagerie Médicale",
+      "name": "DICOM Medical Image"
+    },
+    "dicm": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Imagerie Médicale",
+      "name": "DICOM Medical Image"
+    },
+    "dicom": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Imagerie Médicale",
+      "name": "DICOM Medical Image"
+    },
+    "dng": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Photo RAW",
+      "name": "Digital Negative Adobe"
+    },
+    "doc": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Document",
+      "name": "Microsoft Word (Ancien)"
+    },
+    "docx": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Document",
+      "name": "Microsoft Word OpenXML"
+    },
+    "dwg": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": false,
+      "category": "CAD",
+      "name": "AutoCAD Drawing Database"
+    },
+    "eps": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vectoriel",
+      "name": "Encapsulated PostScript"
+    },
+    "fbx": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "3D Graphics",
+      "name": "Filmbox Autodesk"
+    },
+    "fdx": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Scénario Cinéma",
+      "name": "Final Draft Document"
+    },
+    "flac": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "Audio",
+      "name": "Free Lossless Audio Codec"
+    },
+    "flv": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vidéo Web",
+      "name": "Flash Video"
+    },
+    "gdoc": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Document",
+      "name": "Google Docs Document"
+    },
+    "gif": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Image Animée",
+      "name": "Graphics Interchange Format"
+    },
+    "gsheet": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Tableur",
+      "name": "Google Sheets"
+    },
+    "gslide": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Présentation",
+      "name": "Google Slides"
+    },
+    "gslides": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Présentation",
+      "name": "Google Slides"
+    },
+    "heic": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Image Haute Efficacité",
+      "name": "High Efficiency Image Container"
+    },
+    "html": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Document Web",
+      "name": "HyperText Markup Language"
+    },
+    "idml": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": false,
+      "category": "Mise en page PAO",
+      "name": "InDesign Markup Language"
+    },
+    "indd": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": false,
+      "category": "Mise en page PAO",
+      "name": "Adobe InDesign Document"
+    },
+    "indt": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": false,
+      "category": "Mise en page PAO",
+      "name": "InDesign Template"
+    },
+    "inx": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": false,
+      "category": "Mise en page PAO",
+      "name": "InDesign Interchange"
+    },
+    "java": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Code Source",
+      "name": "Java Source Code"
+    },
+    "jpeg": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Image",
+      "name": "Joint Photographic Experts Group"
+    },
+    "jpg": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Image",
+      "name": "Joint Photographic Experts Group"
+    },
+    "js": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Code Source",
+      "name": "JavaScript Script"
+    },
+    "json": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Données",
+      "name": "JavaScript Object Notation"
+    },
+    "key": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": false,
+      "category": "Présentation",
+      "name": "Apple Keynote Presentation"
+    },
+    "log": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Journal",
+      "name": "System Log File"
+    },
+    "m2ts": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vidéo AVCHD",
+      "name": "MPEG-2 Transport Stream"
+    },
+    "m2v": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vidéo",
+      "name": "MPEG-2 Video"
+    },
+    "m4a": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "Audio",
+      "name": "MPEG-4 Audio"
+    },
+    "m4v": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vidéo Apple",
+      "name": "Apple Video File"
+    },
+    "md": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Documentation",
+      "name": "Markdown Document"
+    },
+    "mkv": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vidéo Conteneur",
+      "name": "Matroska Multimedia Container"
+    },
+    "mov": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vidéo QuickTime",
+      "name": "Apple QuickTime Movie"
+    },
+    "mp3": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "Audio",
+      "name": "MPEG Audio Layer III"
+    },
+    "mp4": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vidéo Universelle",
+      "name": "MPEG-4 Part 14"
+    },
+    "mpeg": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vidéo",
+      "name": "Moving Picture Experts Group"
+    },
+    "mpg": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vidéo",
+      "name": "Moving Picture Experts Group"
+    },
+    "msg": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Message",
+      "name": "Outlook Mail Message"
+    },
+    "mtl": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "3D Graphics",
+      "name": "Material Template Library"
+    },
+    "mts": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vidéo AVCHD",
+      "name": "AVCHD Video Stream"
+    },
+    "nef": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Photo RAW",
+      "name": "Nikon Electronic Format"
+    },
+    "numbers": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": false,
+      "category": "Tableur",
+      "name": "Apple Numbers Spreadsheet"
+    },
+    "obj": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "3D Graphics",
+      "name": "Wavefront 3D Object"
+    },
+    "odp": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Présentation",
+      "name": "OpenDocument Presentation"
+    },
+    "ods": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Tableur",
+      "name": "OpenDocument Spreadsheet"
+    },
+    "odt": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Document",
+      "name": "OpenDocument Text"
+    },
+    "ogg": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Audio",
+      "name": "Ogg Vorbis Audio"
+    },
+    "otp": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Présentation",
+      "name": "OpenDocument Presentation Template"
+    },
+    "pages": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": false,
+      "category": "Document",
+      "name": "Apple Pages Document"
+    },
+    "pdf": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Document Portable",
+      "name": "Adobe Portable Document Format"
+    },
+    "php": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Code Web",
+      "name": "PHP Hypertext Preprocessor"
+    },
+    "ply": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "3D Graphics",
+      "name": "Polygon File Format"
+    },
+    "png": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Image",
+      "name": "Portable Network Graphics"
+    },
+    "ppt": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Présentation",
+      "name": "Microsoft PowerPoint (Ancien)"
+    },
+    "pptx": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Présentation",
+      "name": "Microsoft PowerPoint OpenXML"
+    },
+    "ps": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Impression",
+      "name": "Adobe PostScript"
+    },
+    "psd": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Graphisme",
+      "name": "Adobe Photoshop Document"
+    },
+    "py": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Code Source",
+      "name": "Python Script"
+    },
+    "qt": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vidéo QuickTime",
+      "name": "Apple QuickTime Movie"
+    },
+    "ra": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "Audio",
+      "name": "RealAudio"
+    },
+    "raf": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Photo RAW",
+      "name": "Fujifilm Raw Image"
+    },
+    "raw": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Photo RAW",
+      "name": "Raw Image Data"
+    },
+    "rb": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Code Source",
+      "name": "Ruby Script"
+    },
+    "rtf": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Document",
+      "name": "Rich Text Format"
+    },
+    "sh": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Script Shell",
+      "name": "Bash / Unix Shell Script"
+    },
+    "sql": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Base de données",
+      "name": "Structured Query Language"
+    },
+    "stl": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "3D Graphics",
+      "name": "Stereolithography 3D"
+    },
+    "svg": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vectoriel Web",
+      "name": "Scalable Vector Graphics"
+    },
+    "svs": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Imagerie Microscopie",
+      "name": "Aperio ScanScope Virtual Slide"
+    },
+    "swf": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Animation Web",
+      "name": "Shockwave Flash"
+    },
+    "tga": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Image Raster",
+      "name": "Truevision Targa Graphic"
+    },
+    "tif": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Image Haute Qualité",
+      "name": "Tagged Image File Format"
+    },
+    "tiff": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Image Haute Qualité",
+      "name": "Tagged Image File Format"
+    },
+    "ts": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vidéo Broadcast",
+      "name": "MPEG Transport Stream"
+    },
+    "tsv": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Tableur / Données",
+      "name": "Tab-Separated Values"
+    },
+    "txt": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Texte Brut",
+      "name": "Plain Text Document"
+    },
+    "vtt": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Sous-titres",
+      "name": "Web Video Text Tracks"
+    },
+    "wav": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "Audio",
+      "name": "Waveform Audio"
+    },
+    "webp": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Image Web",
+      "name": "Google WebP Image Format"
+    },
+    "wma": {
+      "pdf": false,
+      "thumbnail": false,
+      "text": false,
+      "category": "Audio",
+      "name": "Windows Media Audio"
+    },
+    "wmv": {
+      "pdf": false,
+      "thumbnail": true,
+      "text": false,
+      "category": "Vidéo",
+      "name": "Windows Media Video"
+    },
+    "wpd": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Document",
+      "name": "WordPerfect Document"
+    },
+    "xbd": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Document",
+      "name": "DocuWorks Binder"
+    },
+    "xdw": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Document",
+      "name": "Fuji Xerox DocuWorks"
+    },
+    "xhtml": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Document Web",
+      "name": "Extensible HyperText Markup"
+    },
+    "xls": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Tableur",
+      "name": "Microsoft Excel (Ancien)"
+    },
+    "xlsm": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Tableur Macro",
+      "name": "Microsoft Excel Macro-Enabled"
+    },
+    "xlsx": {
+      "pdf": true,
+      "thumbnail": true,
+      "text": true,
+      "category": "Tableur",
+      "name": "Microsoft Excel OpenXML"
+    },
+    "xml": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Données",
+      "name": "eXtensible Markup Language"
+    },
+    "xsd": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Schéma",
+      "name": "XML Schema Definition"
+    },
+    "xsl": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Feuille de style",
+      "name": "XML Stylesheet Language"
+    },
+    "yaml": {
+      "pdf": true,
+      "thumbnail": false,
+      "text": true,
+      "category": "Configuration",
+      "name": "YAML Ain't Markup Language"
+    }
+  }
+}

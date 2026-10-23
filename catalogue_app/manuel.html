@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue de Disques - La Bible d'Apprentissage</title>
+    <style>
+        :root {
+            --primary: #0078d4;
+            --bg: #f8f9fa;
+            --text: #333;
+            --card-bg: #fff;
+            --border: #e1dfdd;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #4cc2ff;
+                --bg: #1c1c1c;
+                --text: #e0e0e0;
+                --card-bg: #2d2d2d;
+                --border: #444;
+            }
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        h2 {
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+            margin-top: 40px;
+            color: var(--primary);
+        }
+        h3 {
+            margin-top: 25px;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .alert {
+            background-color: rgba(255, 152, 0, 0.1);
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .pro-tip {
+            background-color: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        code {
+            background-color: rgba(0,0,0,0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        @media (prefers-color-scheme: dark) {
+            code { background-color: rgba(255,255,255,0.1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>La Bible d'Apprentissage</h1>
+            <p>Le guide complet de A à Z pour maîtriser votre Catalogue de Disques</p>
+        </header>
+
+        <div class="card">
+            <h2>1. Le Concept Fondamental</h2>
+            <p>Cette application est conçue pour les professionnels de l'audiovisuel, les monteurs et les sociétés de production. Elle vous permet de <strong>retrouver instantanément n'importe quel fichier multimédia</strong>, même si le disque dur qui le contient est débranché et rangé dans un placard.</p>
+            <p>Le principe est simple : vous branchez un disque, l'application le "scanne" (le photographie), et enregistre la liste complète de ses fichiers dans une base de données ultra-rapide sur votre Mac.</p>
+        </div>
+
+        <div class="card">
+            <h2>2. Disques et Analyse (Le Scan)</h2>
+            <p>C'est ici que tout commence. Pour qu'un disque soit interrogeable, il faut l'analyser.</p>
+            <ul>
+                <li><strong>Nom du disque :</strong> C'est la donnée la plus critique. Entrez EXACTEMENT le nom écrit au marqueur ou sur l'étiquette collée physiquement sur le disque (ex: "RUSHES_2023_04"). Si deux disques ont le même nom, l'application pensera qu'il s'agit du même objet.</li>
+                <li><strong>Détecter les disques branchés :</strong> Ce bouton permet de vérifier quels disques connus sont actuellement connectés à votre Mac. L'application se fie à l'identifiant réel du disque, pas à sa lettre de lecteur.</li>
+                <li><strong>Rapport PDF (Livraison) :</strong> Une fois un disque scanné, vous pouvez cliquer sur "Rapport PDF" en bas pour générer un bordereau professionnel contenant toutes les statistiques du disque, idéal à envoyer au producteur ou au client.</li>
+            </ul>
+            <div class="alert">
+                <strong>Important :</strong> Ne scannez pas votre disque système entier (Macintosh HD) sous peine d'enregistrer des millions de fichiers système inutiles. Choisissez un sous-dossier spécifique (ex: votre dossier Vidéos ou Projets).
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>3. Recherche et Étiquettes</h2>
+            <p>Une fois vos disques scannés, vous pouvez trouver vos fichiers en quelques millisecondes.</p>
+            <ul>
+                <li><strong>Barre de recherche :</strong> Tapez n'importe quel mot clé. Vous pouvez filtrer par extensions (ex: <code>.braw</code>, <code>.mov</code>) ou par catégories.</li>
+                <li><strong>Menu Contextuel :</strong> Faites un <em>clic-droit</em> (ou <em>Control+Clic</em>) sur un résultat pour l'ouvrir, le voir dans le Finder, copier son chemin, ou même <strong>Créer un projet Premiere Pro XML</strong> instantanément à partir du dossier sélectionné.</li>
+                <li><strong>Les Étiquettes (Tags) :</strong> L'application extrait automatiquement des étiquettes (caméra, résolution, framerate). Vous pouvez aussi créer vos propres étiquettes manuelles (ex: "Interview", "Plan de coupe") depuis l'onglet Étiquettes.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>4. Gestion des Doublons (Nettoyage)</h2>
+            <p>L'application calcule une "Empreinte" (Hash) pour chaque fichier. Cela lui permet de détecter si un fichier identique se trouve sur plusieurs disques, même s'il a été renommé.</p>
+            <ul>
+                <li><strong>Sélectionner les disques :</strong> Cochez uniquement les disques que vous souhaitez nettoyer aujourd'hui. L'algorithme se concentrera sur eux.</li>
+                <li><strong>Calculer le plan :</strong> L'application propose un "Plan de réduction". Elle détermine quelles copies garder et lesquelles supprimer (en privilégiant les chemins les plus courts).</li>
+                <li><strong>Action :</strong> L'application <em>ne supprime jamais vos fichiers toute seule</em>. Elle dresse un tableau (CONSERVER / RETIRER). C'est à vous d'utiliser le clic-droit pour afficher le fichier dans le Finder et procéder au nettoyage.</li>
+            </ul>
+            <div class="pro-tip">
+                <strong>Astuce de pro :</strong> Vérifiez toujours un groupe avant de supprimer. Un disque unique contenant 1 copie n'est pas une archive sûre. Gardez au moins 2 copies de vos rushs critiques !
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>5. Projets</h2>
+            <p>L'onglet Projets agit comme un radar exclusif pour vos fichiers de montage (Premiere Pro <code>.prproj</code>, DaVinci Resolve, Final Cut <code>.fcpxml</code>, After Effects). Faites un clic droit sur un projet pour l'ouvrir ou trouver son emplacement instantanément.</p>
+        </div>
+
+        <div class="card">
+            <h2>6. Synchronisation Réseau (Multi-Postes)</h2>
+            <p>Vous travaillez à plusieurs sur plusieurs Macs ? La synchronisation via Google Drive est faite pour vous.</p>
+            <p>Dans l'onglet <strong>Disques et analyse</strong>, cliquez sur <code>☁️ Synchroniser (Drive)</code> :</p>
+            <ul>
+                <li><strong>L'envoi (Push) :</strong> Votre Mac va compresser son catalogue de disques et l'envoyer dans un dossier "CatalogueDisques_Backups" sur votre Google Drive.</li>
+                <li><strong>La réception (Pull) :</strong> Il va ensuite regarder si vos collègues (ou vos autres Macs) ont déposé de nouveaux fichiers catalogues, les télécharger, et fusionner silencieusement toutes leurs découvertes avec votre base.</li>
+            </ul>
+            <p>Ainsi, si un collègue scanne 10 disques de rushs à Paris, vous pourrez rechercher dans ces 10 disques depuis Montréal 5 minutes plus tard, simplement en cliquant sur Synchroniser.</p>
+        </div>
+
+        <div class="card">
+            <h2>7. Paramètres et Personnalisation</h2>
+            <p>Dans l'onglet Paramètres, vous contrôlez le comportement du scanner :</p>
+            <ul>
+                <li><strong>Empreintes (Hash) :</strong> Indispensable pour trouver les doublons.</li>
+                <li><strong>Métadonnées :</strong> Lit les infos de caméra et de durée via FFmpeg (ralentit légèrement le scan mais essentiel pour la vidéo).</li>
+                <li><strong>Miniatures :</strong> Extrait une image JPEG pour vos vidéos. Utile, mais ralentit fortement le processus.</li>
+                <li><strong>Thème :</strong> Basculez entre le mode Clair ou Sombre selon la fatigue de vos yeux.</li>
+            </ul>
+        </div>
+        
+        <footer style="text-align: center; margin-top: 40px; color: var(--border);">
+            <p>Catalogue de Disques &copy; 2026 - Conçu pour la fluidité.</p>
+        </footer>
+    </div>
+</body>
+</html>
