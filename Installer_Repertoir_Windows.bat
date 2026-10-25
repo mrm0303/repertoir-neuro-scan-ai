@@ -10,54 +10,73 @@ echo.
 echo    Initialisation de l'installateur automatique...
 echo.
 
-set "SCRIPT_DIR=%~dp0"
-set "PS_SCRIPT=%SCRIPT_DIR%installer_windows.ps1"
+cd /d "%~dp0"
+set "SRC_DIR=%~dp0"
+set "PS_SCRIPT=%~dp0installer_windows.ps1"
 
-:: 1. Exécution via PowerShell (méthode moderne, gère l'installation de Python, FFmpeg, ExifTool et .venv)
+:: 1. Exécution prioritaire via PowerShell (télécharge Python, FFmpeg, ExifTool et installe .venv)
 if exist "%PS_SCRIPT%" (
     powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%PS_SCRIPT%"
     if %errorlevel% equ 0 (
-        goto :fin
+        exit /b 0
     )
     echo.
-    echo ⚠️ L'installateur PowerShell a renvoyé un code d'avertissement (%errorlevel%).
-    echo    Tentative de secours en mode Batch...
+    echo ⚠️ L'installateur PowerShell a renvoyé un avertissement (%errorlevel%).
+    echo    Bascule automatique en mode de secours Batch...
     echo.
 )
 
-:: 2. Mode de secours Batch si PowerShell a rencontré un problème
+:: 2. Mode de secours Batch si PowerShell est désactivé
 set "INSTALL_DIR=%LOCALAPPDATA%\Repertoir_Neuro_Scan_AI"
 set "DATA_DIR=%USERPROFILE%\CatalogueDisques"
 
 if not exist "%INSTALL_DIR%" mkdir "%INSTALL_DIR%"
-robocopy "%SCRIPT_DIR%." "%INSTALL_DIR%" /E /XD .venv __pycache__ .git _archives_patchs /XF *.pyc *.db *.db-wal *.db-shm >nul
+robocopy "%SRC_DIR%." "%INSTALL_DIR%" /E /XD .venv __pycache__ .git _archives_patchs /XF *.pyc *.db *.db-wal *.db-shm >nul
 
 cd /d "%INSTALL_DIR%"
 
-:: Détection de Python
+:: Détection de l'exécutable Python
+set "PY_EXE="
 where python >nul 2>&1
-if %errorlevel% neq 0 (
+if %errorlevel% equ 0 set "PY_EXE=python"
+if not defined PY_EXE if exist "%LOCALAPPDATA%\Programs\Python\Python311\python.exe" set "PY_EXE=%LOCALAPPDATA%\Programs\Python\Python311\python.exe"
+if not defined PY_EXE if exist "%LOCALAPPDATA%\Programs\Python\Python312\python.exe" set "PY_EXE=%LOCALAPPDATA%\Programs\Python\Python312\python.exe"
+if not defined PY_EXE if exist "C:\Program Files\Python311\python.exe" set "PY_EXE=C:\Program Files\Python311\python.exe"
+if not defined PY_EXE if exist "C:\Program Files\Python312\python.exe" set "PY_EXE=C:\Program Files\Python312\python.exe"
+
+if not defined PY_EXE (
     echo ❌ Python 3 n'a pas été trouvé.
     echo    Veuillez installer Python depuis https://www.python.org/downloads/
-    echo    en cochant "Add python.exe to PATH".
+    echo    en veillant à cocher "Add python.exe to PATH" lors de l'installation.
     pause
     exit /b 1
 )
 
-:: Création venv et installation des dépendances
+:: Création et activation silencieuse de l'environnement virtuel (.venv)
 if not exist ".venv\Scripts\python.exe" (
-    python -m venv .venv
+    echo ⏳ Création de l'environnement virtuel .venv...
+    "%PY_EXE%" -m venv .venv
 )
-".venv\Scripts\python.exe" -m pip install --upgrade pip
-".venv\Scripts\python.exe" -m pip install -r requirements.txt
 
-:: Raccourci
+if exist ".venv\Scripts\activate.bat" (
+    call ".venv\Scripts\activate.bat" >nul 2>&1
+)
+
+echo ⏳ Installation des dépendances (pip install -r requirements.txt)...
+python -m pip install --upgrade pip --no-warn-script-location -q
+python -m pip install -r requirements.txt --prefer-binary --no-warn-script-location -q
+
+:: Initialisation de la base de données
 if not exist "%DATA_DIR%" mkdir "%DATA_DIR%"
+python -c "import sys; sys.path.insert(0, '.'); from catalogue_app.db import connect; from catalogue_app.config import DB_PATH; con = connect(); con.close(); print('✅ Base prête :', DB_PATH)" 2>nul
+
+:: Création du raccourci Bureau
 set "SHORTCUT_PATH=%USERPROFILE%\Desktop\Repertoir Neuro Scan.AI.lnk"
 set "TARGET_BAT=%INSTALL_DIR%\Lancer_App_Windows.bat"
 powershell -NoProfile -Command "$ws = New-Object -ComObject WScript.Shell; $s = $ws.CreateShortcut('%SHORTCUT_PATH%'); $s.TargetPath = '%TARGET_BAT%'; $s.WorkingDirectory = '%INSTALL_DIR%'; $s.Save()" 2>nul
 
+echo.
+echo 🎉 Installation terminée avec succès !
+echo Lancement de Repertoir Neuro Scan.AI...
 start "" "%TARGET_BAT%"
-
-:fin
 exit /b 0

@@ -248,12 +248,12 @@ if (-not (Test-Path $VenvPython)) {
 }
 
 Write-Host "   Mise à jour de pip..." -ForegroundColor Cyan
-& $VenvPython -m pip install --upgrade pip -q
+& $VenvPython -m pip install --upgrade pip --no-warn-script-location -q
 
 Write-Host "   Installation des dépendances (ttkbootstrap, numpy, scipy, Pillow, FastAPI...)..." -ForegroundColor Cyan
 $ReqPath = Join-Path $InstallDir "requirements.txt"
 if (Test-Path $ReqPath) {
-    & $VenvPython -m pip install -r $ReqPath -q
+    & $VenvPython -m pip install -r $ReqPath --prefer-binary --no-warn-script-location
 }
 
 # Test de validation des bibliothèques
@@ -297,14 +297,18 @@ $batContent = @"
 @echo off
 chcp 65001 >nul
 cd /d "%~dp0"
-set "PATH=%~dp0bin;%PATH%"
-if exist ".venv\Scripts\pythonw.exe" (
-    start "" ".venv\Scripts\pythonw.exe" catalogue_disques_v3.py
-) else if exist ".venv\Scripts\python.exe" (
-    start "" ".venv\Scripts\python.exe" catalogue_disques_v3.py
-) else (
-    start "" python catalogue_disques_v3.py
+if exist "%~dp0bin" set "PATH=%~dp0bin;%PATH%"
+if exist "%~dp0.venv\Scripts\activate.bat" (
+    call "%~dp0.venv\Scripts\activate.bat" >nul 2>&1
 )
+if exist "%~dp0.venv\Scripts\pythonw.exe" (
+    start "" "%~dp0.venv\Scripts\pythonw.exe" "%~dp0catalogue_disques_v3.py"
+) else if exist "%~dp0.venv\Scripts\python.exe" (
+    start "" "%~dp0.venv\Scripts\python.exe" "%~dp0catalogue_disques_v3.py"
+) else (
+    start "" python "%~dp0catalogue_disques_v3.py"
+)
+exit /b 0
 "@
 Set-Content -Path $LauncherBat -Value $batContent -Encoding UTF8
 
@@ -315,16 +319,23 @@ $batConsoleContent = @"
 chcp 65001 >nul
 title Repertoir Neuro Scan.AI (Console de debogage)
 cd /d "%~dp0"
-set "PATH=%~dp0bin;%PATH%"
-echo Démarrage de Repertoir Neuro Scan.AI...
-if exist ".venv\Scripts\python.exe" (
-    ".venv\Scripts\python.exe" catalogue_disques_v3.py
+if exist "%~dp0bin" set "PATH=%~dp0bin;%PATH%"
+if exist "%~dp0.venv\Scripts\activate.bat" (
+    call "%~dp0.venv\Scripts\activate.bat" >nul 2>&1
+)
+echo ======================================================================
+echo   🎬 Démarrage de Repertoir Neuro Scan.AI (Mode Console Débogage)
+echo ======================================================================
+echo.
+if exist "%~dp0.venv\Scripts\python.exe" (
+    "%~dp0.venv\Scripts\python.exe" "%~dp0catalogue_disques_v3.py"
 ) else (
-    python catalogue_disques_v3.py
+    python "%~dp0catalogue_disques_v3.py"
 )
 if %errorlevel% neq 0 (
     echo.
-    echo ❌ L'application s'est arrêtée avec une erreur.
+    echo ❌ L'application s'est arrêtée avec le code d'erreur %errorlevel%.
+    echo.
     pause
 )
 "@
