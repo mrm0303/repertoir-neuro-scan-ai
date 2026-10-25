@@ -65,7 +65,7 @@ MAC_STAGE="$STAGE_BASE/Repertoir_Neuro_Scan_AI_macOS"
 mkdir -p "$MAC_STAGE"
 rsync -a "$COMMON_STAGE/" "$MAC_STAGE/"
 # Nettoyer scripts Windows/Linux non nécessaires pour un zip 100% macOS épuré
-rm -f "$MAC_STAGE"/*.bat "$MAC_STAGE"/*Linux.sh
+rm -f "$MAC_STAGE"/*.bat "$MAC_STAGE"/*Linux.sh "$MAC_STAGE"/*.ps1
 MAC_ZIP="$OUT_DIR/Repertoir_Neuro_Scan_AI_macOS.zip"
 rm -f "$MAC_ZIP"
 (cd "$STAGE_BASE" && ditto -c -k --sequesterRsrc --keepParent "Repertoir_Neuro_Scan_AI_macOS" "$MAC_ZIP")
@@ -85,7 +85,7 @@ rm -f "$WIN_ZIP"
 LINUX_STAGE="$STAGE_BASE/Repertoir_Neuro_Scan_AI_Linux"
 mkdir -p "$LINUX_STAGE"
 rsync -a "$COMMON_STAGE/" "$LINUX_STAGE/"
-rm -f "$LINUX_STAGE"/*.command "$LINUX_STAGE"/*.bat
+rm -f "$LINUX_STAGE"/*.command "$LINUX_STAGE"/*.bat "$LINUX_STAGE"/*.ps1
 LINUX_ZIP="$OUT_DIR/Repertoir_Neuro_Scan_AI_Linux.zip"
 rm -f "$LINUX_ZIP"
 (cd "$STAGE_BASE" && ditto -c -k --sequesterRsrc --keepParent "Repertoir_Neuro_Scan_AI_Linux" "$LINUX_ZIP")

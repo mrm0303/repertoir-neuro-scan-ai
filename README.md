@@ -53,11 +53,13 @@ Téléchargez le package prêt à l'emploi correspondant à votre système d'exp
 ### 🪟 Sur Windows (10 / 11)
 1. Téléchargez et extrayez `Repertoir_Neuro_Scan_AI_Windows.zip`.
 2. Double-cliquez sur **`Installer_Repertoir_Windows.bat`**.
-3. L'installateur :
-   - Vérifie la présence de Python 3 (propose l'installation via `winget` si absent),
-   - Installe les dépendances requises dans `.venv`,
+3. L'installateur gère l'intégralité des dépendances de manière 100 % automatique :
+   - Détecte Python ou installe automatiquement Python 3 officiel avec Tkinter (sans droits administrateur requis),
+   - Installe automatiquement **FFmpeg**, **FFprobe** et **ExifTool** pour Windows (traitement vidéo & métadonnées),
+   - Configure l'environnement virtuel `.venv` et installe toutes les bibliothèques requises,
    - Crée un raccourci **`Repertoir Neuro Scan.AI`** sur votre **Bureau**,
    - Initialise votre base de données locale dans `%USERPROFILE%\CatalogueDisques\catalogue.db`,
+   - Démarre directement l'application.
    - Lance l'application.
 
 ---

@@ -39,6 +39,21 @@ DB_PATH = os.path.join(APP_DIR, "catalogue.db")
 THUMBNAILS_DIR = os.path.join(APP_DIR, "thumbnails")
 os.makedirs(THUMBNAILS_DIR, exist_ok=True)
 
+# Recherche automatique des outils multimédias dans le dossier local 'bin' ou chemins système (macOS, Windows, Linux)
+_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_LOCAL_BIN = os.path.join(_PROJECT_ROOT, "bin")
+_EXTRA_PATHS = [
+    _LOCAL_BIN,
+    "/opt/homebrew/bin",
+    "/usr/local/bin",
+    os.path.join(os.environ.get("LOCALAPPDATA", ""), "Programs", "ffmpeg", "bin"),
+    os.path.join(os.environ.get("ProgramFiles", ""), "ffmpeg", "bin"),
+    os.path.join(os.environ.get("ProgramFiles(x86)", ""), "ffmpeg", "bin"),
+]
+for _p in _EXTRA_PATHS:
+    if _p and os.path.isdir(_p) and _p not in os.environ.get("PATH", ""):
+        os.environ["PATH"] = _p + os.pathsep + os.environ.get("PATH", "")
+
 FFPROBE_PATH = shutil.which("ffprobe")
 FFPROBE = bool(FFPROBE_PATH)
 FFMPEG_PATH = shutil.which("ffmpeg")

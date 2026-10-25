@@ -7,7 +7,7 @@
 
 set -e
 
-clear
+clear 2>/dev/null || true
 echo "======================================================================"
 echo "  🎬 Installation de Repertoir Neuro Scan.AI (V6) pour macOS"
 echo "======================================================================"
@@ -178,22 +178,70 @@ create_app_bundle() {
     <string>6.0</string>
     <key>LSMinimumSystemVersion</key>
     <string>11.0</string>
+    <key>LSArchitecturePriority</key>
+    <array>
+        <string>arm64</string>
+        <string>x86_64</string>
+    </array>
+    <key>LSRequiresNativeExecution</key>
+    <true/>
     <key>NSHighResolutionCapable</key>
     <true/>
 </dict>
 </plist>
 EOF
 
-    cat > "$TARGET_APP/Contents/MacOS/launcher" <<EOF
+    # 1. Installer le binaire natif Mach-O universel (évite le piège Rosetta sous Finder)
+    local PRECOMPILED_BIN="$INSTALL_DIR/catalogue_app/assets/launcher_macos_universal"
+    if [ -f "$PRECOMPILED_BIN" ]; then
+        cp "$PRECOMPILED_BIN" "$TARGET_APP/Contents/MacOS/launcher"
+    elif command -v clang >/dev/null 2>&1; then
+        echo '#include <unistd.h>
+#include <stdlib.h>
+#include <libgen.h>
+#include <mach-o/dyld.h>
+int main(int argc, char *argv[]) {
+    char p[2048]; uint32_t s=sizeof(p); _NSGetExecutablePath(p,&s);
+    char *d=dirname(p); char s_path[2048]; snprintf(s_path,sizeof(s_path),"%s/launcher.sh",d);
+    char *args[]={"/bin/bash",s_path,NULL}; execv("/bin/bash",args); return 1;
+}' | clang -O2 -arch arm64 -arch x86_64 -x c - -o "$TARGET_APP/Contents/MacOS/launcher" 2>/dev/null || true
+    fi
+
+    # 2. Script de lancement interne avec sécurisation de l'architecture native
+    cat > "$TARGET_APP/Contents/MacOS/launcher.sh" <<EOF
 #!/bin/bash
+INSTALL_DIR="$INSTALL_DIR"
+if [ ! -d "\$INSTALL_DIR" ]; then
+    INSTALL_DIR="\$( cd "\$( dirname "\${BASH_SOURCE[0]}" )/../../.." >/dev/null 2>&1 && pwd )"
+fi
+
 export PATH="/opt/homebrew/bin:/usr/local/bin:\$PATH"
 export LANG="fr_FR.UTF-8"
-cd "$INSTALL_DIR"
-exec "$INSTALL_DIR/.venv/bin/python3" "$INSTALL_DIR/catalogue_disques_v3.py"
+cd "\$INSTALL_DIR" || exit 1
+
+# Si le processeur physique est Apple Silicon (M1/M2/M3/M4), forcer l'exécution native arm64
+if [ "\$(/usr/sbin/sysctl -n hw.optional.arm64 2>/dev/null)" = "1" ]; then
+    exec /usr/bin/arch -arm64 "\$INSTALL_DIR/.venv/bin/python3" "\$INSTALL_DIR/catalogue_disques_v3.py" "\$@"
+else
+    exec "\$INSTALL_DIR/.venv/bin/python3" "\$INSTALL_DIR/catalogue_disques_v3.py" "\$@"
+fi
 EOF
 
-    chmod +x "$TARGET_APP/Contents/MacOS/launcher"
+    chmod +x "$TARGET_APP/Contents/MacOS/launcher" 2>/dev/null || true
+    chmod +x "$TARGET_APP/Contents/MacOS/launcher.sh" 2>/dev/null || true
+
+    # Si le binaire n'a pas pu être copié, utiliser launcher.sh directement comme fallback
+    if [ ! -f "$TARGET_APP/Contents/MacOS/launcher" ]; then
+        cp "$TARGET_APP/Contents/MacOS/launcher.sh" "$TARGET_APP/Contents/MacOS/launcher"
+        chmod +x "$TARGET_APP/Contents/MacOS/launcher"
+    fi
+
+    # Signature ad-hoc officielle (autorise l'exécution sans alerte de corruption)
+    codesign --force --deep --sign - "$TARGET_APP" 2>/dev/null || true
     xattr -cr "$TARGET_APP" 2>/dev/null || true
+
+    # Forcer la ré-indexation immédiate par LaunchServices de macOS (évite le cache obsolète et l'erreur -600)
+    /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$TARGET_APP" 2>/dev/null || true
 }
 
 # Installer dans /Applications (ou ~/Applications) et créer un raccourci sur le Bureau

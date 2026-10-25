@@ -6,7 +6,7 @@
 
 set -e
 
-clear
+clear 2>/dev/null || true
 echo "======================================================================"
 echo "  🎬 Installation de Repertoir Neuro Scan.AI (V6) pour Linux"
 echo "======================================================================"
