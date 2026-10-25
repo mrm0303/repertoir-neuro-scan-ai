@@ -117,7 +117,7 @@ class SearchTab(BaseTab):
         heads = ("Nom", "Cat. Globale", "Disque", "Disponibilité", "Dossier", "Taille", "Durée", "Caméra",
                  "Définition", "IPS", "Codec", "Date", "Étiquettes")
         self.tv_res = self._make_tree(left_pane, cols, heads,
-                                      (220, 110, 115, 95, 230, 85, 65, 135, 85, 50, 80, 85, 280))
+                                      (360, 110, 125, 95, 280, 85, 65, 135, 85, 50, 80, 85, 300))
         
         # Right pane: Drop Zone / Panier de Rushes
         self.basket_pane = ttk.Frame(self.search_paned)
@@ -128,7 +128,7 @@ class SearchTab(BaseTab):
         ttk.Label(basket_header, text="🛒 Panier de Rushes", font=("TkDefaultFont", 12, "bold")).pack(side="left")
         ttk.Button(basket_header, text="Vider", command=self.app._clear_basket).pack(side="right")
         
-        self.tv_basket = self._make_tree(self.basket_pane, ("nom", "duree", "disque"), ("Nom du Clip", "Durée", "Disque"), (150, 60, 100))
+        self.tv_basket = self._make_tree(self.basket_pane, ("nom", "duree", "disque"), ("Nom du Clip", "Durée", "Disque"), (240, 70, 110))
         
         basket_footer = ttk.Frame(self.basket_pane)
         basket_footer.pack(fill="x", pady=(5, 0))
@@ -408,12 +408,15 @@ class SearchTab(BaseTab):
             self._refresh_saved_searches_list()
 
     def _make_tree(self, parent, cols, heads, widths, selectmode="extended"):
+        if hasattr(self.app, "_make_tree"):
+            return self.app._make_tree(parent, cols, heads, widths, selectmode=selectmode)
         wrap = ttk.Frame(parent)
         wrap.pack(fill="both", expand=True, padx=8, pady=4)
         tv = ttk.Treeview(wrap, columns=cols, show="headings", selectmode=selectmode)
         for c, h, w in zip(cols, heads, widths):
             tv.heading(c, text=h)
-            tv.column(c, width=w, anchor="w")
+            min_w = max(60, int(w * 0.6))
+            tv.column(c, width=w, minwidth=min_w, anchor="w", stretch=True)
         vs = ttk.Scrollbar(wrap, orient="vertical", command=tv.yview)
         hs = ttk.Scrollbar(wrap, orient="horizontal", command=tv.xview)
         tv.configure(yscrollcommand=vs.set, xscrollcommand=hs.set)
@@ -423,6 +426,11 @@ class SearchTab(BaseTab):
         wrap.rowconfigure(0, weight=1)
         wrap.columnconfigure(0, weight=1)
         self._make_sortable(tv, cols, heads)
+        try:
+            from catalogue_app.ui.components.tooltip import attach_treeview_tooltip
+            attach_treeview_tooltip(tv)
+        except Exception:
+            pass
         return tv
 
     def _do_search(self):
@@ -764,11 +772,16 @@ class SearchTab(BaseTab):
             tv_health.heading("statut", text="État")
             tv_health.heading("details", text="Résolution / Codec")
             tv_health.heading("anomalie", text="Diagnostic")
-            tv_health.column("nom", width=180)
-            tv_health.column("statut", width=90)
-            tv_health.column("details", width=150)
-            tv_health.column("anomalie", width=220)
+            tv_health.column("nom", width=280, minwidth=160, stretch=True)
+            tv_health.column("statut", width=90, minwidth=60)
+            tv_health.column("details", width=150, minwidth=100, stretch=True)
+            tv_health.column("anomalie", width=240, minwidth=140, stretch=True)
             tv_health.pack(fill="both", expand=True, padx=16, pady=(0, 10))
+            try:
+                from catalogue_app.ui.components.tooltip import attach_treeview_tooltip
+                attach_treeview_tooltip(tv_health)
+            except Exception:
+                pass
 
             def bg_batch():
                 def prog(curr, tot, p):

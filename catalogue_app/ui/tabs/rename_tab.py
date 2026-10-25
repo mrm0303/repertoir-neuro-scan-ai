@@ -220,16 +220,28 @@ class RenameTab(BaseTab):
         heads = ("Arborescence (Dossier)", "Nom Actuel (Ancien)", "➡️ Nouveau Nom Prévu", "Taille", "Date Prise / Modif", "Statut")
         self.tv_rename = ttk.Treeview(tree_frame, columns=cols, show="headings", height=10)
 
-        widths = (160, 230, 250, 85, 140, 90)
+        widths = (180, 280, 300, 85, 140, 90)
         for c_name, h_text, w in zip(cols, heads, widths):
             self.tv_rename.heading(c_name, text=h_text)
-            self.tv_rename.column(c_name, width=w, anchor="w" if c_name not in ("size", "status") else "center")
+            min_w = max(50, int(w * 0.6))
+            self.tv_rename.column(
+                c_name,
+                width=w,
+                minwidth=min_w,
+                anchor="w" if c_name not in ("size", "status") else "center",
+                stretch=True,
+            )
 
         self.tv_rename.pack(side="left", fill="both", expand=True)
 
         rsb = ttk.Scrollbar(tree_frame, orient="vertical", command=self.tv_rename.yview)
         rsb.pack(side="right", fill="y")
         self.tv_rename.configure(yscrollcommand=rsb.set)
+        try:
+            from catalogue_app.ui.components.tooltip import attach_treeview_tooltip
+            attach_treeview_tooltip(self.tv_rename)
+        except Exception:
+            pass
 
         # Coup d'œil QuickLook macOS
         def _ql_batch_rename(_e=None):

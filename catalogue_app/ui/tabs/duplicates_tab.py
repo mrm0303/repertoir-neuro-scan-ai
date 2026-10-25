@@ -202,9 +202,10 @@ class DuplicatesTab(BaseTab):
         cols = ("nom", "copies", "disques", "info_col", "taille", "recup")
         self.tv_dup = ttk.Treeview(left, columns=cols, show="headings", selectmode="browse")
         for c, h, w in zip(cols, ("Fichier", "Copies", "Disques", "Type", "Taille", "Récupérable"),
-                           (240, 55, 55, 80, 85, 95)):
+                           (340, 60, 60, 85, 90, 100)):
             self.tv_dup.heading(c, text=h)
-            self.tv_dup.column(c, width=w, anchor="w")
+            min_w = max(50, int(w * 0.6))
+            self.tv_dup.column(c, width=w, minwidth=min_w, anchor="w", stretch=True)
         sb1 = ttk.Scrollbar(left, orient="vertical", command=self.tv_dup.yview)
         self.tv_dup.configure(yscrollcommand=sb1.set)
         self.tv_dup.pack(side="left", fill="both", expand=True)
@@ -214,15 +215,21 @@ class DuplicatesTab(BaseTab):
             self.app._make_sortable(self.tv_dup, cols, ("Fichier", "Copies", "Disques", "Type", "Taille", "Récupérable"))
         elif hasattr(self.app, '_make_sortable'):
             self.app._make_sortable(self.tv_dup, cols, ("Fichier", "Copies", "Disques", "Type", "Taille", "Récupérable"))
+        try:
+            from catalogue_app.ui.components.tooltip import attach_treeview_tooltip
+            attach_treeview_tooltip(self.tv_dup)
+        except Exception:
+            pass
         paned.add(left, weight=3)
 
         right = ttk.Labelframe(paned, text="Détail : à conserver / à retirer", padding=4)
         cols2 = ("action", "disque", "dossier", "nom", "taille")
         self.tv_dupdet = ttk.Treeview(right, columns=cols2, show="headings")
         for c, h, w in zip(cols2, ("Action", "Disque", "Dossier / Emplacement", "Nom / Éléments", "Taille"),
-                           (85, 125, 260, 180, 90)):
+                           (85, 125, 320, 280, 90)):
             self.tv_dupdet.heading(c, text=h)
-            self.tv_dupdet.column(c, width=w, anchor="w")
+            min_w = max(50, int(w * 0.6))
+            self.tv_dupdet.column(c, width=w, minwidth=min_w, anchor="w", stretch=True)
         self.tv_dupdet.tag_configure("keep", background="#e8f5e9", foreground="black")
         self.tv_dupdet.tag_configure("drop", background="#ffebee", foreground="black")
         sb2 = ttk.Scrollbar(right, orient="vertical", command=self.tv_dupdet.yview)
@@ -230,6 +237,11 @@ class DuplicatesTab(BaseTab):
         self.tv_dupdet.pack(side="left", fill="both", expand=True)
         self.tv_dupdet.bind("<Double-1>", self._on_dupdet_double_click)
         self.tv_dupdet.bind("<space>", lambda _e: self._quicklook_dup_sel())
+        try:
+            from catalogue_app.ui.components.tooltip import attach_treeview_tooltip
+            attach_treeview_tooltip(self.tv_dupdet)
+        except Exception:
+            pass
         
         # --- Menu Contextuel Doublons ---
         self.menu_dup = tk.Menu(right, tearoff=0)
@@ -264,12 +276,18 @@ class DuplicatesTab(BaseTab):
         for c, h, w in zip(cols3, ("Disque", "Copies en trop", "Espace libérable"),
                            (280, 140, 160)):
             self.tv_dupvol.heading(c, text=h)
-            self.tv_dupvol.column(c, width=w, anchor="w")
+            min_w = max(50, int(w * 0.6))
+            self.tv_dupvol.column(c, width=w, minwidth=min_w, anchor="w", stretch=True)
         self.tv_dupvol.pack(fill="x")
         if hasattr(self, '_make_sortable'):
             self.app._make_sortable(self.tv_dupvol, cols3, ("Disque", "Copies en trop", "Espace libérable"))
         elif hasattr(self.app, '_make_sortable'):
             self.app._make_sortable(self.tv_dupvol, cols3, ("Disque", "Copies en trop", "Espace libérable"))
+        try:
+            from catalogue_app.ui.components.tooltip import attach_treeview_tooltip
+            attach_treeview_tooltip(self.tv_dupvol)
+        except Exception:
+            pass
 
     def _on_change_dupmode(self):
         mode = self.var_dupmode.get()

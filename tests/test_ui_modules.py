@@ -107,3 +107,60 @@ class TestUIModules(unittest.TestCase):
         self.assertTrue(hasattr(tab, "btn_plan"), "DuplicatesTab doit posséder l'attribut self.btn_plan")
         self.assertIsNotNone(tab.btn_plan)
 
+    def test_treeview_tooltip_component(self):
+        """Vérifie la création, le formatage et le fonctionnement du composant TreeviewTooltip."""
+        from tkinter import ttk
+        from catalogue_app.ui.components import attach_treeview_tooltip, TreeviewTooltip
+
+        tv = ttk.Treeview(self.root, columns=("nom", "dossier", "disque"), show="headings")
+        tip = attach_treeview_tooltip(tv)
+        self.assertIsInstance(tip, TreeviewTooltip)
+
+        # Test formatage par défaut d'une ligne
+        cols = ["nom", "dossier", "disque"]
+        values = ["Lilo_and_Stitch_2025_4K_HDR.mov", "/Volumes/RUSHES_01/Projets/2025", "RUSHES_01"]
+
+        # Survol colonne nom
+        fmt_nom = tip._default_format("nom", values[0], values, cols)
+        self.assertIn("Lilo_and_Stitch_2025_4K_HDR.mov", fmt_nom)
+        self.assertIn("/Volumes/RUSHES_01/Projets/2025", fmt_nom)
+
+        # Survol colonne dossier
+        fmt_dossier = tip._default_format("dossier", values[1], values, cols)
+        self.assertIn("/Volumes/RUSHES_01/Projets/2025", fmt_dossier)
+
+        # Survol valeur vide
+        self.assertIsNone(tip._default_format("nom", "", values, cols))
+
+        # Nettoyage
+        tv.destroy()
+
+    def test_updater_os_awareness(self):
+        """Vérifie que updater.check_for_updates() adapte ses instructions à l'OS hôte lorsque Git est absent."""
+        import sys
+        from unittest.mock import patch
+        from catalogue_app.updater import check_for_updates
+
+        with patch("catalogue_app.updater.get_configured_repo_url", return_value="https://github.com/mrm0303/repertoir-neuro-scan-ai.git"):
+            with patch("catalogue_app.updater.git_available", return_value=False):
+                # Test Windows
+                with patch.object(sys, "platform", "win32"):
+                    res_win = check_for_updates()
+                    self.assertEqual(res_win["status"], "error")
+                    self.assertIn("Git pour Windows", res_win["message"])
+                    self.assertNotIn("Outils de ligne de commande » d'Apple", res_win["message"])
+
+                # Test macOS
+                with patch.object(sys, "platform", "darwin"):
+                    res_mac = check_for_updates()
+                    self.assertEqual(res_mac["status"], "error")
+                    self.assertIn("Apple", res_mac["message"])
+                    self.assertNotIn("Git pour Windows", res_mac["message"])
+
+                # Test Linux
+                with patch.object(sys, "platform", "linux"):
+                    res_lin = check_for_updates()
+                    self.assertEqual(res_lin["status"], "error")
+                    self.assertIn("apt install git", res_lin["message"])
+
+

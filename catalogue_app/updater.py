@@ -102,9 +102,26 @@ def _has_head(root):
 
 
 def git_available():
-    """Vérifie que Git est utilisable (sur Mac : Outils de ligne de commande Apple)."""
+    """Vérifie que Git est utilisable sur la machine (macOS, Windows, Linux)."""
     import shutil
+    # Si git n'est pas directement dans PATH, vérifier les chemins d'installation standards sous Windows
     if not shutil.which("git"):
+        if sys.platform == "win32":
+            candidates = [
+                os.path.expandvars(r"%ProgramFiles%\Git\cmd\git.exe"),
+                os.path.expandvars(r"%ProgramFiles%\Git\bin\git.exe"),
+                os.path.expandvars(r"%ProgramFiles(x86)%\Git\cmd\git.exe"),
+                os.path.expandvars(r"%ProgramFiles(x86)%\Git\bin\git.exe"),
+                os.path.expandvars(r"%LocalAppData%\Programs\Git\cmd\git.exe"),
+                os.path.expandvars(r"%LocalAppData%\Programs\Git\bin\git.exe"),
+            ]
+            for c in candidates:
+                if os.path.isfile(c):
+                    cmd_dir = os.path.dirname(c)
+                    cur_path = os.environ.get("PATH", "")
+                    if cmd_dir.lower() not in cur_path.lower():
+                        os.environ["PATH"] = cmd_dir + os.pathsep + cur_path
+                    return True
         return False
     try:
         res = subprocess.run(["git", "--version"], capture_output=True, text=True, timeout=10)
@@ -154,13 +171,32 @@ def check_for_updates():
                 subprocess.Popen(["xcode-select", "--install"])
             except Exception:
                 pass
+            msg = (
+                "Les mises à jour automatiques nécessitent Git (inclus dans les « Outils de ligne de commande » d'Apple).\n\n"
+                "Une fenêtre macOS propose de les installer : cliquez sur « Installer », "
+                "puis relancez la vérification des mises à jour."
+            )
+        elif sys.platform == "win32":
+            msg = (
+                "Les mises à jour automatiques nécessitent Git pour Windows.\n\n"
+                "Pour l'installer rapidement et simplement :\n"
+                "• Relancez le script « Installer_Repertoir_Windows.bat » (qui l'installe automatiquement), OU\n"
+                "• Téléchargez Git directement depuis https://git-scm.com/download/win, OU\n"
+                "• Ouvrez un terminal PowerShell et exécutez :\n"
+                "    winget install --id Git.Git -e --source winget\n\n"
+                "Une fois Git installé, relancez l'application pour profiter des mises à jour en un clic."
+            )
+        else:
+            msg = (
+                "Les mises à jour automatiques nécessitent Git.\n\n"
+                "Installez Git avec votre gestionnaire de paquets Linux (ex: sudo apt install git ou sudo dnf install git), "
+                "puis relancez la vérification des mises à jour."
+            )
         return {
             "status": "error",
             "behind_count": 0,
             "changelog": "",
-            "message": ("Les mises à jour nécessitent les « Outils de ligne de commande » d'Apple.\n\n"
-                        "Une fenêtre macOS propose de les installer : cliquez sur « Installer », "
-                        "puis relancez la vérification des mises à jour."),
+            "message": msg,
             "branch": "main",
         }
 
@@ -290,9 +326,9 @@ def apply_update(progress_cb=None):
             ).stdout.strip()
             if dirty or (ahead.isdigit() and int(ahead) > 0):
                 return False, (
-                    "Des modifications locales du programme ont été détectées sur ce Mac.\n\n"
+                    "Des modifications locales du programme ont été détectées sur cet ordinateur.\n\n"
                     "Par sécurité, la mise à jour automatique ne les écrase pas.\n"
-                    "(Sur le Mac de développement, utilisez « Publier_Mise_A_Jour_GitHub.command ».)"
+                    "(Sur la machine de développement, utilisez « Publier_Mise_A_Jour_GitHub.command » ou git commit.)"
                 )
             res = subprocess.run(
                 ["git", "-C", root, "merge", "--ff-only", f"origin/{branch}"],

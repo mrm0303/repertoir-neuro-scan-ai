@@ -206,15 +206,20 @@ class ShootingTimelineDialog(tk.Toplevel):
         self.tv_days.heading("date", text="Date")
         self.tv_days.heading("clips", text="Rushes")
         self.tv_days.heading("duree", text="Durée")
-        self.tv_days.column("date", width=95)
-        self.tv_days.column("clips", width=60, anchor="center")
-        self.tv_days.column("duree", width=75, anchor="center")
+        self.tv_days.column("date", width=105, minwidth=70, stretch=True)
+        self.tv_days.column("clips", width=65, minwidth=40, anchor="center")
+        self.tv_days.column("duree", width=80, minwidth=50, anchor="center")
 
         sb_days = ttk.Scrollbar(left, orient="vertical", command=self.tv_days.yview)
         self.tv_days.configure(yscrollcommand=sb_days.set)
         self.tv_days.pack(side="left", fill="both", expand=True)
         sb_days.pack(side="right", fill="y")
         self.tv_days.bind("<<TreeviewSelect>>", self._on_select_day)
+        try:
+            from catalogue_app.ui.components.tooltip import attach_treeview_tooltip
+            attach_treeview_tooltip(self.tv_days)
+        except Exception:
+            pass
 
         # Right: Day Timeline & Details
         right = ttk.Frame(paned)
@@ -243,14 +248,14 @@ class ShootingTimelineDialog(tk.Toplevel):
         self.tv_clips = ttk.Treeview(table_frame, columns=cols, show="headings")
         for c, h in zip(cols, heads):
             self.tv_clips.heading(c, text=h)
-        self.tv_clips.column("heure", width=65, anchor="center")
-        self.tv_clips.column("nom", width=180)
-        self.tv_clips.column("camera", width=110)
-        self.tv_clips.column("definition", width=85, anchor="center")
-        self.tv_clips.column("duree", width=65, anchor="center")
-        self.tv_clips.column("codec", width=70, anchor="center")
-        self.tv_clips.column("taille", width=70, anchor="e")
-        self.tv_clips.column("disque", width=100)
+        self.tv_clips.column("heure", width=70, minwidth=50, anchor="center")
+        self.tv_clips.column("nom", width=300, minwidth=180, stretch=True)
+        self.tv_clips.column("camera", width=120, minwidth=80, stretch=True)
+        self.tv_clips.column("definition", width=95, minwidth=60, anchor="center")
+        self.tv_clips.column("duree", width=70, minwidth=50, anchor="center")
+        self.tv_clips.column("codec", width=75, minwidth=50, anchor="center")
+        self.tv_clips.column("taille", width=80, minwidth=60, anchor="e")
+        self.tv_clips.column("disque", width=120, minwidth=80, stretch=True)
 
         sb_v = ttk.Scrollbar(table_frame, orient="vertical", command=self.tv_clips.yview)
         sb_h = ttk.Scrollbar(table_frame, orient="horizontal", command=self.tv_clips.xview)
@@ -260,6 +265,11 @@ class ShootingTimelineDialog(tk.Toplevel):
         sb_h.grid(row=1, column=0, sticky="ew")
         table_frame.rowconfigure(0, weight=1)
         table_frame.columnconfigure(0, weight=1)
+        try:
+            from catalogue_app.ui.components.tooltip import attach_treeview_tooltip
+            attach_treeview_tooltip(self.tv_clips)
+        except Exception:
+            pass
 
         # Action Buttons
         act = ttk.Frame(right)

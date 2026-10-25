@@ -281,7 +281,8 @@ class CatalogueApp(AppBase):
         tv = ttk.Treeview(wrap, columns=cols, show="headings", selectmode=selectmode)
         for c, h, w in zip(cols, heads, widths):
             tv.heading(c, text=h)
-            tv.column(c, width=w, anchor="w")
+            min_w = max(60, int(w * 0.6))
+            tv.column(c, width=w, minwidth=min_w, anchor="w", stretch=True)
         vs = ttk.Scrollbar(wrap, orient="vertical", command=tv.yview)
         hs = ttk.Scrollbar(wrap, orient="horizontal", command=tv.xview)
         tv.configure(yscrollcommand=vs.set, xscrollcommand=hs.set)
@@ -291,6 +292,11 @@ class CatalogueApp(AppBase):
         wrap.rowconfigure(0, weight=1)
         wrap.columnconfigure(0, weight=1)
         self._make_sortable(tv, cols, heads)
+        try:
+            from catalogue_app.ui.components.tooltip import attach_treeview_tooltip
+            attach_treeview_tooltip(tv)
+        except Exception:
+            pass
         return tv
 
     def _tab_attr(self, tab_name, attr):

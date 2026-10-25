@@ -172,11 +172,17 @@ class ScannerTab(BaseTab):
         )
         for c, h, w in zip(jcols, jheads, (170, 110, 60, 90, 100, 140, 190, 260)):
             self.tv_jobs.heading(c, text=h)
-            self.tv_jobs.column(c, width=w, anchor="w")
+            min_w = max(50, int(w * 0.6))
+            self.tv_jobs.column(c, width=w, minwidth=min_w, anchor="w", stretch=True)
         self.tv_jobs.pack(side="left", fill="x", expand=True)
         jsb = ttk.Scrollbar(timer, orient="vertical", command=self.tv_jobs.yview)
         jsb.pack(side="right", fill="y")
         self.tv_jobs.configure(yscrollcommand=jsb.set)
+        try:
+            from catalogue_app.ui.components.tooltip import attach_treeview_tooltip
+            attach_treeview_tooltip(self.tv_jobs)
+        except Exception:
+            pass
         self.tv_jobs.tag_configure("run", foreground="#64b5f6")
         self.tv_jobs.tag_configure("ok", foreground="#81c784")
         self.tv_jobs.tag_configure("wait", foreground="#9e9e9e")
@@ -239,13 +245,19 @@ class ScannerTab(BaseTab):
         self.tv_vol = ttk.Treeview(mid, columns=cols, show="headings", height=8)
         for c, h, w in zip(cols, heads, (180, 90, 65, 85, 95, 140, 260, 180)):
             self.tv_vol.heading(c, text=h)
-            self.tv_vol.column(c, width=w, anchor="w")
+            min_w = max(50, int(w * 0.6))
+            self.tv_vol.column(c, width=w, minwidth=min_w, anchor="w", stretch=True)
         self.tv_vol.pack(fill="both", expand=True, side="left")
         sb = ttk.Scrollbar(mid, orient="vertical", command=self.tv_vol.yview)
         sb.pack(side="right", fill="y")
         self.tv_vol.configure(yscrollcommand=sb.set)
         self.tv_vol.bind("<Double-1>", self._edit_priority)
         self._make_sortable(self.tv_vol, cols, heads)
+        try:
+            from catalogue_app.ui.components.tooltip import attach_treeview_tooltip
+            attach_treeview_tooltip(self.tv_vol)
+        except Exception:
+            pass
 
         vb = ttk.Frame(f)
         vb.pack(fill="x", padx=8, pady=(0, 6))
