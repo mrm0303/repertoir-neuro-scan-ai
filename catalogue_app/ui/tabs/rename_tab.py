@@ -16,6 +16,7 @@ except ImportError:
     HAS_DND = False
 
 from catalogue_app.ui.tabs.base_tab import BaseTab
+from catalogue_app.utils import check_directory_access, prompt_directory_access_fix
 from catalogue_app.batch_renamer import (
     scan_files_for_renaming, preview_batch_rename, execute_batch_rename,
     sanitize_filename, DEFAULT_MEDIA_EXTS
@@ -296,11 +297,19 @@ class RenameTab(BaseTab):
                    command=self._update_rename_preview).pack(side="right", padx=5)
 
     def _update_rename_preview(self):
-        d = self.var_rename_dir.get().strip()
-        if not d or not os.path.isdir(d):
+        d_raw = self.var_rename_dir.get().strip()
+        if not d_raw:
             self.tv_rename.delete(*self.tv_rename.get_children())
-            self.lbl_rename_count.config(text="Veuillez sélectionner un dossier valide contenant des rushes.")
+            self.lbl_rename_count.config(text="Veuillez sélectionner un dossier contenant des rushes.")
             return
+
+        ok, resolved_d, err_kind, err_msg = check_directory_access(d_raw)
+        if not ok:
+            self.tv_rename.delete(*self.tv_rename.get_children())
+            self.lbl_rename_count.config(text="Dossier inaccessible.")
+            prompt_directory_access_fix(self, d_raw, err_kind, err_msg)
+            return
+        d = resolved_d
 
         try:
             # 1. Scanner les fichiers

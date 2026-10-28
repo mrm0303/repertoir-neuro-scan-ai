@@ -163,4 +163,53 @@ class TestUIModules(unittest.TestCase):
                     self.assertEqual(res_lin["status"], "error")
                     self.assertIn("apt install git", res_lin["message"])
 
+    def test_check_directory_access(self):
+        """Vérifie la détection précise des états de dossiers et des permissions HFS+/TCC."""
+        import sys
+        from unittest.mock import patch
+        from catalogue_app.utils import check_directory_access
+
+        # 1. Dossier valide
+        ok, res_p, err_k, err_m = check_directory_access(self.tmp_dir)
+        self.assertTrue(ok)
+        self.assertEqual(err_k, "")
+
+        # 2. Chemin vide
+        ok, res_p, err_k, err_m = check_directory_access("")
+        self.assertFalse(ok)
+        self.assertEqual(err_k, "empty")
+
+        # 3. Fichier et non dossier
+        dummy_file = os.path.join(self.tmp_dir, "dummy.txt")
+        with open(dummy_file, "w") as f:
+            f.write("test")
+        ok, res_p, err_k, err_m = check_directory_access(dummy_file)
+        self.assertFalse(ok)
+        self.assertEqual(err_k, "not_a_dir")
+
+        # 4. Dossier introuvable
+        ok, res_p, err_k, err_m = check_directory_access(os.path.join(self.tmp_dir, "inexistant_folder_123"))
+        self.assertFalse(ok)
+        self.assertEqual(err_k, "not_found")
+
+        # 5. Simulation disque HFS+ sous macOS avec permission refusée (Errno 13)
+        with patch.object(sys, "platform", "darwin"):
+            pe = PermissionError(13, "Permission denied")
+            with patch("os.stat", side_effect=pe):
+                ok, res_p, err_k, err_m = check_directory_access("/Volumes/MASTER")
+                self.assertFalse(ok)
+                self.assertEqual(err_k, "permission_hfs")
+                self.assertIn("Mac OS Étendu / HFS+", err_m)
+                self.assertIn("Ignorer les autorisations de ce volume", err_m)
+
+        # 6. Simulation restriction TCC macOS (Errno 1)
+        with patch.object(sys, "platform", "darwin"):
+            pe_tcc = PermissionError(1, "Operation not permitted")
+            with patch("os.stat", side_effect=pe_tcc):
+                ok, res_p, err_k, err_m = check_directory_access("/Volumes/MASTER")
+                self.assertFalse(ok)
+                self.assertEqual(err_k, "permission_tcc")
+                self.assertIn("Volumes amovibles", err_m)
+
+
 

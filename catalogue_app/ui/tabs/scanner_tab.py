@@ -12,7 +12,14 @@ from tkinter import ttk, messagebox, filedialog, simpledialog
 from catalogue_app.ui.tabs.base_tab import BaseTab
 from catalogue_app.ui.components import MultiSelectMenu
 from catalogue_app.config import APP_NAME, DB_PATH
-from catalogue_app.utils import human_size, human_count, human_clock, normalize
+from catalogue_app.utils import (
+    human_size,
+    human_count,
+    human_clock,
+    normalize,
+    check_directory_access,
+    prompt_directory_access_fix,
+)
 from catalogue_app.db import (
     connect,
     list_mounted_volumes,
@@ -507,10 +514,15 @@ class ScannerTab(BaseTab):
             self.btn_pause.config(text="Pause")
 
     def _add_job(self, start_now=False):
-        path, name = self.var_path.get().strip(), self.var_volname.get().strip()
-        if not path or not os.path.isdir(path):
-            messagebox.showerror(APP_NAME, "Veuillez choisir un dossier valide.")
+        raw_path = self.var_path.get().strip()
+        name = self.var_volname.get().strip()
+
+        ok, resolved_path, err_kind, err_msg = check_directory_access(raw_path)
+        if not ok:
+            prompt_directory_access_fix(self, raw_path, err_kind, err_msg)
             return
+
+        path = resolved_path
         if not name:
             messagebox.showerror(APP_NAME, "Veuillez donner un nom au disque.")
             return
@@ -1131,7 +1143,11 @@ class ScannerTab(BaseTab):
                 f"Le disque « {name} » n'est pas branché (ou n'a pas été détecté via 'Détecter les disques branchés').",
             )
             return
-        self.var_path.set(path)
+        ok, resolved_path, err_kind, err_msg = check_directory_access(path)
+        if not ok:
+            prompt_directory_access_fix(self, path, err_kind, err_msg)
+            return
+        self.var_path.set(resolved_path)
         self.var_volname.set(name)
         self.var_inc.set(True)
         self._add_job(start_now=True)

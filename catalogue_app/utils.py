@@ -258,3 +258,194 @@ def quick_preview(paths):
     except Exception:
         pass
 
+
+def check_directory_access(path: str) -> tuple[bool, str, str, str]:
+    """
+    Vérifie la validité et l'accessibilité réelle d'un dossier ou volume (macOS, Windows, Linux).
+    Gère spécifiquement :
+    - Les volumes Mac OS Étendu (HFS+) avec propriétaire / autorisations POSIX activées
+    - Les protections macOS TCC (Accès complet au disque / Volumes amovibles)
+    - La normalisation Unicode (NFC / NFD) propre aux systèmes de fichiers Mac
+    - Les points de montage décalés (/Volumes/Nom 1) ou les disques débranchés / en veille
+
+    Retourne : (ok: bool, resolved_path: str, error_kind: str, error_message: str)
+      error_kind : "" | "empty" | "not_a_dir" | "permission_hfs" | "permission_tcc" | "permission_denied" | "not_found" | "os_error"
+    """
+    import stat
+    raw = (path or "").strip().strip("'\"")
+    if not raw:
+        return False, "", "empty", "Veuillez sélectionner un disque ou un dossier à analyser."
+
+    # Normalisation et résolution des chemins
+    candidates = [raw]
+    if sys.platform == "darwin":
+        nfd_p = unicodedata.normalize('NFD', raw)
+        nfc_p = unicodedata.normalize('NFC', raw)
+        if nfd_p not in candidates: candidates.append(nfd_p)
+        if nfc_p not in candidates: candidates.append(nfc_p)
+
+    resolved = None
+    exists = False
+    is_dir = False
+    perm_err = None
+    os_err = None
+
+    for c in candidates:
+        try:
+            st = os.stat(c)
+            exists = True
+            is_dir = stat.S_ISDIR(st.st_mode)
+            resolved = c
+            break
+        except PermissionError as pe:
+            exists = True
+            is_dir = True  # Considéré comme dossier si présent dans /Volumes
+            perm_err = pe
+            resolved = c
+            break
+        except FileNotFoundError:
+            if os.path.lexists(c):
+                exists = True
+                resolved = c
+                try:
+                    lst = os.lstat(c)
+                    is_dir = stat.S_ISDIR(lst.st_mode)
+                except Exception:
+                    is_dir = True
+                break
+        except OSError as oe:
+            os_err = oe
+            if os.path.lexists(c):
+                exists = True
+                resolved = c
+                is_dir = True
+                break
+
+    if resolved is None:
+        resolved = raw
+
+    # 1. Dossier introuvable
+    if not exists:
+        if sys.platform == "darwin" and resolved.startswith("/Volumes/"):
+            # Vérifier si le disque a été monté sous un nom incrémenté (ex: /Volumes/NOM 1)
+            base_vol = resolved.rstrip("/")
+            alt_candidates = [f"{base_vol} {i}" for i in range(1, 5)]
+            for alt in alt_candidates:
+                if os.path.lexists(alt):
+                    return (
+                        False, alt, "not_found",
+                        f"Le disque « {os.path.basename(resolved)} » a été monté par macOS sous le chemin « {alt} ».\n\n"
+                        f"Veuillez sélectionner ce chemin mis à jour."
+                    )
+        return (
+            False, resolved, "not_found",
+            f"Le dossier ou disque « {resolved} » est introuvable.\n\n"
+            f"Assurez-vous que le périphérique est bien branché et visible dans le Finder."
+        )
+
+    # 2. C'est un fichier simple, pas un dossier
+    if not is_dir:
+        return (
+            False, resolved, "not_a_dir",
+            f"« {resolved} » est un fichier et non un dossier.\n\n"
+            f"Veuillez choisir un dossier ou un disque."
+        )
+
+    # 3. Test de lecture réelle si stat n'a pas déjà levé de permission
+    if not perm_err and not os_err:
+        try:
+            with os.scandir(resolved) as it:
+                next(it, None)
+        except PermissionError as pe:
+            perm_err = pe
+        except OSError as oe:
+            os_err = oe
+
+    # 4. Traitement des erreurs de permissions (HFS+, TCC macOS, ou POSIX)
+    if perm_err:
+        errno_val = getattr(perm_err, "errno", None)
+        vol_name = os.path.basename(resolved.rstrip("/"))
+        is_macos_vol = sys.platform == "darwin" and (resolved.startswith("/Volumes/") or resolved.startswith("/Volumes"))
+
+        # macOS TCC : Errno 1 (Operation not permitted)
+        if errno_val == 1 or "Operation not permitted" in str(perm_err):
+            return (
+                False, resolved, "permission_tcc",
+                f"macOS bloque l'accès au disque « {vol_name} » (Protection de confidentialité Système).\n\n"
+                f"💡 Pour débloquer l'accès :\n"
+                f"1. Ouvrez « Réglages Système » > « Confidentialité et sécurité ».\n"
+                f"2. Allez dans « Fichiers et dossiers » (ou « Accès complet au disque »).\n"
+                f"3. Activez l'accès aux « Volumes amovibles » pour Repertoir (ou Python / Terminal)."
+            )
+
+        # macOS HFS+ (Mac OS Étendu) : Errno 13 (Permission denied) ou volume sous /Volumes
+        if is_macos_vol:
+            return (
+                False, resolved, "permission_hfs",
+                f"Le disque « {vol_name} » (formaté en Mac OS Étendu / HFS+) restreint l'accès à son contenu pour votre session utilisateur ({perm_err}).\n\n"
+                f"Ce format conserve strictement les autorisations d'origine du Mac.\n\n"
+                f"💡 Solution officielle Apple (1 clic) :\n"
+                f"1. Ouvrez la fenêtre « Lire les informations » du disque dans le Finder (Cmd + I).\n"
+                f"2. En bas de la fenêtre, déverrouillez le cadenas 🔒 avec votre mot de passe.\n"
+                f"3. Cochez la case : « Ignorer les autorisations de ce volume » ☑️.\n\n"
+                f"Souhaitez-vous ouvrir la fenêtre « Lire les informations » du disque dans le Finder dès maintenant ?"
+            )
+
+        return (
+            False, resolved, "permission_denied",
+            f"Accès refusé au dossier « {resolved} » ({perm_err}).\n\n"
+            f"Vérifiez que votre compte utilisateur dispose des droits de lecture sur ce dossier."
+        )
+
+    # 5. Erreur I/O ou disque en veille
+    if os_err:
+        return (
+            False, resolved, "os_error",
+            f"Erreur d'accès matériel ou disque indisponible ({os_err}).\n\n"
+            f"Si c'est un disque dur mécanique, il est peut-être en veille ou le câble a été déconnecté."
+        )
+
+    return True, resolved, "", ""
+
+
+def prompt_directory_access_fix(parent, path: str, error_kind: str, error_message: str):
+    """
+    Affiche une boîte de dialogue explicative et propose une action directe
+    (ouvrir Finder Get Info pour HFS+, ouvrir Réglages Système pour TCC).
+    """
+    import tkinter.messagebox as mb
+    from .config import APP_NAME
+
+    if error_kind == "permission_hfs":
+        res = mb.askyesno(
+            f"{APP_NAME} — Accès disque HFS+",
+            error_message,
+            icon="warning",
+            parent=parent
+        )
+        if res:
+            try:
+                # Ouvre directement la fenêtre "Lire les informations" du Finder pour ce volume
+                script = f'tell application "Finder" to open information window of (POSIX file "{path}" as alias)'
+                subprocess.Popen(["osascript", "-e", script])
+            except Exception as e:
+                mb.showerror(APP_NAME, f"Impossible d'ouvrir le Finder : {e}", parent=parent)
+        return
+
+    if error_kind == "permission_tcc":
+        res = mb.askyesno(
+            f"{APP_NAME} — Confidentialité macOS",
+            error_message + "\n\nSouhaitez-vous ouvrir les Réglages Système dès maintenant ?",
+            icon="warning",
+            parent=parent
+        )
+        if res:
+            try:
+                subprocess.Popen(["open", "x-apple.systempreferences:com.apple.preference.security?Privacy_AllFiles"])
+            except Exception:
+                pass
+        return
+
+    mb.showerror(APP_NAME, error_message, parent=parent)
+
+

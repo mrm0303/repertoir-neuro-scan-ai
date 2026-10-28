@@ -190,12 +190,12 @@ class Scanner:
              min_hash_size=1024, note="", do_precount=True, incremental=True,
              skip_system=True, do_thumbs=False):
         original_root = os.path.abspath(root)
-        walk_root = original_root
+        ok, resolved_root, err_kind, err_msg = check_directory_access(original_root)
+        if not ok:
+            raise ValueError(f"Accès impossible au dossier '{original_root}' : {err_msg}")
+        walk_root = resolved_root
         if os.name == "nt" and not walk_root.startswith("\\\\?\\"):
             walk_root = "\\\\?\\" + walk_root
-            
-        if not os.path.isdir(walk_root):
-            raise ValueError(f"Dossier introuvable : {original_root}")
 
         t0 = time.time()
         serial = volume_serial(original_root)

@@ -17,6 +17,7 @@ except ImportError:
 
 from catalogue_app.ui.tabs.base_tab import BaseTab
 from catalogue_app.config import APP_NAME
+from catalogue_app.utils import check_directory_access, prompt_directory_access_fix
 from catalogue_app import dit
 from catalogue_app.dit import DITCopyJob
 
@@ -191,13 +192,15 @@ class DitTab(BaseTab):
         self.txt_dit_log.config(state="disabled")
 
     def _start_dit_copy(self):
-        src = self.var_dit_src.get().strip()
+        raw_src = self.var_dit_src.get().strip()
         dst1 = self.var_dit_dst.get().strip()
         dst2 = getattr(self, "var_dit_dst2", tk.StringVar()).get().strip()
 
-        if not src or not os.path.isdir(src):
-            messagebox.showwarning(APP_NAME, "Veuillez sélectionner un dossier source valide.")
+        ok, resolved_src, err_kind, err_msg = check_directory_access(raw_src)
+        if not ok:
+            prompt_directory_access_fix(self, raw_src, err_kind, err_msg)
             return
+        src = resolved_src
         if not dst1:
             messagebox.showwarning(APP_NAME, "Veuillez sélectionner au moins un dossier de destination principale.")
             return

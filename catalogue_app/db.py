@@ -239,8 +239,9 @@ def list_mounted_volumes():
                 try:
                     for entry in sorted(os.listdir(base)):
                         full = os.path.join(base, entry)
-                        if os.path.isdir(full) and not entry.startswith("."):
-                            vols.append(full)
+                        if not entry.startswith("."):
+                            if os.path.isdir(full) or os.path.lexists(full):
+                                vols.append(full)
                 except PermissionError:
                     pass
     return vols
